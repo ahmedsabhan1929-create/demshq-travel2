@@ -13,7 +13,6 @@
     
     <!-- Three.js Library for 3D Globe -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
     <style>
         body {
@@ -45,7 +44,7 @@
         }
 
         .glass-card {
-            background: rgba(30, 41, 59, 0.6);
+            background: rgba(30, 41, 59, 0.65);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -63,20 +62,25 @@
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
         }
 
+        /* Globe Canvas Pointer Events Disabled */
         #globe-container {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            cursor: grab;
-        }
-        #globe-container:active {
-            cursor: grabbing;
+            pointer-events: none; /* إيقاف التفاعل نهائياً ليصبح زينة فقط */
+            z-index: 0;
         }
     </style>
 </head>
-<body class="h-screen flex flex-col overflow-hidden">
+<body class="h-screen flex flex-col overflow-hidden relative">
+
+    <!-- background Decorative Globe Canvas (In Center) -->
+    <div id="globe-container"></div>
 
     <!-- Header Navigation -->
-    <header class="glass-panel z-40 px-6 py-4 flex items-center justify-between border-b border-slate-800 shrink-0">
+    <header class="glass-panel z-40 px-6 py-4 flex items-center justify-between border-b border-slate-800 shrink-0 relative">
         <div class="flex items-center space-x-4 space-x-reverse">
             <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-500/30">
                 <i class="fa-solid fa-plane-departure"></i>
@@ -112,24 +116,20 @@
         </div>
     </header>
 
-    <!-- Main Content Split Screen -->
-    <main class="flex-1 flex overflow-hidden relative">
+    <!-- Main Content Panel (Floating Panel over Globe Background) -->
+    <main class="flex-1 flex justify-center items-center p-6 z-10 overflow-hidden relative">
 
-        <!-- Left Side: Controls & Services Panel (50% Width) -->
-        <section class="w-1/2 h-full flex flex-col z-20 border-l border-slate-800 bg-slate-950/80 backdrop-blur-md">
+        <section class="w-full max-w-3xl h-full flex flex-col z-20 rounded-2xl glass-panel border border-slate-800 shadow-2xl overflow-hidden">
             
             <!-- Service 1: الكروبات -->
             <div id="panel-groups" class="p-6 h-full flex flex-col overflow-y-auto space-y-4">
                 <div class="flex justify-between items-center mb-2">
                     <div>
                         <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-microchip text-blue-500"></i> الكروبات السياحية المتاحة
+                            <i class="fa-solid fa-globe text-blue-500"></i> الكروبات السياحية المتاحة
                         </h2>
-                        <p class="text-xs text-slate-400">اختر رحلتك وتفاعل مع الكوكب الرقمي ثلاثي الأبعاد</p>
+                        <p class="text-xs text-slate-400">تصفح أقوى العروض والرحلات الجماعية</p>
                     </div>
-                    <button onclick="openEditModal(null)" class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-2 rounded-lg font-semibold flex items-center gap-1 transition-all shadow-md">
-                        <i class="fa-solid fa-plus"></i> إضافة كروب جديد
-                    </button>
                 </div>
 
                 <div id="groups-list" class="grid grid-cols-1 gap-4"></div>
@@ -141,44 +141,45 @@
                     <h2 class="text-xl font-bold text-white flex items-center gap-2">
                         <i class="fa-solid fa-passport text-blue-500"></i> خدمات الفيزا والتأشيرات
                     </h2>
-                    <p class="text-xs text-slate-400">اختر أية دولة لمعاينة الأسعار ومتطلبات التقديم</p>
+                    <p class="text-xs text-slate-400">معلومات التأشيرة والأسعار ومتطلبات التقديم حسب الدولة</p>
                 </div>
 
                 <div class="grid grid-cols-1 gap-3" id="visa-list"></div>
             </div>
 
             <!-- Service 3: الطيران -->
-            <div id="panel-flights" class="p-6 h-full flex flex-col space-y-5 hidden">
+            <div id="panel-flights" class="p-6 h-full flex flex-col space-y-5 overflow-y-auto hidden">
                 <div>
                     <h2 class="text-xl font-bold text-white flex items-center gap-2">
                         <i class="fa-solid fa-plane text-blue-500"></i> حجز تذاكر الطيران
                     </h2>
-                    <p class="text-xs text-slate-400">حدد مطار المغادرة والوصول لمعاينة التكلفة التقديرية</p>
+                    <p class="text-xs text-slate-400">حدد مطار الانطلاق والوصول لحساب التكلفة التقديرية</p>
                 </div>
 
                 <div class="glass-panel p-5 rounded-2xl space-y-4 border border-slate-700/50">
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 mb-1.5">مطار الانطلاق</label>
                         <select id="flight-from" class="w-full bg-slate-900 border border-slate-700 text-white text-sm rounded-xl p-3 focus:outline-none focus:border-blue-500">
-                            <option value="BGW">مطار بغداد الدولي (BGW)</option>
-                            <option value="EBL">مطار أربيل الدولي (EBL)</option>
-                            <option value="BSR">مطار البصرة الدولي (BSR)</option>
+                            <option value="BGW">🇮🇶 العراق - مطار بغداد الدولي (BGW)</option>
+                            <option value="EBL">🇮🇶 العراق - مطار أربيل الدولي (EBL)</option>
+                            <option value="BSR">🇮🇶 العراق - مطار البصرة الدولي (BSR)</option>
                         </select>
                     </div>
 
                     <div class="flex justify-center my-1">
-                        <button class="w-8 h-8 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center border border-blue-500/30">
+                        <div class="w-8 h-8 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center border border-blue-500/30">
                             <i class="fa-solid fa-arrow-down-up-lock text-xs"></i>
-                        </button>
+                        </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 mb-1.5">مطار الوصول</label>
                         <select id="flight-to" class="w-full bg-slate-900 border border-slate-700 text-white text-sm rounded-xl p-3 focus:outline-none focus:border-blue-500">
-                            <option value="IST">مطار إسطنبول الدولي (IST)</option>
-                            <option value="DXB">مطار دبي الدولي (DXB)</option>
-                            <option value="GYD">مطار باكو حيدر علييف (GYD)</option>
-                            <option value="CAI">مطار القاهرة الدولي (CAI)</option>
+                            <option value="IST">🇹🇷 تركيا - مطار إسطنبول الدولي (IST)</option>
+                            <option value="DXB">🇦🇪 الإمارات - مطار دبي الدولي (DXB)</option>
+                            <option value="GYD">🇦🇿 أذربيجان - مطار باكو حيدر علييف (GYD)</option>
+                            <option value="CAI">🇪🇬 مصر - مطار القاهرة الدولي (CAI)</option>
+                            <option value="MYP">🇲🇾 ماليزيا - مطار كوالالمبور الدولي (KUL)</option>
                         </select>
                     </div>
 
@@ -191,8 +192,8 @@
                     <div class="flex justify-between items-center">
                         <div>
                             <span class="text-xs text-blue-400 font-bold tracking-widest uppercase">النتيجة التقديرية</span>
-                            <h3 class="text-lg font-bold text-white mt-0.5" id="flight-route-title">بغداد ➔ إسطنبول</h3>
-                            <p class="text-xs text-slate-400" id="flight-duration">مدة الرحلة: ~ 2 ساعة و 30 دقيقة</p>
+                            <h3 class="text-lg font-bold text-white mt-0.5" id="flight-route-title">🇮🇶 بغداد ➔ 🇹🇷 إسطنبول</h3>
+                            <p class="text-xs text-slate-400" id="flight-duration">مدة الرحلة التقديرية: ~ 2 ساعة و 30 دقيقة</p>
                         </div>
                         <div class="text-left">
                             <span class="text-2xl font-black text-green-400" id="flight-price">$320</span>
@@ -208,16 +209,18 @@
                     <h2 class="text-xl font-bold text-white flex items-center gap-2">
                         <i class="fa-solid fa-hotel text-blue-500"></i> استكشاف وحجز الفنادق
                     </h2>
-                    <p class="text-xs text-slate-400">اختر الدولة والمنطقة لتصفح أفضل خيارات الإقامة</p>
+                    <p class="text-xs text-slate-400">اختر الدولة والمنطقة لتصفح خيارات الإقامة</p>
                 </div>
 
                 <div class="glass-panel p-4 rounded-2xl grid grid-cols-2 gap-3 border border-slate-700/50">
                     <div>
                         <label class="block text-xs text-slate-300 mb-1">اسم الدولة</label>
                         <select id="hotel-country" onchange="updateHotelDistricts()" class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-2.5">
-                            <option value="UAE">الإمارات العربية المتحدة</option>
-                            <option value="TUR">تركيا</option>
-                            <option value="AZE">أذربيجان</option>
+                            <option value="UAE">🇦🇪 الإمارات العربية المتحدة</option>
+                            <option value="TUR">🇹🇷 تركيا</option>
+                            <option value="AZE">🇦🇿 أذربيجان</option>
+                            <option value="EGY">🇪🇬 مصر</option>
+                            <option value="MYS">🇲🇾 ماليزيا</option>
                         </select>
                     </div>
 
@@ -236,122 +239,77 @@
 
         </section>
 
-        <!-- Right Side: Digital 3D Globe Canvas (50% Width) -->
-        <section class="w-1/2 h-full relative bg-[#04070d]">
-            <div id="globe-container"></div>
-            
-            <div class="absolute bottom-6 right-6 bg-slate-900/80 backdrop-blur-md p-3 rounded-xl border border-slate-800 text-xs text-slate-400 pointer-events-none">
-                <p><i class="fa-solid fa-circle-nodes text-blue-400 ml-1"></i> مجسم إلكتروني رقمي ثلاثي الأبعاد</p>
-            </div>
-        </section>
-
     </main>
-
-    <!-- Modal Form -->
-    <div id="edit-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-lg rounded-2xl p-6 border border-slate-700 shadow-2xl relative">
-            <button onclick="closeEditModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <h3 class="text-lg font-bold text-white mb-4" id="modal-title">تفاصيل الكروب والتعديل</h3>
-            
-            <form id="group-form" onsubmit="saveGroup(event)" class="space-y-3">
-                <input type="hidden" id="modal-group-id">
-                
-                <div>
-                    <label class="block text-xs text-slate-300 mb-1">اسم الكروب / الوجهة</label>
-                    <input type="text" id="modal-group-title" required class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3">
-                </div>
-
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs text-slate-300 mb-1">السعر ($)</label>
-                        <input type="number" id="modal-group-price" required class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-300 mb-1">مدة الرحلة</label>
-                        <input type="text" id="modal-group-duration" required class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs text-slate-300 mb-1">تفاصيل الفندق والخدمات</label>
-                    <textarea id="modal-group-details" rows="3" required class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3"></textarea>
-                </div>
-
-                <div class="flex gap-2 pt-2">
-                    <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-xs transition-all">
-                        حفظ التعديلات
-                    </button>
-                    <button type="button" onclick="closeEditModal()" class="px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2.5 rounded-xl text-xs">
-                        إلغاء
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <!-- Application Script -->
     <script>
-        // Data Sets
+        // Data Sets with Flags Included
         let groupsData = [
-            { id: 1, title: 'رحلة دبي الذهبية', price: 650, duration: '6 أيام / 5 ليالي', hotel: 'فندق ماريوت دبي 5 نجوم', flag: '🇦🇪' },
-            { id: 2, title: 'سحر إسطنبول والشمال التركي', price: 480, duration: '8 أيام / 7 ليالي', hotel: 'فندق جواهربيرت إسطنبول 4 نجوم', flag: '🇹🇷' },
-            { id: 3, title: 'رحلة باكو الاستثنائية', price: 520, duration: '5 أيام / 4 ليالي', hotel: 'فندق هايات ريجنسي باكو', flag: '🇦🇿' }
+            { id: 1, title: 'رحلة دبي الذهبية', price: 650, duration: '6 أيام / 5 ليالي', hotel: 'فندق ماريوت دبي 5 نجوم', flag: '🇦🇪', country: 'الإمارات' },
+            { id: 2, title: 'سحر إسطنبول والشمال التركي', price: 480, duration: '8 أيام / 7 ليالي', hotel: 'فندق جواهربيرت إسطنبول 4 نجوم', flag: '🇹🇷', country: 'تركيا' },
+            { id: 3, title: 'رحلة باكو الاستثنائية', price: 520, duration: '5 أيام / 4 ليالي', hotel: 'فندق هايات ريجنسي باكو', flag: '🇦🇿', country: 'أذربيجان' },
+            { id: 4, title: 'رحلة شرم الشيخ و القاهرة', price: 430, duration: '7 أيام / 6 ليالي', hotel: 'منتجع ريكسوس شرم الشيخ', flag: '🇪🇬', country: 'مصر' },
+            { id: 5, title: 'جولة كوالالمبور ولنكاوي', price: 890, duration: '10 أيام / 9 ليالي', hotel: 'فندق جراندا ميلينيوم كوالالمبور', flag: '🇲🇾', country: 'ماليزيا' }
         ];
 
         const visaData = [
             { id: 'UAE', country: 'الإمارات العربية المتحدة', price: '$120', time: '24 - 48 ساعة', docs: 'صورة الجواز + صورة شخصية', flag: '🇦🇪' },
             { id: 'TUR', country: 'تركيا (فيزا إلكترونية/ملصق)', price: '$130', time: '3 - 5 أيام عمل', docs: 'جواز نافذ + كشف حساب', flag: '🇹🇷' },
             { id: 'AZE', country: 'أذربيجان', price: '$45', time: '3 أيام', docs: 'صورة الجواز فقط', flag: '🇦🇿' },
-            { id: 'EGY', country: 'مصر (الموافقات الأمنية)', price: '$150', time: '7 - 10 أيام', docs: 'صورة الجواز والهوية', flag: '🇪🇬' }
+            { id: 'EGY', country: 'مصر (الموافقات الأمنية)', price: '$150', time: '7 - 10 أيام', docs: 'صورة الجواز والهوية', flag: '🇪🇬' },
+            { id: 'MYS', country: 'ماليزيا', price: '$35', time: '48 ساعة', docs: 'جواز السفر وتأكيد الحجز', flag: '🇲🇾' }
         ];
 
         const hotelsData = {
             'UAE': [
-                { name: 'فندق برج العرب دبي', rating: '5 نجوم فاخر', price: '$850/ليلة', area: 'جميرا' },
-                { name: 'فندق أتلانتس النخلة', rating: '5 نجوم', price: '$520/ليلة', area: 'نخلة جميرا' }
+                { name: 'فندق برج العرب دبي', rating: '5 نجوم فاخر', price: '$850/ليلة', area: 'جميرا', flag: '🇦🇪' },
+                { name: 'فندق أتلانتس النخلة', rating: '5 نجوم', price: '$520/ليلة', area: 'نخلة جميرا', flag: '🇦🇪' }
             ],
             'TUR': [
-                { name: 'فندق سواندور توبكابي إسطنبول', rating: '5 نجوم', price: '$210/ليلة', area: 'تقسيم' },
-                { name: 'فندق راديسون بلو إسطنبول', rating: '4 نجوم', price: '$140/ليلة', area: 'شيشلي' }
+                { name: 'فندق سواندور توبكابي إسطنبول', rating: '5 نجوم', price: '$210/ليلة', area: 'تقسيم', flag: '🇹🇷' },
+                { name: 'فندق راديسون بلو إسطنبول', rating: '4 نجوم', price: '$140/ليلة', area: 'شيشلي', flag: '🇹🇷' }
+            ],
+            'AZE': [
+                { name: 'فندق فيرمونت باكو (أبراج اللهب)', rating: '5 نجوم', price: '$190/ليلة', area: 'وسط المدينة', flag: '🇦🇿' }
+            ],
+            'EGY': [
+                { name: 'فندق ماريوت مينا هاوس القاهرة', rating: '5 نجوم', price: '$180/ليلة', area: 'الجيزة', flag: '🇪🇬' }
+            ],
+            'MYS': [
+                { name: 'فندق تريدرز كوالالمبور', rating: '5 نجوم', price: '$130/ليلة', area: 'وسط المدينة البرجين', flag: '🇲🇾' }
             ]
         };
 
-        // Digital Tech Globe Implementation
-        let scene, camera, renderer, digitalGlobeGroup, controls;
+        // Non-Interactive Decorative 3D Digital Globe Scene
+        let scene, camera, renderer, digitalGlobeGroup;
 
         function initDigitalGlobe() {
             const container = document.getElementById('globe-container');
 
             scene = new THREE.Scene();
 
-            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.z = 210;
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 190;
 
             renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
-
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
 
             digitalGlobeGroup = new THREE.Group();
 
             // 1. Digital Wireframe Grid Sphere
             const sphereGeometry = new THREE.SphereGeometry(60, 48, 48);
             const wireframeMaterial = new THREE.MeshBasicMaterial({
-                color: 0x1e40af,
+                color: 0x2563eb,
                 wireframe: true,
                 transparent: true,
-                opacity: 0.25
+                opacity: 0.22
             });
             const wireframeMesh = new THREE.Mesh(sphereGeometry, wireframeMaterial);
             digitalGlobeGroup.add(wireframeMesh);
 
-            // 2. Inner Glowing Core
+            // 2. Inner Core Sphere
             const coreGeometry = new THREE.SphereGeometry(58.5, 32, 32);
             const coreMaterial = new THREE.MeshBasicMaterial({
                 color: 0x030712,
@@ -361,9 +319,9 @@
             const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
             digitalGlobeGroup.add(coreMesh);
 
-            // 3. Digital Tech Points / Particles
+            // 3. Digital Particles Grid
             const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 2500;
+            const particlesCount = 2800;
             const positions = new Float32Array(particlesCount * 3);
 
             for (let i = 0; i < particlesCount; i++) {
@@ -390,13 +348,13 @@
             const pointCloud = new THREE.Points(particlesGeometry, particlesMaterial);
             digitalGlobeGroup.add(pointCloud);
 
-            // 4. Outer Tech Ring
+            // 4. Tech Outer Ring
             const ringGeometry = new THREE.RingGeometry(72, 73, 64);
             const ringMaterial = new THREE.MeshBasicMaterial({
                 color: 0x3b82f6,
                 side: THREE.DoubleSide,
                 transparent: true,
-                opacity: 0.3
+                opacity: 0.25
             });
             const ringMesh = new THREE.Mesh(ringGeometry, ringMaterial);
             ringMesh.rotation.x = Math.PI / 2.5;
@@ -404,10 +362,7 @@
 
             scene.add(digitalGlobeGroup);
 
-            // Ambient Lights
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-
+            // Smooth Auto-Rotation Animation
             animate();
 
             window.addEventListener('resize', onWindowResize);
@@ -416,19 +371,16 @@
         function animate() {
             requestAnimationFrame(animate);
             if (digitalGlobeGroup) {
-                digitalGlobeGroup.rotation.y += 0.0018;
-                digitalGlobeGroup.rotation.x += 0.0003;
+                digitalGlobeGroup.rotation.y += 0.002;
+                digitalGlobeGroup.rotation.x += 0.0004;
             }
-            controls.update();
             renderer.render(scene, camera);
         }
 
         function onWindowResize() {
-            const container = document.getElementById('globe-container');
-            if (!container) return;
-            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
         // Tab Switcher Logic
@@ -444,18 +396,20 @@
         function renderGroups() {
             const container = document.getElementById('groups-list');
             container.innerHTML = groupsData.map(g => `
-                <div class="glass-card p-4 rounded-2xl cursor-pointer flex items-center justify-between border border-slate-800 hover:border-blue-500/50">
+                <div class="glass-card p-4 rounded-2xl flex items-center justify-between border border-slate-800">
                     <div class="flex items-center gap-3">
                         <span class="text-3xl">${g.flag}</span>
                         <div>
-                            <h4 class="font-bold text-white text-sm">${g.title}</h4>
-                            <p class="text-xs text-slate-400"><i class="fa-solid fa-hotel text-blue-400 ml-1"></i> ${g.hotel}</p>
+                            <div class="flex items-center gap-2">
+                                <h4 class="font-bold text-white text-sm">${g.title}</h4>
+                                <span class="text-xs text-slate-400">(${g.country})</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-0.5"><i class="fa-solid fa-hotel text-blue-400 ml-1"></i> ${g.hotel}</p>
                             <span class="inline-block mt-1 text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">${g.duration}</span>
                         </div>
                     </div>
                     <div class="text-left">
                         <span class="text-lg font-black text-blue-400">$${g.price}</span>
-                        <button onclick="event.stopPropagation(); openEditModal(${g.id})" class="block mt-1 text-[11px] text-slate-400 hover:text-white underline">تعديل</button>
                     </div>
                 </div>
             `).join('');
@@ -470,6 +424,7 @@
                         <div>
                             <h4 class="font-bold text-white text-sm">${v.country}</h4>
                             <p class="text-xs text-slate-400"><i class="fa-solid fa-clock text-blue-400 ml-1"></i> المدة: ${v.time}</p>
+                            <p class="text-[11px] text-slate-400"><i class="fa-solid fa-file-lines text-blue-400 ml-1"></i> ${v.docs}</p>
                         </div>
                     </div>
                     <span class="text-lg font-bold text-green-400">${v.price}</span>
@@ -478,13 +433,30 @@
         }
 
         window.searchFlights = function() {
+            const fromSelect = document.getElementById('flight-from');
+            const toSelect = document.getElementById('flight-to');
+            
+            const fromText = fromSelect.options[fromSelect.selectedIndex].text.split('-')[1] || '';
+            const toText = toSelect.options[toSelect.selectedIndex].text.split('-')[1] || '';
+            
+            const fromFlag = fromSelect.options[fromSelect.selectedIndex].text.split(' ')[0];
+            const toFlag = toSelect.options[toSelect.selectedIndex].text.split(' ')[0];
+
+            document.getElementById('flight-route-title').innerHTML = `${fromFlag} ${fromText} ➔ ${toFlag} ${toText}`;
             document.getElementById('flight-result').classList.remove('hidden');
         };
 
         window.updateHotelDistricts = function() {
             const country = document.getElementById('hotel-country').value;
             const select = document.getElementById('hotel-district');
-            const options = country === 'UAE' ? ['جميرا', 'نخلة جميرا', 'وسط دبي'] : ['تقسيم', 'شيشلي', 'الفاتح'];
+            
+            let options = [];
+            if (country === 'UAE') options = ['جميرا', 'نخلة جميرا', 'وسط دبي'];
+            else if (country === 'TUR') options = ['تقسيم', 'شيشلي', 'الفاتح'];
+            else if (country === 'AZE') options = ['وسط المدينة', 'البلدة القديمة'];
+            else if (country === 'EGY') options = ['الجيزة', 'وسط البلد', 'شرم الشيخ'];
+            else if (country === 'MYS') options = ['كوالالمبور البرجين', 'جزيرة لنكاوي'];
+
             select.innerHTML = options.map(o => `<option value="${o}">${o}</option>`).join('');
         };
 
@@ -493,65 +465,23 @@
             const list = hotelsData[country] || [];
             const container = document.getElementById('hotels-list');
             
+            if(list.length === 0) {
+                container.innerHTML = `<div class="text-center text-slate-400 py-4 text-xs">لا توجد فنادق متاحة حالياً لهذا الخيار</div>`;
+                return;
+            }
+
             container.innerHTML = list.map(h => `
                 <div class="glass-card p-3 rounded-xl flex justify-between items-center">
-                    <div>
-                        <h4 class="text-xs font-bold text-white">${h.name}</h4>
-                        <span class="text-[10px] text-blue-400">${h.rating} - ${h.area}</span>
+                    <div class="flex items-center gap-2.5">
+                        <span class="text-2xl">${h.flag}</span>
+                        <div>
+                            <h4 class="text-xs font-bold text-white">${h.name}</h4>
+                            <span class="text-[10px] text-blue-400">${h.rating} - ${h.area}</span>
+                        </div>
                     </div>
                     <span class="text-xs font-bold text-green-400">${h.price}</span>
                 </div>
             `).join('');
-        };
-
-        window.openEditModal = function(id) {
-            const modal = document.getElementById('edit-modal');
-            modal.classList.remove('hidden');
-
-            if (id) {
-                const g = groupsData.find(item => item.id === id);
-                document.getElementById('modal-group-id').value = g.id;
-                document.getElementById('modal-group-title').value = g.title;
-                document.getElementById('modal-group-price').value = g.price;
-                document.getElementById('modal-group-duration').value = g.duration;
-                document.getElementById('modal-group-details').value = g.hotel;
-            } else {
-                document.getElementById('group-form').reset();
-                document.getElementById('modal-group-id').value = '';
-            }
-        };
-
-        window.closeEditModal = function() {
-            document.getElementById('edit-modal').classList.add('hidden');
-        };
-
-        window.saveGroup = function(e) {
-            e.preventDefault();
-            const id = document.getElementById('modal-group-id').value;
-            const title = document.getElementById('modal-group-title').value;
-            const price = document.getElementById('modal-group-price').value;
-            const duration = document.getElementById('modal-group-duration').value;
-            const details = document.getElementById('modal-group-details').value;
-
-            if (id) {
-                const g = groupsData.find(item => item.id == id);
-                g.title = title;
-                g.price = price;
-                g.duration = duration;
-                g.hotel = details;
-            } else {
-                groupsData.push({
-                    id: Date.now(),
-                    title: title,
-                    price: price,
-                    duration: duration,
-                    hotel: details,
-                    flag: '✈️'
-                });
-            }
-
-            renderGroups();
-            closeEditModal();
         };
 
         window.addEventListener('DOMContentLoaded', () => {
