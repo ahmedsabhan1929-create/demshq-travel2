@@ -18,7 +18,7 @@
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #0b0f19;
+            background-color: #080c14;
             color: #e2e8f0;
             overflow-x: hidden;
         }
@@ -116,16 +116,16 @@
     <main class="flex-1 flex overflow-hidden relative">
 
         <!-- Left Side: Controls & Services Panel (50% Width) -->
-        <section class="w-1/2 h-full flex flex-col z-20 border-l border-slate-800 bg-slate-950/70 backdrop-blur-md">
+        <section class="w-1/2 h-full flex flex-col z-20 border-l border-slate-800 bg-slate-950/80 backdrop-blur-md">
             
             <!-- Service 1: الكروبات -->
             <div id="panel-groups" class="p-6 h-full flex flex-col overflow-y-auto space-y-4">
                 <div class="flex justify-between items-center mb-2">
                     <div>
                         <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-earth-americas text-blue-500"></i> الكروبات السياحية المتاحة
+                            <i class="fa-solid fa-microchip text-blue-500"></i> الكروبات السياحية المتاحة
                         </h2>
-                        <p class="text-xs text-slate-400">اختر رحلتك وقم بتوجيه الكوكب ثلاثي الأبعاد بشكل تفاعلي</p>
+                        <p class="text-xs text-slate-400">اختر رحلتك وتفاعل مع الكوكب الرقمي ثلاثي الأبعاد</p>
                     </div>
                     <button onclick="openEditModal(null)" class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-2 rounded-lg font-semibold flex items-center gap-1 transition-all shadow-md">
                         <i class="fa-solid fa-plus"></i> إضافة كروب جديد
@@ -236,12 +236,12 @@
 
         </section>
 
-        <!-- Right Side: 3D Interactive Earth Canvas (50% Width) -->
-        <section class="w-1/2 h-full relative bg-black">
+        <!-- Right Side: Digital 3D Globe Canvas (50% Width) -->
+        <section class="w-1/2 h-full relative bg-[#04070d]">
             <div id="globe-container"></div>
             
             <div class="absolute bottom-6 right-6 bg-slate-900/80 backdrop-blur-md p-3 rounded-xl border border-slate-800 text-xs text-slate-400 pointer-events-none">
-                <p><i class="fa-solid fa-hand-pointer text-blue-400 ml-1"></i> تدوير بالماوس | عجلة الماوس للتقريب والتبعيد</p>
+                <p><i class="fa-solid fa-circle-nodes text-blue-400 ml-1"></i> مجسم إلكتروني رقمي ثلاثي الأبعاد</p>
             </div>
         </section>
 
@@ -318,58 +318,95 @@
             ]
         };
 
-        // 3D Globe Implementation
-        let scene, camera, renderer, earthMesh, controls;
+        // Digital Tech Globe Implementation
+        let scene, camera, renderer, digitalGlobeGroup, controls;
 
-        function init3DGlobe() {
+        function initDigitalGlobe() {
             const container = document.getElementById('globe-container');
 
             scene = new THREE.Scene();
 
             camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.z = 220;
+            camera.position.z = 210;
 
             renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
 
-            // Orbit Controls
             controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
 
-            // Earth Mesh Geometry & Texture
-            const earthGeometry = new THREE.SphereGeometry(60, 64, 64);
-            const textureLoader = new THREE.TextureLoader();
-            const earthTexture = textureLoader.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg');
+            digitalGlobeGroup = new THREE.Group();
 
-            const earthMaterial = new THREE.MeshPhongMaterial({
-                map: earthTexture,
-                shininess: 15
-            });
-
-            earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
-            scene.add(earthMesh);
-
-            // Atmosphere Outer Glow
-            const atmosphereGeometry = new THREE.SphereGeometry(61.5, 64, 64);
-            const atmosphereMaterial = new THREE.MeshBasicMaterial({
-                color: 0x3b82f6,
+            // 1. Digital Wireframe Grid Sphere
+            const sphereGeometry = new THREE.SphereGeometry(60, 48, 48);
+            const wireframeMaterial = new THREE.MeshBasicMaterial({
+                color: 0x1e40af,
+                wireframe: true,
                 transparent: true,
-                opacity: 0.15,
-                side: THREE.BackSide
+                opacity: 0.25
             });
-            const atmosphereMesh = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
-            scene.add(atmosphereMesh);
+            const wireframeMesh = new THREE.Mesh(sphereGeometry, wireframeMaterial);
+            digitalGlobeGroup.add(wireframeMesh);
 
-            // Lights
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            // 2. Inner Glowing Core
+            const coreGeometry = new THREE.SphereGeometry(58.5, 32, 32);
+            const coreMaterial = new THREE.MeshBasicMaterial({
+                color: 0x030712,
+                transparent: true,
+                opacity: 0.95
+            });
+            const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
+            digitalGlobeGroup.add(coreMesh);
+
+            // 3. Digital Tech Points / Particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 2500;
+            const positions = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount; i++) {
+                const u = Math.random();
+                const v = Math.random();
+                const theta = u * 2.0 * Math.PI;
+                const phi = Math.acos(2.0 * v - 1.0);
+                const r = 60.5;
+
+                positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+                positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+                positions[i * 3 + 2] = r * Math.cos(phi);
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const particlesMaterial = new THREE.PointsMaterial({
+                color: 0x38bdf8,
+                size: 1.2,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            const pointCloud = new THREE.Points(particlesGeometry, particlesMaterial);
+            digitalGlobeGroup.add(pointCloud);
+
+            // 4. Outer Tech Ring
+            const ringGeometry = new THREE.RingGeometry(72, 73, 64);
+            const ringMaterial = new THREE.MeshBasicMaterial({
+                color: 0x3b82f6,
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0.3
+            });
+            const ringMesh = new THREE.Mesh(ringGeometry, ringMaterial);
+            ringMesh.rotation.x = Math.PI / 2.5;
+            digitalGlobeGroup.add(ringMesh);
+
+            scene.add(digitalGlobeGroup);
+
+            // Ambient Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
             scene.add(ambientLight);
-
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
-            directionalLight.position.set(5, 3, 5);
-            scene.add(directionalLight);
 
             animate();
 
@@ -378,8 +415,9 @@
 
         function animate() {
             requestAnimationFrame(animate);
-            if (earthMesh) {
-                earthMesh.rotation.y += 0.0012;
+            if (digitalGlobeGroup) {
+                digitalGlobeGroup.rotation.y += 0.0018;
+                digitalGlobeGroup.rotation.x += 0.0003;
             }
             controls.update();
             renderer.render(scene, camera);
@@ -517,7 +555,7 @@
         };
 
         window.addEventListener('DOMContentLoaded', () => {
-            init3DGlobe();
+            initDigitalGlobe();
             renderGroups();
             renderVisas();
             updateHotelDistricts();
