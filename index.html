@@ -1,1228 +1,630 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adella Seafood Restaurant | Bosphorus Fine Dining Istanbul</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Experience award-winning Mediterranean & Ottoman seafood fine dining on a spacious rooftop overlooking the stunning Bosphorus in Fatih, İstanbul.">
-    <meta name="keywords" content="Adella Seafood, Istanbul Fine Dining, Bosphorus Rooftop Restaurant, Seafood Istanbul, Ottoman Cuisine">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Adella Seafood Restaurant - Bosphorus Rooftop Dining">
-    <meta property="og:description" content="Where the Bosphorus meets culinary art. Fresh seafood, panoramic views, and Michelin-caliber craftsmanship.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=1200&q=80">
-    <meta property="og:type" content="restaurant">
-
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Restaurant",
-      "name": "Adella Seafood Restaurant",
-      "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=1200&q=80",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Hobyar, Hamidiye Cd. No:16",
-        "addressLocality": "Fatih",
-        "addressRegion": "İstanbul",
-        "postalCode": "34112",
-        "addressCountry": "TR"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 41.0122,
-        "longitude": 28.9744
-      },
-      "url": "https://adellaseafood.com",
-      "telephone": "+902125275271",
-      "servesCuisine": ["Seafood", "Mediterranean", "Turkish"],
-      "priceRange": "₺₺₺₺",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.4",
-        "reviewCount": "1142"
-      }
-    }
-    </script>
-
+    <title>شركة دمشق للسفر والسياحة - Damascus Travel & Tourism</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        ocean: {
-                            900: '#070C12',
-                            800: '#0B131D',
-                            700: '#111D2C',
-                            600: '#18273A',
-                            500: '#22364F'
-                        },
-                        gold: {
-                            400: '#F3E5AB',
-                            500: '#D4AF37',
-                            600: '#AA820A'
-                        },
-                        bronze: {
-                            500: '#A3724C',
-                            600: '#825633'
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['Playfair Display', 'Cinzel', 'serif'],
-                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'spin-slow': 'spin 20s linear infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- Alpine.js Component Engine -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* Custom Fine Dining Styling */
         body {
-            background-color: #070C12;
-            color: #E2E8F0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Cairo', sans-serif;
+            background-color: #0b0f19;
+            color: #e2e8f0;
             overflow-x: hidden;
         }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
 
-        .font-cinzel { fontFamily: 'Cinzel', serif; }
-        .font-playfair { fontFamily: 'Playfair Display', serif; }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #070C12; }
-        ::-webkit-scrollbar-thumb { background: #18273A; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
-
-        /* Glassmorphism */
         .glass-panel {
-            background: rgba(11, 19, 29, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .glass-card {
-            background: rgba(17, 29, 44, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card:hover {
-            border-color: rgba(212, 175, 55, 0.4);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.08);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15);
         }
 
-        /* Gold Gradient Text */
-        .text-gold-gradient {
-            background: linear-gradient(135deg, #FFF0C2 0%, #D4AF37 50%, #9A7718 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .active-tab {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
         }
-
-        .border-gold-gradient {
-            border-image: linear-gradient(135deg, #D4AF37, #825633) 1;
-        }
-
-        /* Custom Cursor Styling */
-        @media (min-width: 1024px) {
-            * { cursor: none !important; }
-            #custom-cursor {
-                pointer-events: none;
-                position: fixed;
-                top: 0; left: 0;
-                z-index: 9999;
-                transition: transform 0.1s ease-out, opacity 0.2s ease;
-                will-change: transform;
-            }
-            #cursor-dot {
-                width: 8px; height: 8px;
-                background-color: #D4AF37;
-                border-radius: 50%;
-                position: absolute;
-                top: -4px; left: -4px;
-            }
-            #cursor-ring {
-                width: 40px; height: 40px;
-                border: 1px solid rgba(212, 175, 55, 0.5);
-                border-radius: 50%;
-                position: absolute;
-                top: -20px; left: -20px;
-                transition: width 0.2s ease, height 0.2s ease, top 0.2s ease, left 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-            }
-            .cursor-hover #cursor-ring {
-                width: 60px; height: 60px;
-                top: -30px; left: -30px;
-                background: rgba(212, 175, 55, 0.1);
-                border-color: #D4AF37;
-            }
-        }
-
-        /* Smooth Hide Scrollbar for Horizontal Scroll */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
 </head>
-<body x-data="restaurantApp()" class="selection:bg-gold-500 selection:text-ocean-900">
+<body class="h-screen flex flex-col overflow-hidden">
 
-    <!-- DESKTOP CUSTOM CURSOR -->
-    <div id="custom-cursor" class="hidden lg:block">
-        <div id="cursor-dot"></div>
-        <div id="cursor-ring"></div>
-    </div>
-
-    <!-- PRELOADER INTRO SCREEN -->
-    <div x-show="loading" 
-         x-transition:leave="transition ease-in duration-700 transform"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-105"
-         class="fixed inset-0 z-[100] bg-ocean-900 flex flex-col items-center justify-center p-4">
-        
-        <div class="relative flex flex-col items-center">
-            <!-- Animated Crest -->
-            <div class="w-24 h-24 mb-6 relative flex items-center justify-center">
-                <div class="absolute inset-0 border border-gold-500/30 rounded-full animate-spin-slow"></div>
-                <div class="absolute inset-2 border border-dashed border-gold-500/60 rounded-full animate-[spin_10s_linear_infinite_reverse]"></div>
-                <i data-lucide="waves" class="w-10 h-10 text-gold-500 animate-pulse"></i>
+    <!-- Header Navigation -->
+    <header class="glass-panel z-40 px-6 py-4 flex items-center justify-between border-b border-slate-800 shrink-0">
+        <div class="flex items-center space-x-4 space-x-reverse">
+            <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-500/30">
+                <i class="fa-solid fa-plane-departure"></i>
             </div>
-
-            <!-- Logo Title Animation -->
-            <h1 class="font-cinzel text-3xl md:text-5xl font-bold tracking-[0.25em] text-gold-gradient mb-2 text-center">
-                ADELLA
-            </h1>
-            <p class="text-xs uppercase tracking-[0.4em] text-gray-400 font-sans">
-                Seafood & Rooftop • Bosphorus
-            </p>
-
-            <!-- Loading Bar -->
-            <div class="w-48 h-[2px] bg-ocean-700 mt-8 rounded-full overflow-hidden relative">
-                <div class="h-full bg-gradient-to-r from-gold-600 via-gold-500 to-gold-400 w-full animate-[shimmer_2s_infinite] transition-all duration-1000"></div>
+            <div>
+                <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300">
+                    شركة دمشق للسفر والسياحة
+                </h1>
+                <p class="text-xs text-slate-400">Damascus Travel & Tourism Agency</p>
             </div>
-            
-            <p class="text-[10px] text-gray-500 tracking-widest mt-4 uppercase font-mono">Fine Dining Istanbul</p>
         </div>
-    </div>
 
-    <!-- NAVBAR SECTION -->
-    <header x-data="{ scrolled: false }" 
-            @scroll.window="scrolled = (window.pageYOffset > 50)"
-            :class="scrolled ? 'bg-ocean-900/90 backdrop-blur-md border-b border-gold-500/20 py-4 shadow-2xl' : 'bg-transparent py-6'"
-            class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-            
-            <!-- Brand Logo -->
-            <a href="#hero" class="group flex items-center gap-3">
-                <div class="w-10 h-10 border border-gold-500/40 rounded-full flex items-center justify-center group-hover:border-gold-500 transition-colors">
-                    <i data-lucide="anchor" class="w-5 h-5 text-gold-500 group-hover:scale-110 transition-transform"></i>
-                </div>
-                <div>
-                    <span class="font-cinzel font-bold text-xl md:text-2xl text-white tracking-[0.2em] block leading-none">ADELLA</span>
-                    <span class="text-[9px] uppercase tracking-[0.3em] text-gold-500 font-sans block mt-1">Seafood Rooftop</span>
-                </div>
-            </a>
-
-            <!-- Desktop Menu Navigation -->
-            <nav class="hidden lg:flex items-center space-x-8 text-xs tracking-[0.2em] uppercase font-medium">
-                <a href="#about" class="text-gray-300 hover:text-gold-500 transition-colors py-1 relative group">
-                    About
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="#signature" class="text-gray-300 hover:text-gold-500 transition-colors py-1 relative group">
-                    Signatures
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="#menu" class="text-gray-300 hover:text-gold-500 transition-colors py-1 relative group">
-                    Menu
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="#chef" class="text-gray-300 hover:text-gold-500 transition-colors py-1 relative group">
-                    Craft
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="#gallery" class="text-gray-300 hover:text-gold-500 transition-colors py-1 relative group">
-                    Ambiance
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="#reviews" class="text-gray-300 hover:text-gold-500 transition-colors py-1 relative group">
-                    Reviews
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-            </nav>
-
-            <!-- Book Table CTA -->
-            <div class="hidden lg:flex items-center space-x-6">
-                <a href="tel:+902125275271" class="text-xs text-gold-500 flex items-center gap-2 hover:text-white transition-colors">
-                    <i data-lucide="phone" class="w-3.5 h-3.5"></i>
-                    <span>+90 212 527 52 71</span>
-                </a>
-                <a href="#reservation" class="relative inline-flex items-center justify-center px-6 py-2.5 text-xs font-semibold tracking-widest text-ocean-900 uppercase transition-all duration-300 bg-gold-500 hover:bg-gold-400 rounded-sm shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)]">
-                    Book Table
-                </a>
-            </div>
-
-            <!-- Mobile Hamburger Button -->
-            <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden text-gold-500 focus:outline-none p-2">
-                <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-7 h-7"></i>
-                <i data-lucide="x" x-show="mobileMenuOpen" class="w-7 h-7"></i>
+        <nav class="flex items-center gap-2 bg-slate-900/80 p-1.5 rounded-2xl border border-slate-800">
+            <button onclick="switchTab('groups')" id="tab-groups" class="active-tab px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2">
+                <i class="fa-solid fa-people-group"></i> الكروبات السياحية
             </button>
-        </div>
+            <button onclick="switchTab('visa')" id="tab-visa" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-passport"></i> خدمات الفيزا
+            </button>
+            <button onclick="switchTab('flights')" id="tab-flights" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-plane"></i> تذاكر الطيران
+            </button>
+            <button onclick="switchTab('hotels')" id="tab-hotels" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-hotel"></i> حجز الفنادق
+            </button>
+        </nav>
 
-        <!-- Fullscreen Mobile Navigation Drawer -->
-        <div x-show="mobileMenuOpen" 
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="opacity-0 -translate-y-4"
-             x-transition:enter-end="opacity-100 translate-y-0"
-             x-transition:leave="transition ease-in duration-200"
-             x-transition:leave-start="opacity-100 translate-y-0"
-             x-transition:leave-end="opacity-0 -translate-y-4"
-             class="lg:hidden fixed inset-0 top-[73px] bg-ocean-900/98 backdrop-blur-xl z-40 flex flex-col justify-between p-8 border-t border-gold-500/20">
-            <div class="flex flex-col space-y-6 text-center pt-8">
-                <a href="#about" @click="mobileMenuOpen = false" class="font-cinzel text-xl tracking-widest text-gray-200 hover:text-gold-500">ABOUT ADELLA</a>
-                <a href="#signature" @click="mobileMenuOpen = false" class="font-cinzel text-xl tracking-widest text-gray-200 hover:text-gold-500">SIGNATURE DISHES</a>
-                <a href="#menu" @click="mobileMenuOpen = false" class="font-cinzel text-xl tracking-widest text-gray-200 hover:text-gold-500">DYNAMIC MENU</a>
-                <a href="#chef" @click="mobileMenuOpen = false" class="font-cinzel text-xl tracking-widest text-gray-200 hover:text-gold-500">CULINARY CRAFT</a>
-                <a href="#gallery" @click="mobileMenuOpen = false" class="font-cinzel text-xl tracking-widest text-gray-200 hover:text-gold-500">ROOFTOP GALLERY</a>
-                <a href="#reservation" @click="mobileMenuOpen = false" class="font-cinzel text-xl tracking-widest text-gold-500">RESERVATIONS</a>
-            </div>
-
-            <div class="space-y-4 text-center border-t border-gold-500/10 pt-6">
-                <p class="text-xs text-gray-400">Hobyar, Hamidiye Cd. No:16, Fatih/İstanbul</p>
-                <a href="#reservation" @click="mobileMenuOpen = false" class="block w-full py-3 bg-gold-500 text-ocean-900 font-semibold uppercase tracking-widest text-sm rounded">
-                    Reserve Table
-                </a>
-            </div>
+        <div class="flex items-center gap-3">
+            <span class="text-xs text-slate-400 border border-slate-700 px-3 py-1.5 rounded-full bg-slate-800/50">
+                <i class="fa-solid fa-phone text-blue-400 ml-1"></i> خدمة العملاء 24/7
+            </span>
         </div>
     </header>
 
-    <!-- HERO SECTION WITH CINEMATIC ATMOSPHERE -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        <!-- Parallax Background Overlay -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=2000&q=80" 
-                 alt="Adella Rooftop Bosphorus View" 
-                 class="w-full h-full object-cover scale-105 animate-[pulse-slow_8s_ease-in-out_infinite] filter brightness-[0.45] contrast-125">
-            <div class="absolute inset-0 bg-gradient-to-t from-ocean-900 via-ocean-900/40 to-ocean-900/70"></div>
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#070C12_100%)] opacity-80"></div>
-        </div>
+    <!-- Main Content Split Screen -->
+    <main class="flex-1 flex overflow-hidden relative">
 
-        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center my-auto py-16">
+        <!-- Left Column: Services Panel (50% Width) -->
+        <section class="w-1/2 h-full flex flex-col z-20 border-l border-slate-800 bg-slate-950/60 backdrop-blur-md">
             
-            <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel text-gold-500 text-xs tracking-[0.25em] uppercase mb-8 border border-gold-500/30">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                <span>Bosphorus Rooftop Fine Dining</span>
-            </div>
-
-            <!-- Headline -->
-            <h1 class="font-cinzel text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-wider text-white leading-[1.1] mb-8">
-                WHERE THE BOSPHORUS MEETS <span class="text-gold-gradient block mt-2">CULINARY ART</span>
-            </h1>
-
-            <p class="max-w-2xl mx-auto text-base md:text-lg text-gray-300 font-light tracking-wide leading-relaxed mb-10">
-                Situated atop a magnificent rooftop in historical İstanbul. Indulge in hyper-fresh Aegean & Ottoman seafood creations masterfully paired with panoramic strait views.
-            </p>
-
-            <!-- Action CTAs -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
-                <a href="#reservation" class="w-full sm:w-auto px-8 py-4 bg-gold-500 hover:bg-gold-400 text-ocean-900 font-bold uppercase tracking-[0.2em] text-xs transition-all duration-300 rounded-sm shadow-[0_0_30px_rgba(212,175,55,0.4)] flex items-center justify-center gap-3 group">
-                    <span>Reserve Your Table</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-                <a href="#menu" class="w-full sm:w-auto px-8 py-4 border border-gold-500/40 hover:border-gold-500 text-white font-medium uppercase tracking-[0.2em] text-xs transition-all duration-300 rounded-sm glass-panel flex items-center justify-center gap-2 hover:bg-gold-500/10">
-                    <i data-lucide="utensils" class="w-4 h-4 text-gold-500"></i>
-                    <span>Explore Menu</span>
-                </a>
-            </div>
-
-            <!-- Highlights Strip -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-20 pt-8 border-t border-white/10 text-center">
-                <div>
-                    <div class="font-cinzel text-2xl font-bold text-gold-500">4.4 ★</div>
-                    <div class="text-[10px] uppercase tracking-widest text-gray-400 mt-1">1,142+ Google Reviews</div>
-                </div>
-                <div>
-                    <div class="font-cinzel text-2xl font-bold text-gold-500">ROOFTOP</div>
-                    <div class="text-[10px] uppercase tracking-widest text-gray-400 mt-1">Panoramic Bosphorus</div>
-                </div>
-                <div>
-                    <div class="font-cinzel text-2xl font-bold text-gold-500">02:00 AM</div>
-                    <div class="text-[10px] uppercase tracking-widest text-gray-400 mt-1">Nightly Service</div>
-                </div>
-                <div>
-                    <div class="font-cinzel text-2xl font-bold text-gold-500">FRESH CATCH</div>
-                    <div class="text-[10px] uppercase tracking-widest text-gray-400 mt-1">Daily Sea Selection</div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Scroll Indicator -->
-        <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gold-500/60 hover:text-gold-500 transition-colors">
-            <span class="text-[9px] uppercase tracking-[0.3em]">Scroll</span>
-            <i data-lucide="chevron-down" class="w-4 h-4 animate-bounce"></i>
-        </a>
-    </section>
-
-    <!-- PHILOSOPHY / ABOUT SECTION -->
-    <section id="about" class="py-28 relative bg-ocean-900 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                
-                <!-- Left Visual Stack -->
-                <div class="lg:col-span-6 relative">
-                    <div class="relative z-10 rounded-sm overflow-hidden border border-gold-500/20 shadow-2xl group">
-                        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1000&q=80" 
-                             alt="Adella Dining Ambiance" 
-                             class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-ocean-900/90 via-transparent to-transparent"></div>
-                    </div>
-
-                    <!-- Overlapping Accent Image -->
-                    <div class="absolute -bottom-8 -right-6 w-3/5 z-20 hidden sm:block border-2 border-gold-500/30 rounded-sm overflow-hidden shadow-2xl">
-                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" 
-                             alt="Seafood Craft" 
-                             class="w-full h-56 object-cover">
-                    </div>
-
-                    <!-- Decorative Floating Badge -->
-                    <div class="absolute -top-6 -left-6 z-20 glass-panel p-6 border border-gold-500/30 rounded-sm hidden sm:flex items-center gap-4">
-                        <i data-lucide="award" class="w-10 h-10 text-gold-500"></i>
-                        <div>
-                            <p class="font-cinzel text-lg font-bold text-white">Legacy Ottoman</p>
-                            <p class="text-xs text-gray-400">Architectural Heritage</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Narrative Column -->
-                <div class="lg:col-span-6 space-y-6">
-                    <div class="inline-flex items-center gap-2 text-gold-500 text-xs uppercase tracking-[0.3em]">
-                        <span class="w-8 h-[1px] bg-gold-500"></span>
-                        <span>Our Philosophy</span>
-                    </div>
-
-                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white leading-tight">
-                        MORE THAN A MEAL. <br>
-                        <span class="text-gold-gradient">AN OCEAN LEGACY.</span>
-                    </h2>
-
-                    <p class="text-gray-300 text-sm md:text-base leading-relaxed font-light">
-                        Long before a dish reaches your rooftop table, its story has already begun in the azure depths of the Aegean and Marmara seas. At <strong class="text-gold-500">Adella Seafood</strong>, we craft an ode to Istanbul’s maritime heritage.
-                    </p>
-
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Situated in Historic Fatih on Hamidiye Caddesi, our spacious rooftop provides an unobstructed panorama of the Bosphorus Strait. Every plate combines centuries-old Ottoman seafood wisdom with contemporary Mediterranean refinement.
-                    </p>
-
-                    <!-- Feature Grid -->
-                    <div class="grid grid-cols-2 gap-6 pt-4 border-t border-gold-500/15">
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center shrink-0 mt-1">
-                                <i data-lucide="fish" class="w-4 h-4 text-gold-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-cinzel text-sm font-semibold text-white">Daily Wild Catch</h4>
-                                <p class="text-xs text-gray-400 mt-1">Directly sourced from local artisanal fishermen each morning.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center shrink-0 mt-1">
-                                <i data-lucide="flame" class="w-4 h-4 text-gold-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-cinzel text-sm font-semibold text-white">Oak Charcoal Grill</h4>
-                                <p class="text-xs text-gray-400 mt-1">Sealed with natural wood fire for unmistakable signature aroma.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pt-4">
-                        <a href="#chef" class="inline-flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-gold-500 font-semibold hover:text-white transition-colors">
-                            <span>Meet Our Master Chefs</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- SIGNATURE DISHES BENTO GRID -->
-    <section id="signature" class="py-28 bg-ocean-800 relative">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-gold-500 text-xs uppercase tracking-[0.3em] block mb-3">Culinary Highlights</span>
-                <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white mb-4">SIGNATURE CREATIONS</h2>
-                <div class="w-16 h-[2px] bg-gold-500 mx-auto mb-4"></div>
-                <p class="text-gray-400 text-sm">Most celebrated selections praised by international food critics & our distinguished guests.</p>
-            </div>
-
-            <!-- Bento Layout -->
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                
-                <!-- Bento 1: Large Featured Item -->
-                <div class="md:col-span-2 lg:col-span-2 glass-card rounded-sm overflow-hidden relative group cursor-pointer"
-                     @click="openDishModal(signatures[0])">
-                    <div class="h-[380px] overflow-hidden relative">
-                        <img :src="signatures[0].image" :alt="signatures[0].name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-ocean-900 via-ocean-900/30 to-transparent"></div>
-                        <div class="absolute top-4 left-4 bg-gold-500 text-ocean-900 text-[10px] font-bold tracking-widest px-3 py-1 uppercase rounded-xs">
-                            Chef's Masterpiece
-                        </div>
-                        <div class="absolute bottom-6 left-6 right-6">
-                            <div class="flex justify-between items-end mb-2">
-                                <h3 class="font-cinzel text-2xl font-bold text-white" x-text="signatures[0].name"></h3>
-                                <span class="font-cinzel text-xl font-bold text-gold-500" x-text="signatures[0].price"></span>
-                            </div>
-                            <p class="text-xs text-gray-300 font-light line-clamp-2" x-text="signatures[0].desc"></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bento 2 & 3: Standard Cards -->
-                <template x-for="(dish, idx) in signatures.slice(1, 3)" :key="idx">
-                    <div class="glass-card rounded-sm overflow-hidden relative group cursor-pointer"
-                         @click="openDishModal(dish)">
-                        <div class="h-[380px] overflow-hidden relative flex flex-col justify-between p-6">
-                            <img :src="dish.image" :alt="dish.name" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-ocean-900 via-ocean-900/40 to-ocean-900/20"></div>
-                            
-                            <div class="relative z-10 flex justify-between items-start">
-                                <span class="text-[10px] uppercase tracking-widest px-2.5 py-1 bg-black/60 backdrop-blur-md text-gold-400 border border-gold-500/20 rounded-xs" x-text="dish.category"></span>
-                                <span class="text-sm font-bold font-cinzel text-gold-500 bg-ocean-900/80 px-2.5 py-1 rounded-xs" x-text="dish.price"></span>
-                            </div>
-
-                            <div class="relative z-10">
-                                <h3 class="font-cinzel text-xl font-bold text-white mb-2" x-text="dish.name"></h3>
-                                <p class="text-xs text-gray-300 font-light line-clamp-2" x-text="dish.desc"></p>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-
-                <!-- Bento 4: Wide Card -->
-                <div class="md:col-span-3 lg:col-span-2 glass-card rounded-sm overflow-hidden relative group cursor-pointer"
-                     @click="openDishModal(signatures[3])">
-                    <div class="h-[280px] overflow-hidden relative flex items-end p-6">
-                        <img :src="signatures[3].image" :alt="signatures[3].name" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-ocean-900 via-ocean-900/50 to-transparent"></div>
-                        <div class="relative z-10 w-full flex justify-between items-end">
-                            <div>
-                                <span class="text-[10px] uppercase tracking-widest text-gold-400 block mb-1" x-text="signatures[3].category"></span>
-                                <h3 class="font-cinzel text-2xl font-bold text-white" x-text="signatures[3].name"></h3>
-                                <p class="text-xs text-gray-300 max-w-md mt-1 font-light" x-text="signatures[3].desc"></p>
-                            </div>
-                            <span class="font-cinzel text-2xl font-bold text-gold-500" x-text="signatures[3].price"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bento 5 & 6 -->
-                <template x-for="(dish, idx) in signatures.slice(4, 6)" :key="idx + 'rest'">
-                    <div class="glass-card rounded-sm overflow-hidden relative group cursor-pointer"
-                         @click="openDishModal(dish)">
-                        <div class="h-[280px] overflow-hidden relative flex flex-col justify-between p-6">
-                            <img :src="dish.image" :alt="dish.name" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-ocean-900 via-ocean-900/40 to-ocean-900/20"></div>
-                            
-                            <div class="relative z-10">
-                                <span class="text-[10px] uppercase tracking-widest text-gold-400 block" x-text="dish.category"></span>
-                            </div>
-
-                            <div class="relative z-10">
-                                <div class="flex justify-between items-baseline mb-1">
-                                    <h3 class="font-cinzel text-lg font-bold text-white" x-text="dish.name"></h3>
-                                    <span class="text-sm font-bold font-cinzel text-gold-500" x-text="dish.price"></span>
-                                </div>
-                                <p class="text-xs text-gray-300 font-light line-clamp-2" x-text="dish.desc"></p>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- CATEGORIZED DYNAMIC MENU SECTION -->
-    <section id="menu" class="py-28 bg-ocean-900 relative">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-gold-500 text-xs uppercase tracking-[0.3em] block mb-3">Epicurean Selections</span>
-                <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white mb-4">THE FULL MENU</h2>
-                <p class="text-gray-400 text-sm">Prices in Turkish Lira (₺). Prepared fresh daily according to sea seasonal availability.</p>
-            </div>
-
-            <!-- Category Filter Tabs -->
-            <div class="flex items-center justify-center gap-2 md:gap-4 overflow-x-auto pb-6 no-scrollbar mb-12 border-b border-gold-500/10">
-                <template x-for="cat in menuCategories" :key="cat.id">
-                    <button @click="activeCategory = cat.id"
-                            :class="activeCategory === cat.id ? 'bg-gold-500 text-ocean-900 font-bold border-gold-500 shadow-[0_0_20px_rgba(212,175,55,0.3)]' : 'glass-panel text-gray-300 hover:text-gold-500 border-white/10'"
-                            class="px-5 py-2.5 rounded-xs text-xs uppercase tracking-widest whitespace-nowrap transition-all duration-300 border">
-                        <span x-text="cat.name"></span>
-                    </button>
-                </template>
-            </div>
-
-            <!-- Menu Grid -->
-            <div class="grid md:grid-cols-2 gap-8">
-                <template x-for="item in filteredMenuItems" :key="item.id">
-                    <div class="glass-card p-6 rounded-sm flex gap-5 items-center group cursor-pointer hover:border-gold-500/40"
-                         @click="openDishModal(item)">
-                        <div class="w-24 h-24 rounded-xs overflow-hidden shrink-0 relative">
-                            <img :src="item.image" :alt="item.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <template x-if="item.popular">
-                                <span class="absolute top-1 left-1 bg-gold-500 text-ocean-900 text-[8px] font-extrabold px-1.5 py-0.5 uppercase tracking-tighter">Popular</span>
-                            </template>
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex justify-between items-baseline mb-1 border-b border-dashed border-gray-700/60 pb-2">
-                                <h4 class="font-cinzel text-lg font-bold text-white group-hover:text-gold-400 transition-colors" x-text="item.name"></h4>
-                                <span class="font-cinzel font-bold text-gold-500 text-base" x-text="item.price"></span>
-                            </div>
-                            <p class="text-xs text-gray-400 font-light mt-2 line-clamp-2" x-text="item.desc"></p>
-                        </div>
-                    </div>
-                </template>
-            </div>
-
-            <div class="mt-16 text-center">
-                <p class="text-xs text-gray-500 italic mb-4">* All dishes may contain traces of allergens. Please inform your captain server of any dietary preferences or vegetarian requests.</p>
-                <a href="#reservation" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold-500 border border-gold-500/30 px-6 py-3 rounded-xs hover:bg-gold-500 hover:text-ocean-900 transition-all">
-                    <span>Reserve For Tonight</span>
-                    <i data-lucide="calendar" class="w-4 h-4"></i>
-                </a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- CHEF & CULINARY CRAFT SECTION -->
-    <section id="chef" class="py-28 bg-ocean-800 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                
-                <!-- Quote & Content -->
-                <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 text-gold-500 text-xs uppercase tracking-[0.3em]">
-                        <i data-lucide="utensils-crossed" class="w-4 h-4"></i>
-                        <span>Mastery & Technique</span>
-                    </div>
-
-                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white leading-tight">
-                        CRAFTED BY PASSION. <br>
-                        <span class="text-gold-gradient">SEALED BY FIRE & SEA.</span>
-                    </h2>
-
-                    <blockquote class="border-l-2 border-gold-500 pl-6 italic text-gray-300 font-serif text-lg md:text-xl my-6">
-                        "Seafood requires complete surrender to subtlety. We don't mask the natural oceanic essence; we amplify it with Mediterranean botanicals, toasted textures, and precise fire control."
-                    </blockquote>
-
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">
-                        Head Chef Selim Bosphorus brings over 22 years of high-gastronomy experience across Mediterranean harbors. Every morning begins with inspecting the fresh yields from the Marmara, ensuring only wild sea bass, octopus, and bluefin tuna enter Adella's kitchen.
-                    </p>
-
-                    <!-- Experience Metrics -->
-                    <div class="grid grid-cols-3 gap-6 pt-6 border-t border-gold-500/10">
-                        <div>
-                            <span class="font-cinzel text-3xl md:text-4xl font-bold text-gold-500 block">22+</span>
-                            <span class="text-[10px] uppercase tracking-wider text-gray-400">Years Gastronomy</span>
-                        </div>
-                        <div>
-                            <span class="font-cinzel text-3xl md:text-4xl font-bold text-gold-500 block">100%</span>
-                            <span class="text-[10px] uppercase tracking-wider text-gray-400">Wild & Sustainable</span>
-                        </div>
-                        <div>
-                            <span class="font-cinzel text-3xl md:text-4xl font-bold text-gold-500 block">35+</span>
-                            <span class="text-[10px] uppercase tracking-wider text-gray-400">Artisanal Wines</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chef Portrait -->
-                <div class="lg:col-span-5 relative">
-                    <div class="relative rounded-sm overflow-hidden border border-gold-500/30 shadow-2xl">
-                        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" 
-                             alt="Chef Crafting Seafood" 
-                             class="w-full h-[520px] object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-ocean-900 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-6 left-6 right-6 p-4 glass-panel rounded-xs">
-                            <p class="font-cinzel text-base font-bold text-white">Chef Executive</p>
-                            <p class="text-xs text-gold-400">Adella Culinary Operations</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- AMBIANCE & ROOFTOP GALLERY -->
-    <section id="gallery" class="py-28 bg-ocean-900 relative">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
-                <div>
-                    <span class="text-gold-500 text-xs uppercase tracking-[0.3em] block mb-3">Visual Journey</span>
-                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white">THE ROOFTOP ATMOSPHERE</h2>
-                </div>
-                <p class="text-gray-400 text-sm max-w-md">Experience golden hour sunset views across historic Fatih and the Bosphorus Strait.</p>
-            </div>
-
-            <!-- Masonry Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <template x-for="(img, idx) in galleryImages" :key="idx">
-                    <div class="glass-card rounded-sm overflow-hidden group cursor-pointer h-72 relative"
-                         @click="activeLightbox = img.src">
-                        <img :src="img.src" :alt="img.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-ocean-900/90 via-ocean-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <span class="text-gold-500 text-[10px] uppercase tracking-widest" x-text="img.category"></span>
-                            <h4 class="font-cinzel text-lg font-bold text-white" x-text="img.title"></h4>
-                        </div>
-                    </div>
-                </template>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- TABLE RESERVATION SYSTEM -->
-    <section id="reservation" class="py-28 bg-ocean-800 relative border-y border-gold-500/10">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                
-                <!-- Left Details -->
-                <div class="lg:col-span-5 space-y-6">
-                    <span class="text-gold-500 text-xs uppercase tracking-[0.3em] block">Guaranteed Seating</span>
-                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white leading-tight">
-                        RESERVE YOUR <span class="text-gold-gradient">ROOFTOP TABLE</span>
-                    </h2>
-                    <p class="text-gray-300 text-sm font-light leading-relaxed">
-                        Due to high demand for Bosphorus sunset views, we recommend booking table reservations at least 24 hours in advance.
-                    </p>
-
-                    <div class="space-y-4 pt-4 border-t border-gold-500/10">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center shrink-0">
-                                <i data-lucide="clock" class="w-5 h-5 text-gold-500"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-400">Operating Hours</p>
-                                <p class="text-sm font-semibold text-white">Daily: 12:00 PM – 02:00 AM</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center shrink-0">
-                                <i data-lucide="map-pin" class="w-5 h-5 text-gold-500"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-400">Location</p>
-                                <p class="text-sm font-semibold text-white">Hamidiye Cd. No:16, Fatih/İstanbul</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center shrink-0">
-                                <i data-lucide="phone-call" class="w-5 h-5 text-gold-500"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-400">Concierge Desk</p>
-                                <p class="text-sm font-semibold text-gold-500">+90 212 527 52 71</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Form Box -->
-                <div class="lg:col-span-7">
-                    <form @submit.prevent="handleReservation" class="glass-panel p-8 md:p-10 rounded-sm border border-gold-500/30 space-y-6">
-                        
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <!-- Name -->
-                            <div>
-                                <label class="block text-xs uppercase tracking-widest text-gray-300 mb-2">Full Name *</label>
-                                <input type="text" x-model="booking.name" required placeholder="e.g. Lord Alexander" 
-                                       class="w-full bg-ocean-900/80 border border-white/10 focus:border-gold-500 rounded-xs px-4 py-3 text-sm text-white focus:outline-none transition-colors">
-                            </div>
-
-                            <!-- Phone -->
-                            <div>
-                                <label class="block text-xs uppercase tracking-widest text-gray-300 mb-2">Phone Number *</label>
-                                <input type="tel" x-model="booking.phone" required placeholder="+90 5XX XXX XX XX" 
-                                       class="w-full bg-ocean-900/80 border border-white/10 focus:border-gold-500 rounded-xs px-4 py-3 text-sm text-white focus:outline-none transition-colors">
-                            </div>
-                        </div>
-
-                        <div class="grid md:grid-cols-3 gap-6">
-                            <!-- Date -->
-                            <div>
-                                <label class="block text-xs uppercase tracking-widest text-gray-300 mb-2">Date *</label>
-                                <input type="date" x-model="booking.date" required 
-                                       class="w-full bg-ocean-900/80 border border-white/10 focus:border-gold-500 rounded-xs px-4 py-3 text-sm text-white focus:outline-none transition-colors">
-                            </div>
-
-                            <!-- Time -->
-                            <div>
-                                <label class="block text-xs uppercase tracking-widest text-gray-300 mb-2">Time Slot *</label>
-                                <select x-model="booking.time" required class="w-full bg-ocean-900/80 border border-white/10 focus:border-gold-500 rounded-xs px-4 py-3 text-sm text-white focus:outline-none transition-colors">
-                                    <option value="" disabled selected>Select Time</option>
-                                    <option value="18:00">18:00 Sunset Opening</option>
-                                    <option value="19:30">19:30 Evening Prime</option>
-                                    <option value="21:00">21:00 Late Night</option>
-                                    <option value="22:30">22:30 Midnight Fine</option>
-                                </select>
-                            </div>
-
-                            <!-- Guests -->
-                            <div>
-                                <label class="block text-xs uppercase tracking-widest text-gray-300 mb-2">Guests *</label>
-                                <select x-model="booking.guests" required class="w-full bg-ocean-900/80 border border-white/10 focus:border-gold-500 rounded-xs px-4 py-3 text-sm text-white focus:outline-none transition-colors">
-                                    <option value="1">1 Person</option>
-                                    <option value="2" selected>2 Guests (Romantic)</option>
-                                    <option value="4">4 Guests (Family)</option>
-                                    <option value="6">6+ Guests (VIP Lounge)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Seating Area Selection -->
-                        <div>
-                            <label class="block text-xs uppercase tracking-widest text-gray-300 mb-2">Seating Atmosphere *</label>
-                            <div class="grid grid-cols-2 gap-4">
-                                <label class="flex items-center gap-3 p-3 bg-ocean-900/60 border rounded-xs cursor-pointer"
-                                       :class="booking.seating === 'rooftop' ? 'border-gold-500 text-gold-500' : 'border-white/10 text-gray-400'">
-                                    <input type="radio" value="rooftop" x-model="booking.seating" class="hidden">
-                                    <i data-lucide="sun" class="w-4 h-4"></i>
-                                    <span class="text-xs font-semibold uppercase tracking-wider">Rooftop Bosphorus View</span>
-                                </label>
-                                <label class="flex items-center gap-3 p-3 bg-ocean-900/60 border rounded-xs cursor-pointer"
-                                       :class="booking.seating === 'indoor' ? 'border-gold-500 text-gold-500' : 'border-white/10 text-gray-400'">
-                                    <input type="radio" value="indoor" x-model="booking.seating" class="hidden">
-                                    <i data-lucide="home" class="w-4 h-4"></i>
-                                    <span class="text-xs font-semibold uppercase tracking-wider">Indoor Salon Dining</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Special Request -->
-                        <div>
-                            <label class="block text-xs uppercase tracking-widest text-gray-300 mb-2">Special Notes / Dietary Requests</label>
-                            <textarea x-model="booking.notes" rows="3" placeholder="Anniversary celebration, seafood allergy, wine pairing request..."
-                                      class="w-full bg-ocean-900/80 border border-white/10 focus:border-gold-500 rounded-xs px-4 py-3 text-sm text-white focus:outline-none transition-colors"></textarea>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" 
-                                :disabled="submitting"
-                                class="w-full py-4 bg-gold-500 hover:bg-gold-400 text-ocean-900 font-bold uppercase tracking-[0.2em] text-xs transition-all duration-300 rounded-xs shadow-[0_0_25px_rgba(212,175,55,0.4)] flex items-center justify-center gap-2">
-                            <span x-show="!submitting">Confirm Reservation Request</span>
-                            <span x-show="submitting" class="animate-pulse">Processing Booking...</span>
-                        </button>
-
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIALS SECTION -->
-    <section id="reviews" class="py-28 bg-ocean-900 relative">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-gold-500 text-xs uppercase tracking-[0.3em] block mb-3">Distinguished Guest Impressions</span>
-                <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white mb-2">4.4 RATED EXPERIENCE</h2>
-                <p class="text-xs text-gray-400 uppercase tracking-widest">Based on 1,142+ Verified Google Reviews</p>
-            </div>
-
-            <!-- Review Cards Carousel Grid -->
-            <div class="grid md:grid-cols-3 gap-8">
-                <template x-for="(review, i) in reviews" :key="i">
-                    <div class="glass-card p-8 rounded-sm relative flex flex-col justify-between">
-                        <div>
-                            <div class="flex text-gold-500 gap-1 mb-4">
-                                <template x-for="star in 5">
-                                    <i data-lucide="star" class="w-4 h-4 fill-gold-500 text-gold-500"></i>
-                                </template>
-                            </div>
-                            <p class="text-gray-300 text-sm font-light leading-relaxed italic mb-6" x-text="'&ldquo;' + review.text + '&rdquo;'"></p>
-                        </div>
-                        <div class="border-t border-gold-500/10 pt-4 flex justify-between items-center">
-                            <div>
-                                <p class="font-cinzel font-bold text-white text-sm" x-text="review.author"></p>
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wider" x-text="review.source"></p>
-                            </div>
-                            <i data-lucide="quote" class="w-6 h-6 text-gold-500/30"></i>
-                        </div>
-                    </div>
-                </template>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- LOCATION & MAP SECTION -->
-    <section id="location" class="py-28 bg-ocean-800 relative">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="grid lg:grid-cols-12 gap-8 items-stretch">
-                
-                <!-- Info Column -->
-                <div class="lg:col-span-5 glass-panel p-8 md:p-10 rounded-sm flex flex-col justify-between">
+            <!-- Service 1: الكروبات -->
+            <div id="panel-groups" class="p-6 h-full flex flex-col overflow-y-auto space-y-4">
+                <div class="flex justify-between items-center mb-2">
                     <div>
-                        <span class="text-gold-500 text-xs uppercase tracking-[0.3em] block mb-2">Find Us In İstanbul</span>
-                        <h3 class="font-cinzel text-3xl font-bold text-white mb-6">HISTORIC FATIH ROOFTOP</h3>
-                        
-                        <div class="space-y-6 text-sm">
-                            <div class="flex items-start gap-4">
-                                <i data-lucide="map-pin" class="w-5 h-5 text-gold-500 shrink-0 mt-1"></i>
-                                <div>
-                                    <strong class="block text-white">Address</strong>
-                                    <span class="text-gray-400">Hobyar, Hamidiye Cd. No:16, 34112 Fatih/İstanbul, Turkey</span>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4">
-                                <i data-lucide="clock" class="w-5 h-5 text-gold-500 shrink-0 mt-1"></i>
-                                <div>
-                                    <strong class="block text-white">Hours</strong>
-                                    <span class="text-gray-400">Monday – Sunday: 12:00 PM – 02:00 AM</span>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4">
-                                <i data-lucide="phone" class="w-5 h-5 text-gold-500 shrink-0 mt-1"></i>
-                                <div>
-                                    <strong class="block text-white">Direct Phone</strong>
-                                    <a href="tel:+902125275271" class="text-gold-500 hover:underline">+90 212 527 52 71</a>
-                                </div>
-                            </div>
-                        </div>
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-earth-americas text-blue-500"></i> الكروبات السياحية المتاحة
+                        </h2>
+                        <p class="text-xs text-slate-400">اختر رحلتك وتصفح التفاصيل المباشرة على كوكب الأرض</p>
                     </div>
-
-                    <div class="pt-8 mt-8 border-t border-gold-500/10">
-                        <a href="https://maps.google.com/?q=Hobyar,+Hamidiye+Cd.+No:16,+34112+Fatih/İstanbul" 
-                           target="_blank" 
-                           class="w-full py-3.5 bg-gold-500/10 border border-gold-500/40 hover:bg-gold-500 hover:text-ocean-900 text-gold-500 font-bold uppercase tracking-widest text-xs rounded-xs transition-all flex items-center justify-center gap-2">
-                            <span>Open Google Maps Directions</span>
-                            <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
-                    </div>
+                    <button onclick="openEditModal(null)" class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-2 rounded-lg font-semibold flex items-center gap-1 transition-all shadow-md">
+                        <i class="fa-solid fa-plus"></i> إضافة كروب جديد
+                    </button>
                 </div>
 
-                <!-- Custom Styled Dark Map Canvas Placeholder -->
-                <div class="lg:col-span-7 rounded-sm overflow-hidden border border-gold-500/20 min-h-[350px] relative glass-card">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.052820359051!2d28.9718!3d41.0122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab9be232b6dd1%3A0x6e22f87a8df8b935!2sHamidiye%20Cd.%20No%3A16%2C%2034112%20Fatih%2F%C4%B0stanbul!5e0!3m2!1sen!2str!4v1700000000000!5m2!1sen!2str" 
-                            class="w-full h-full min-h-[400px] border-0 filter invert-[0.9] hue-rotate-[180deg] contrast-[1.2]" 
-                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-
+                <div id="groups-list" class="grid grid-cols-1 gap-4"></div>
             </div>
-        </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-ocean-900 border-t border-gold-500/20 py-16 text-gray-400 text-xs">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-                <!-- Col 1 -->
-                <div class="space-y-4">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="anchor" class="w-5 h-5 text-gold-500"></i>
-                        <span class="font-cinzel text-xl font-bold text-white tracking-widest">ADELLA</span>
+            <!-- Service 2: الفيزا -->
+            <div id="panel-visa" class="p-6 h-full flex flex-col overflow-y-auto space-y-4 hidden">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-passport text-blue-500"></i> خدمات الفيزا والتأشيرات
+                    </h2>
+                    <p class="text-xs text-slate-400">مرر السهم أو اختر أية دولة لعرض السعر والمستمسكات المطلوبة</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-3" id="visa-list"></div>
+            </div>
+
+            <!-- Service 3: الطيران -->
+            <div id="panel-flights" class="p-6 h-full flex flex-col space-y-5 hidden">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-plane text-blue-500"></i> حجز تذاكر الطيران المباشر
+                    </h2>
+                    <p class="text-xs text-slate-400">حدد مطار الانطلاق والوصول لمشاهدة مسار الطائرة 3D فوق القارات</p>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl space-y-4 border border-slate-700/50">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1.5">مطار الانطلاق</label>
+                        <select id="flight-from" class="w-full bg-slate-900 border border-slate-700 text-white text-sm rounded-xl p-3 focus:outline-none focus:border-blue-500">
+                            <option value="BGW">مطار بغداد الدولي (BGW)</option>
+                            <option value="EBL">مطار أربيل الدولي (EBL)</option>
+                            <option value="BSR">مطار البصرة الدولي (BSR)</option>
+                        </select>
                     </div>
-                    <p class="text-xs text-gray-400 leading-relaxed font-light">
-                        Spacious Rooftop Seafood Restaurant situated in Fatih, İstanbul. Fresh Bosphorus catch, Mediterranean recipes & Ottoman heritage.
-                    </p>
-                </div>
 
-                <!-- Col 2 -->
-                <div>
-                    <h5 class="font-cinzel text-white uppercase tracking-widest text-sm mb-4">Quick Links</h5>
-                    <ul class="space-y-2">
-                        <li><a href="#about" class="hover:text-gold-500 transition-colors">Our Story</a></li>
-                        <li><a href="#signature" class="hover:text-gold-500 transition-colors">Signature Dishes</a></li>
-                        <li><a href="#menu" class="hover:text-gold-500 transition-colors">Full Menu & Wine</a></li>
-                        <li><a href="#reservation" class="hover:text-gold-500 transition-colors">Table Booking</a></li>
-                    </ul>
-                </div>
-
-                <!-- Col 3 -->
-                <div>
-                    <h5 class="font-cinzel text-white uppercase tracking-widest text-sm mb-4">Social Presence</h5>
-                    <p class="mb-3 text-xs text-gray-400">Follow our Instagram for daily catches & rooftop sunset views.</p>
-                    <a href="https://instagram.com" target="_blank" class="inline-flex items-center gap-2 text-gold-500 hover:text-white transition-colors">
-                        <i data-lucide="instagram" class="w-4 h-4"></i>
-                        <span>@adellaseafood</span>
-                    </a>
-                </div>
-
-                <!-- Col 4 -->
-                <div>
-                    <h5 class="font-cinzel text-white uppercase tracking-widest text-sm mb-4">VIP Club</h5>
-                    <p class="mb-3 text-xs text-gray-400">Subscribe for seasonal menu previews & private tasting invitations.</p>
-                    <div class="flex">
-                        <input type="email" placeholder="Your email..." class="bg-ocean-800 border border-white/10 px-3 py-2 text-xs text-white focus:outline-none focus:border-gold-500 rounded-l-xs w-full">
-                        <button class="bg-gold-500 text-ocean-900 px-4 font-bold rounded-r-xs hover:bg-gold-400">
-                            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                    <div class="flex justify-center my-1">
+                        <button class="w-8 h-8 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center border border-blue-500/30">
+                            <i class="fa-solid fa-arrow-down-up-lock text-xs"></i>
                         </button>
                     </div>
-                </div>
-            </div>
 
-            <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center">
-                <p>© 2026 Adella Seafood Restaurant İstanbul. All rights reserved.</p>
-                <p class="text-gray-500 text-[11px]">Designed for Michelin-level Culinary Fine Dining Experience.</p>
-            </div>
-
-        </div>
-    </footer>
-
-    <!-- DISH DETAIL MODAL -->
-    <div x-show="activeModalDish" 
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0 scale-95"
-         x-transition:enter-end="opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-95"
-         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-         style="display: none;">
-        
-        <template x-if="activeModalDish">
-            <div @click.away="activeModalDish = null" class="glass-panel max-w-lg w-full rounded-sm overflow-hidden border border-gold-500/40 relative">
-                <button @click="activeModalDish = null" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:text-gold-500">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-                <div class="h-64 overflow-hidden relative">
-                    <img :src="activeModalDish.image" :alt="activeModalDish.name" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-ocean-900 to-transparent"></div>
-                </div>
-                <div class="p-6 space-y-4">
-                    <div class="flex justify-between items-baseline">
-                        <h3 class="font-cinzel text-2xl font-bold text-white" x-text="activeModalDish.name"></h3>
-                        <span class="font-cinzel text-xl font-bold text-gold-500" x-text="activeModalDish.price"></span>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1.5">مطار الوصول</label>
+                        <select id="flight-to" class="w-full bg-slate-900 border border-slate-700 text-white text-sm rounded-xl p-3 focus:outline-none focus:border-blue-500">
+                            <option value="IST">مطار إسطنبول الدولي (IST)</option>
+                            <option value="DXB">مطار دبي الدولي (DXB)</option>
+                            <option value="GYD">مطار باكو حيدر علييف (GYD)</option>
+                            <option value="CAI">مطار القاهرة الدولي (CAI)</option>
+                        </select>
                     </div>
-                    <p class="text-sm text-gray-300 font-light leading-relaxed" x-text="activeModalDish.desc"></p>
-                    <div class="pt-4 border-t border-gold-500/10 flex items-center justify-between">
-                        <span class="text-xs uppercase tracking-widest text-gold-400">Pairing Recommendation: White Aegean Wine</span>
-                        <a href="#reservation" @click="activeModalDish = null" class="px-5 py-2 bg-gold-500 text-ocean-900 font-bold text-xs uppercase tracking-wider rounded-xs">Book Table</a>
+
+                    <button onclick="searchFlights()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass"></i> بحث عن رحلة ورسم المسار 3D
+                    </button>
+                </div>
+
+                <div id="flight-result" class="hidden glass-card p-5 rounded-2xl border-l-4 border-l-blue-500">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="text-xs text-blue-400 font-bold tracking-widest uppercase">النتيجة التقديرية</span>
+                            <h3 class="text-lg font-bold text-white mt-0.5" id="flight-route-title">بغداد ➔ إسطنبول</h3>
+                            <p class="text-xs text-slate-400" id="flight-duration">مدة الرحلة: ~ 2 ساعة و 30 دقيقة</p>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-2xl font-black text-green-400" id="flight-price">$320</span>
+                            <span class="block text-xs text-slate-400">لشخص واحد</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </template>
-    </div>
 
-    <!-- CONFIRMATION MODAL -->
-    <div x-show="reservationSuccess" 
-         x-transition
-         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
-         style="display: none;">
-        <div class="glass-panel max-w-md w-full p-8 rounded-sm text-center border border-gold-500 space-y-6">
-            <div class="w-16 h-16 rounded-full bg-gold-500/20 border border-gold-500 flex items-center justify-center mx-auto text-gold-500">
-                <i data-lucide="check-circle" class="w-10 h-10"></i>
+            <!-- Service 4: الفنادق -->
+            <div id="panel-hotels" class="p-6 h-full flex flex-col space-y-5 hidden">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-hotel text-blue-500"></i> استكشاف وحجز الفنادق العالمية
+                    </h2>
+                    <p class="text-xs text-slate-400">ابحث باسم الدولة والمنطقة للتركيز المباشر على الموقع</p>
+                </div>
+
+                <div class="glass-panel p-4 rounded-2xl grid grid-cols-2 gap-3 border border-slate-700/50">
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">اسم الدولة</label>
+                        <select id="hotel-country" onchange="updateHotelDistricts()" class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-2.5">
+                            <option value="UAE">الإمارات العربية المتحدة</option>
+                            <option value="TUR">تركيا</option>
+                            <option value="AZE">أذربيجان</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">المنطقة / المدينة</label>
+                        <select id="hotel-district" class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-2.5"></select>
+                    </div>
+
+                    <button onclick="searchHotels()" class="col-span-2 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-xs transition-all mt-1">
+                        <i class="fa-solid fa-location-crosshairs"></i> توجيه الكوكب وتحديث الفنادق
+                    </button>
+                </div>
+
+                <div id="hotels-list" class="space-y-3 overflow-y-auto flex-1"></div>
             </div>
-            <h3 class="font-cinzel text-2xl font-bold text-white">RESERVATION CONFIRMED</h3>
-            <p class="text-sm text-gray-300 font-light">
-                Thank you <strong class="text-gold-500" x-text="booking.name"></strong>. We have saved your rooftop table request for <span x-text="booking.guests"></span> guest(s) on <span x-text="booking.date"></span> at <span x-text="booking.time"></span>.
-            </p>
-            <p class="text-xs text-gray-400">Our concierge desk (+90 212 527 52 71) will send an SMS confirmation shortly.</p>
-            <button @click="reservationSuccess = false" class="w-full py-3 bg-gold-500 text-ocean-900 font-bold text-xs uppercase tracking-widest rounded-xs">
-                Close
+
+        </section>
+
+        <!-- Right Column: 3D Globe Canvas (50% Width) -->
+        <section class="w-1/2 h-full relative bg-black">
+            <div id="globe-container" class="w-full h-full"></div>
+
+            <div id="globe-hover-badge" class="absolute top-6 right-6 hidden glass-panel px-4 py-3 rounded-2xl border border-blue-500/40 pointer-events-none transition-all duration-300 shadow-2xl">
+                <div class="flex items-center gap-3">
+                    <span id="badge-flag" class="text-2xl">🇦🇪</span>
+                    <div>
+                        <h4 id="badge-title" class="font-bold text-white text-sm">دبي، الإمارات</h4>
+                        <p id="badge-desc" class="text-xs text-blue-300">سعر الفيزا: $120</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute bottom-6 left-6 glass-panel px-3 py-1.5 rounded-xl text-xs text-slate-400 flex items-center gap-2 pointer-events-none">
+                <i class="fa-solid fa-arrows-spin text-blue-400 animate-spin"></i>
+                <span>استخدم الماوس للتدوير والتكبير والتفاعل مع كوكب الأرض ثلاثي الأبعاد</span>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Form -->
+    <div id="edit-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-lg rounded-2xl p-6 border border-slate-700 shadow-2xl relative">
+            <button onclick="closeEditModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
             </button>
+            <h3 class="text-lg font-bold text-white mb-4" id="modal-title">تفاصيل الكروب والتعديل</h3>
+            
+            <form id="group-form" onsubmit="saveGroup(event)" class="space-y-3">
+                <input type="hidden" id="modal-group-id">
+                
+                <div>
+                    <label class="block text-xs text-slate-300 mb-1">اسم الكروب / الوجهة</label>
+                    <input type="text" id="modal-group-title" required class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">السعر ($)</label>
+                        <input type="number" id="modal-group-price" required class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">مدة الرحلة</label>
+                        <input type="text" id="modal-group-duration" required class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-300 mb-1">تفاصيل الفندق والخدمات</label>
+                    <textarea id="modal-group-details" rows="3" required class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3"></textarea>
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                    <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-xs transition-all">
+                        حفظ التعديلات
+                    </button>
+                    <button type="button" onclick="closeEditModal()" class="px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2.5 rounded-xl text-xs">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <!-- ALPINE APP LOGIC & DATA -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons();
-        });
+    <!-- Application Script -->
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-        function restaurantApp() {
-            return {
-                loading: true,
-                mobileMenuOpen: false,
-                activeCategory: 'mains',
-                activeModalDish: null,
-                activeLightbox: null,
-                reservationSuccess: false,
-                submitting: false,
+        let groupsData = [
+            { id: 1, title: 'رحلة دبي الذهبية', price: 650, duration: '6 أيام / 5 ليالي', hotel: 'فندق ماريوت دبي 5 نجوم', lat: 25.2048, lng: 55.2708, flag: '🇦🇪' },
+            { id: 2, title: 'سحر إسطنبول والشمال التركي', price: 480, duration: '8 أيام / 7 ليالي', hotel: 'فندق جواهربيرت إسطنبول 4 نجوم', lat: 41.0082, lng: 28.9784, flag: '🇹🇷' },
+            { id: 3, title: 'رحلة باكو الاستثنائية', price: 520, duration: '5 أيام / 4 ليالي', hotel: 'فندق هايات ريجنسي باكو', lat: 40.4093, lng: 49.8671, flag: '🇦🇿' }
+        ];
 
-                booking: {
-                    name: '',
-                    phone: '',
-                    date: '',
-                    time: '',
-                    guests: '2',
-                    seating: 'rooftop',
-                    notes: ''
-                },
+        const visaData = [
+            { id: 'UAE', country: 'الإمارات العربية المتحدة', price: '$120', time: '24 - 48 ساعة', docs: 'صورة الجواز + صورة شخصية', lat: 25.2048, lng: 55.2708, flag: '🇦🇪' },
+            { id: 'TUR', country: 'تركيا (فيزا إلكترونية/ملصق)', price: '$130', time: '3 - 5 أيام عمل', docs: 'جواز نافذ + كشف حساب', lat: 41.0082, lng: 28.9784, flag: '🇹🇷' },
+            { id: 'AZE', country: 'أذربيجان', price: '$45', time: '3 أيام', docs: 'صورة الجواز فقط', lat: 40.4093, lng: 49.8671, flag: '🇦🇿' },
+            { id: 'EGY', country: 'مصر (الموافقات الأمنية)', price: '$150', time: '7 - 10 أيام', docs: 'صورة الجواز والهوية', lat: 30.0444, lng: 31.2357, flag: '🇪🇬' }
+        ];
 
-                init() {
-                    // Preloader timer
-                    setTimeout(() => {
-                        this.loading = false;
-                        this.$nextTick(() => lucide.createIcons());
-                    }, 1400);
+        const airportsData = {
+            'BGW': { name: 'بغداد', lat: 33.2625, lng: 44.2344 },
+            'EBL': { name: 'أربيل', lat: 36.2375, lng: 43.9631 },
+            'BSR': { name: 'البصرة', lat: 30.5492, lng: 47.7811 },
+            'IST': { name: 'إسطنبول', lat: 41.2753, lng: 28.7519 },
+            'DXB': { name: 'دبي', lat: 25.2532, lng: 55.3657 },
+            'GYD': { name: 'باكو', lat: 40.4675, lng: 50.0467 },
+            'CAI': { name: 'القاهرة', lat: 30.1219, lng: 31.4056 }
+        };
 
-                    // Custom Cursor setup
-                    if (window.innerWidth >= 1024) {
-                        const cursor = document.getElementById('custom-cursor');
-                        window.addEventListener('mousemove', (e) => {
-                            cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-                        });
+        const hotelsData = {
+            'UAE': [
+                { name: 'فندق برج العرب دبي', rating: '5 نجوم فاخر', price: '$850/ليلة', area: 'جميرا' },
+                { name: 'فندق أتلانتس النخلة', rating: '5 نجوم', price: '$520/ليلة', area: 'نخلة جميرا' }
+            ],
+            'TUR': [
+                { name: 'فندق سواندور توبكابي إسطنبول', rating: '5 نجوم', price: '$210/ليلة', area: 'تقسيم' },
+                { name: 'فندق راديسون بلو إسطنبول', rating: '4 نجوم', price: '$140/ليلة', area: 'شيشلي' }
+            ]
+        };
 
-                        document.querySelectorAll('a, button, .cursor-pointer').forEach(el => {
-                            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
-                            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
-                        });
-                    }
-                },
+        let scene, camera, renderer, controls, globeGroup, flightArcMesh, animatedPlane;
 
-                openDishModal(dish) {
-                    this.activeModalDish = dish;
-                    this.$nextTick(() => lucide.createIcons());
-                },
+        function init3DGlobe() {
+            const container = document.getElementById('globe-container');
+            scene = new THREE.Scene();
 
-                handleReservation() {
-                    this.submitting = true;
-                    setTimeout(() => {
-                        this.submitting = false;
-                        this.reservationSuccess = true;
-                        this.$nextTick(() => lucide.createIcons());
-                    }, 1200);
-                },
+            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(0, 0, 3.2);
 
-                signatures: [
-                    {
-                        name: "Charcoal Grilled Octopus",
-                        category: "Signature Masterpiece",
-                        price: "₺1,450",
-                        image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
-                        desc: "Tender Aegean octopus arm slow-roasted over oak coals, served over velvety fava puree, caper berries, and extra virgin Aegean olive oil."
-                    },
-                    {
-                        name: "Seafood Risotto Carnaroli",
-                        category: "Pasta & Grain",
-                        price: "₺1,280",
-                        image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=800&q=80",
-                        desc: "Carnaroli rice slow-cooked in rich lobster bisque with tiger prawns, blue mussels, calamari rings, and saffron foam."
-                    },
-                    {
-                        name: "Mediterranean Sea Bass",
-                        category: "Main Catch",
-                        price: "₺1,600",
-                        image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80",
-                        desc: "Whole wild sea bass wood-grilled with fresh herbs, sea salt crust option, roasted baby potatoes, and lemon butter emulsion."
-                    },
-                    {
-                        name: "Lobster Linguine & Herbs",
-                        category: "Chef Specialty",
-                        price: "₺2,100",
-                        image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80",
-                        desc: "Artisanal linguine infused with fresh whole Bosphorus lobster, cherry tomatoes, white wine glaze, and garden basil."
-                    },
-                    {
-                        name: "Fresh Raw Oyster Platter",
-                        category: "Raw Bar",
-                        price: "₺1,850",
-                        image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80",
-                        desc: "Six premium oysters served over crushed ice with classic mignonette, fresh lemon wedges, and shallot vinegar."
-                    },
-                    {
-                        name: "Crispy Calamari Tava",
-                        category: "Starters",
-                        price: "₺890",
-                        image: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=800&q=80",
-                        desc: "Golden pan-fried Bosphorus squid served with traditional walnut-garlic tarator sauce and lemon zest."
-                    }
-                ],
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
 
-                menuCategories: [
-                    { id: 'starters', name: 'Mezeler & Starters' },
-                    { id: 'mains', name: 'Main Fish' },
-                    { id: 'pasta', name: 'Pasta & Risotto' },
-                    { id: 'desserts', name: 'Desserts (Tatlılar)' }
-                ],
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
 
-                get filteredMenuItems() {
-                    const allItems = {
-                        starters: [
-                            { id: 1, name: "Meze Selection Platter", price: "₺780", desc: "Assorted cold mezeler including sea bass marin, roasted eggplant, and sea fennel.", image: "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=400&q=80", popular: true },
-                            { id: 2, name: "Karides Tava (Garlic Prawns)", price: "₺920", desc: "Jumbo prawns sauteed in copper pan with garlic, chili flakes, and butter.", image: "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=400&q=80" },
-                            { id: 3, name: "Stuffed Bosphorus Mussels", price: "₺650", desc: "Spiced aromatic rice stuffed in fresh mussels with cinnamon and pine nuts.", image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=400&q=80" }
-                        ],
-                        mains: [
-                            { id: 4, name: "Grilled Sea Bass Fillet", price: "₺1,400", desc: "Skin-on sea bass grilled on open flame, seasonal greens, and sumac onions.", image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=80", popular: true },
-                            { id: 5, name: "Pan-Seared Salmon Steak", price: "₺1,350", desc: "Norwegian salmon with sesame glaze, asparagus, and saffron potato mash.", image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=400&q=80" },
-                            { id: 6, name: "Fisherman's Casserole (Balık Buğulama)", price: "₺1,550", desc: "Slow-baked mixed seafood in clay pot with tomatoes, peppers, and bay leaves.", image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=400&q=80" }
-                        ],
-                        pasta: [
-                            { id: 7, name: "Salmon & Dill Pasta", price: "₺980", desc: "Tagliatelle in silky cream sauce, smoked salmon chunks, and fresh dill.", image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=400&q=80" },
-                            { id: 8, name: "Wild Mushroom Risotto", price: "₺920", desc: "Arborio rice, porcini mushrooms, truffle butter, and aged parmesan shavings.", image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&q=80" }
-                        ],
-                        desserts: [
-                            { id: 9, name: "Ekmek Kadayıfı", price: "₺450", desc: "Traditional crumpet dessert in syrup served with thick buffalo kaymak cream.", image: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=400&q=80", popular: true },
-                            { id: 10, name: "İncir Tatlısı (Fig Dessert)", price: "₺420", desc: "Slow-poached dried figs stuffed with walnut halves, topped with gold leaf.", image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=400&q=80" },
-                            { id: 11, name: "Gaziantep Pistachio Baklava", price: "₺480", desc: "Layers of crisp phyllo dough filled with premium Antep pistachios.", image: "https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&w=400&q=80" }
-                        ]
-                    };
-                    return allItems[this.activeCategory] || allItems.mains;
-                },
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+            scene.add(ambientLight);
 
-                galleryImages: [
-                    { src: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80", title: "Rooftop Bosphorus Sunset", category: "View" },
-                    { src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80", title: "Main Dining Salon", category: "Interior" },
-                    { src: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80", title: "Charcoal Seafood Platter", category: "Cuisine" },
-                    { src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80", title: "Evening Bosphorus Lights", category: "Ambiance" },
-                    { src: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80", title: "Chef Fire Craft", category: "Kitchen" },
-                    { src: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80", title: "Fresh Catch Display", category: "Ingredients" }
-                ],
+            const sunLight = new THREE.DirectionalLight(0xffffff, 2.0);
+            sunLight.position.set(5, 3, 5);
+            scene.add(sunLight);
 
-                reviews: [
-                    { author: "Elena Rostova", source: "Google Review", text: "Hands down the best rooftop dining view in İstanbul. The octopus melt in your mouth and the wine selection from Aegean vineyards was exceptional." },
-                    { author: "Jean-Luc Martin", source: "Google Review", text: "Michelin-worthy presentation and warmth. Watching the ships pass through the Bosphorus while dining on fresh sea bass is unforgettable." },
-                    { author: "Tariq Al-Mansoor", source: "Google Review", text: "Top-tier hospitality! The Ekmek Kadayıfı dessert with kaymak was the perfect sweet finale. Highly recommend reserving a rooftop table." }
-                ]
+            globeGroup = new THREE.Group();
+            scene.add(globeGroup);
+
+            const textureLoader = new THREE.TextureLoader();
+            const sphereGeo = new THREE.SphereGeometry(1, 64, 64);
+
+            const dayTexture = textureLoader.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg');
+            const bumpTexture = textureLoader.load('https://unpkg.com/three-globe/example/img/earth-topology.png');
+
+            const globeMaterial = new THREE.MeshStandardMaterial({
+                map: dayTexture,
+                bumpMap: bumpTexture,
+                bumpScale: 0.04,
+                roughness: 0.6
+            });
+
+            const globeMesh = new THREE.Mesh(sphereGeo, globeMaterial);
+            globeGroup.add(globeMesh);
+
+            const atmosGeo = new THREE.SphereGeometry(1.02, 64, 64);
+            const atmosMat = new THREE.MeshBasicMaterial({
+                color: 0x3b82f6,
+                transparent: true,
+                opacity: 0.15,
+                side: THREE.BackSide
+            });
+            globeGroup.add(new THREE.Mesh(atmosGeo, atmosMat));
+
+            renderGlobePins();
+
+            function animate() {
+                requestAnimationFrame(animate);
+                controls.update();
+
+                if (animatedPlane && animatedPlane.userData.progress !== undefined) {
+                    animatedPlane.userData.progress += 0.005;
+                    if (animatedPlane.userData.progress > 1) animatedPlane.userData.progress = 0;
+                    const point = animatedPlane.userData.curve.getPoint(animatedPlane.userData.progress);
+                    animatedPlane.position.copy(point);
+                }
+
+                globeGroup.rotation.y += 0.0008;
+                renderer.render(scene, camera);
             }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
         }
+
+        function latLngToVector3(lat, lng, radius = 1.01) {
+            const phi = (90 - lat) * (Math.PI / 180);
+            const theta = (lng + 180) * (Math.PI / 180);
+            return new THREE.Vector3(
+                -(radius * Math.sin(phi) * Math.cos(theta)),
+                radius * Math.cos(phi),
+                radius * Math.sin(phi) * Math.sin(theta)
+            );
+        }
+
+        function renderGlobePins() {
+            groupsData.forEach(g => {
+                const pos = latLngToVector3(g.lat, g.lng, 1.015);
+                const pinGeo = new THREE.SphereGeometry(0.025, 16, 16);
+                const pinMat = new THREE.MeshBasicMaterial({ color: 0x3b82f6 });
+                const pinMesh = new THREE.Mesh(pinGeo, pinMat);
+                pinMesh.position.copy(pos);
+                globeGroup.add(pinMesh);
+            });
+        }
+
+        window.flyToLocation = function(lat, lng) {
+            const targetPos = latLngToVector3(lat, lng, 2.4);
+            const startPos = camera.position.clone();
+            let progress = 0;
+            function animateCamera() {
+                progress += 0.03;
+                camera.position.lerpVectors(startPos, targetPos, progress);
+                if (progress < 1) requestAnimationFrame(animateCamera);
+            }
+            animateCamera();
+        };
+
+        window.switchTab = function(tabName) {
+            ['groups', 'visa', 'flights', 'hotels'].forEach(t => {
+                document.getElementById(`tab-${t}`).className = t === tabName 
+                    ? 'active-tab px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2'
+                    : 'px-4 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center gap-2';
+                document.getElementById(`panel-${t}`).classList.toggle('hidden', t !== tabName);
+            });
+        };
+
+        function renderGroups() {
+            const container = document.getElementById('groups-list');
+            container.innerHTML = groupsData.map(g => `
+                <div onclick="selectGroup(${g.id})" class="glass-card p-4 rounded-2xl cursor-pointer flex items-center justify-between border border-slate-800 hover:border-blue-500/50">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">${g.flag}</span>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">${g.title}</h4>
+                            <p class="text-xs text-slate-400"><i class="fa-solid fa-hotel text-blue-400 ml-1"></i> ${g.hotel}</p>
+                            <span class="inline-block mt-1 text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">${g.duration}</span>
+                        </div>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-lg font-black text-blue-400">$${g.price}</span>
+                        <button onclick="event.stopPropagation(); openEditModal(${g.id})" class="block mt-1 text-[11px] text-slate-400 hover:text-white underline">تعديل</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.selectGroup = function(id) {
+            const g = groupsData.find(item => item.id === id);
+            if (g) {
+                flyToLocation(g.lat, g.lng);
+                showBadge(g.flag, g.title, `السعر: $${g.price} | ${g.duration}`);
+            }
+        };
+
+        function renderVisas() {
+            const container = document.getElementById('visa-list');
+            container.innerHTML = visaData.map(v => `
+                <div onmouseenter="flyToLocation(${v.lat}, ${v.lng}); showBadge('${v.flag}', '${v.country}', 'السعر: ${v.price}')" class="glass-card p-4 rounded-2xl flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">${v.flag}</span>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">${v.country}</h4>
+                            <p class="text-xs text-slate-400"><i class="fa-solid fa-clock text-blue-400 ml-1"></i> المدة: ${v.time}</p>
+                        </div>
+                    </div>
+                    <span class="text-lg font-bold text-green-400">${v.price}</span>
+                </div>
+            `).join('');
+        }
+
+        window.searchFlights = function() {
+            const fromKey = document.getElementById('flight-from').value;
+            const toKey = document.getElementById('flight-to').value;
+            const from = airportsData[fromKey];
+            const to = airportsData[toKey];
+
+            if (!from || !to) return;
+
+            const p1 = latLngToVector3(from.lat, from.lng, 1.01);
+            const p2 = latLngToVector3(to.lat, to.lng, 1.01);
+            const mid = new THREE.Vector3().addVectors(p1, p2).multiplyScalar(0.5).normalize().multiplyScalar(1.35);
+            const curve = new THREE.QuadraticBezierCurve3(p1, mid, p2);
+
+            if (flightArcMesh) globeGroup.remove(flightArcMesh);
+            if (animatedPlane) globeGroup.remove(animatedPlane);
+
+            const points = curve.getPoints(50);
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+            const material = new THREE.LineBasicMaterial({ color: 0x3b82f6, linewidth: 3 });
+            flightArcMesh = new THREE.Line(geometry, material);
+            globeGroup.add(flightArcMesh);
+
+            const planeGeo = new THREE.SphereGeometry(0.02, 16, 16);
+            const planeMat = new THREE.MeshBasicMaterial({ color: 0x60a5fa });
+            animatedPlane = new THREE.Mesh(planeGeo, planeMat);
+            animatedPlane.userData = { curve: curve, progress: 0 };
+            globeGroup.add(animatedPlane);
+
+            document.getElementById('flight-result').classList.remove('hidden');
+            document.getElementById('flight-route-title').innerText = `${from.name} ➔ ${to.name}`;
+            flyToLocation((from.lat + to.lat) / 2, (from.lng + to.lng) / 2);
+        };
+
+        window.updateHotelDistricts = function() {
+            const country = document.getElementById('hotel-country').value;
+            const select = document.getElementById('hotel-district');
+            const options = country === 'UAE' ? ['جميرا', 'نخلة جميرا', 'وسط دبي'] : ['تقسيم', 'شيشلي', 'الفاتح'];
+            select.innerHTML = options.map(o => `<option value="${o}">${o}</option>`).join('');
+        };
+
+        window.searchHotels = function() {
+            const country = document.getElementById('hotel-country').value;
+            const list = hotelsData[country] || [];
+            const container = document.getElementById('hotels-list');
+            container.innerHTML = list.map(h => `
+                <div class="glass-card p-3 rounded-xl flex justify-between items-center">
+                    <div>
+                        <h4 class="text-xs font-bold text-white">${h.name}</h4>
+                        <span class="text-[10px] text-blue-400">${h.rating} - ${h.area}</span>
+                    </div>
+                    <span class="text-xs font-bold text-green-400">${h.price}</span>
+                </div>
+            `).join('');
+
+            const loc = visaData.find(v => v.id === country);
+            if (loc) flyToLocation(loc.lat, loc.lng);
+        };
+
+        function showBadge(flag, title, desc) {
+            const badge = document.getElementById('globe-hover-badge');
+            document.getElementById('badge-flag').innerText = flag;
+            document.getElementById('badge-title').innerText = title;
+            document.getElementById('badge-desc').innerText = desc;
+            badge.classList.remove('hidden');
+        }
+
+        window.openEditModal = function(id) {
+            const modal = document.getElementById('edit-modal');
+            modal.classList.remove('hidden');
+
+            if (id) {
+                const g = groupsData.find(item => item.id === id);
+                document.getElementById('modal-group-id').value = g.id;
+                document.getElementById('modal-group-title').value = g.title;
+                document.getElementById('modal-group-price').value = g.price;
+                document.getElementById('modal-group-duration').value = g.duration;
+                document.getElementById('modal-group-details').value = g.hotel;
+            } else {
+                document.getElementById('group-form').reset();
+                document.getElementById('modal-group-id').value = '';
+            }
+        };
+
+        window.closeEditModal = function() {
+            document.getElementById('edit-modal').classList.add('hidden');
+        };
+
+        window.saveGroup = function(e) {
+            e.preventDefault();
+            const id = document.getElementById('modal-group-id').value;
+            const title = document.getElementById('modal-group-title').value;
+            const price = document.getElementById('modal-group-price').value;
+            const duration = document.getElementById('modal-group-duration').value;
+            const details = document.getElementById('modal-group-details').value;
+
+            if (id) {
+                const g = groupsData.find(item => item.id == id);
+                g.title = title;
+                g.price = price;
+                g.duration = duration;
+                g.hotel = details;
+            } else {
+                groupsData.push({
+                    id: Date.now(),
+                    title: title,
+                    price: price,
+                    duration: duration,
+                    hotel: details,
+                    lat: 25.2048,
+                    lng: 55.2708,
+                    flag: '✈️'
+                });
+            }
+
+            renderGroups();
+            closeEditModal();
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            init3DGlobe();
+            renderGroups();
+            renderVisas();
+            updateHotelDistricts();
+            searchHotels();
+        });
     </script>
 </body>
 </html>
