@@ -63,20 +63,23 @@
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
         }
 
-        /* Leaflet Dark Customization */
+        /* Leaflet Dark Customization Without API Key Requirement */
         .leaflet-container {
             background-color: #090d16 !important;
             font-family: 'Cairo', sans-serif !important;
         }
+        .leaflet-tile {
+            filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3);
+        }
         .leaflet-popup-content-wrapper {
-            background: rgba(15, 23, 42, 0.9) !important;
+            background: rgba(15, 23, 42, 0.95) !important;
             color: #fff !important;
             border: 1px solid rgba(59, 130, 246, 0.4);
             border-radius: 12px !important;
             backdrop-filter: blur(8px);
         }
         .leaflet-popup-tip {
-            background: rgba(15, 23, 42, 0.9) !important;
+            background: rgba(15, 23, 42, 0.95) !important;
         }
     </style>
 </head>
@@ -334,17 +337,15 @@
         let map, flightLine;
         let mapMarkers = [];
 
-        // Initialize OpenSource Leaflet Map
+        // Initialize Direct OpenStreetMap (Free & No API Key Required)
         function initMap() {
             map = L.map('map', {
                 zoomControl: false
             }).setView([30, 45], 4);
 
-            // Dark Matter Free Tiles (CartoDB OpenStreetMap)
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                maxZoom: 18,
-                subdomains: 'abcd',
-                attribution: '&copy; OpenStreetMap'
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; OpenStreetMap contributors'
             }).addTo(map);
 
             L.control.zoom({ position: 'bottomright' }).addTo(map);
