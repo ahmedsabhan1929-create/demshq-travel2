@@ -8,193 +8,279 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Three.js Library for 3D Globe -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
     <style>
-        body {
+        * {
             font-family: 'Cairo', sans-serif;
-            background-color: #080c14;
-            color: #e2e8f0;
-            overflow-x: hidden;
         }
-        
+
+        /* Custom Scrollbar for Glass Containers */
         ::-webkit-scrollbar {
             width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #0f172a;
+            background: rgba(15, 23, 42, 0.4);
         }
         ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 9999px;
+            backdrop-filter: blur(4px);
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #3b82f6;
+            background: rgba(59, 130, 246, 0.6);
         }
 
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.88);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Pure Glassmorphism Aesthetics */
+        .glass-header {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .glass-main-container {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(25px) saturate(190%);
+            -webkit-backdrop-filter: blur(25px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
         }
 
         .glass-card {
-            background: rgba(30, 41, 59, 0.65);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .glass-card:hover {
-            border-color: rgba(59, 130, 246, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(96, 165, 250, 0.5);
+            transform: translateY(-3px) scale(1.005);
+            box-shadow: 0 12px 30px -5px rgba(59, 130, 246, 0.25);
+        }
+
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .active-tab {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.85) 0%, rgba(29, 78, 216, 0.9) 100%);
+            backdrop-filter: blur(12px);
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
         }
 
-        /* Globe Canvas Pointer Events Disabled */
-        #globe-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
+        /* Plane Floating Animation */
+        @keyframes planeFly {
+            0% {
+                transform: translate(-10%, 15px) rotate(-1deg);
+            }
+            50% {
+                transform: translate(5%, -15px) rotate(2deg);
+            }
+            100% {
+                transform: translate(-10%, 15px) rotate(-1deg);
+            }
+        }
+
+        /* Cloud Drifting Animations */
+        @keyframes cloudFloatLeft {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        @keyframes cloudFloatRight {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .animate-plane {
+            animation: planeFly 12s ease-in-out infinite;
+        }
+
+        .animate-cloud-slow {
+            animation: cloudFloatLeft 45s linear infinite;
+        }
+
+        .animate-cloud-fast {
+            animation: cloudFloatRight 30s linear infinite;
+        }
+
+        .animate-cloud-reverse {
+            animation: cloudFloatLeft 60s linear infinite;
         }
     </style>
 </head>
-<body class="h-screen flex flex-col overflow-hidden relative">
+<body class="h-screen flex flex-col overflow-hidden bg-slate-950 text-slate-100 relative select-none">
 
-    <!-- Background Decorative Globe Canvas (In Center) -->
-    <div id="globe-container"></div>
+    <!-- Sky Background Layer with Airplane & Clouds -->
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <!-- Sky Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-sky-950 via-slate-900 to-indigo-950 opacity-95"></div>
 
-    <!-- Header Navigation -->
-    <header class="glass-panel z-40 px-6 py-3 flex items-center justify-between border-b border-slate-800 shrink-0 relative">
-        <div class="flex items-center space-x-4 space-x-reverse">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-500/30">
+        <!-- Atmospheric Glows -->
+        <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-500/20 rounded-full blur-[140px]"></div>
+        <div class="absolute bottom-0 right-0 w-[600px] h-[400px] bg-indigo-600/15 rounded-full blur-[120px]"></div>
+
+        <!-- Drifting Clouds Back Layer -->
+        <div class="absolute top-10 left-0 w-[120%] h-64 bg-repeat-x opacity-20 animate-cloud-slow" 
+             style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1000 300\'><path fill=\'%23ffffff\' d=\'M 100,250 Q 150,180 220,200 Q 280,120 380,150 Q 450,90 550,130 Q 620,180 700,160 Q 780,110 880,160 Q 950,220 1000,250 Z\'/></svg>'); background-size: 800px 200px;">
+        </div>
+
+        <!-- Airplane Graphic Flying in Center Sky -->
+        <div class="absolute inset-0 flex items-center justify-center opacity-75 animate-plane">
+            <svg class="w-[320px] md:w-[500px] h-auto drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)] text-sky-100/90" viewBox="0 0 512 512" fill="currentColor">
+                <path d="M498.1 5.6c-10.1-7.5-24.3-7.3-34.1 0.4l-206 163.6-118.8-32.4c-12.8-3.5-26.3 2.1-32.7 13.5L2.8 208.2c-5.2 9.2-3.8 20.7 3.5 28.3l85.2 88.8-39 82.2c-4.8 10.1-2.6 22.2 5.4 29.9l28.3 27.2c7.9 7.6 19.9 9.3 29.7 4.2l181-94.2 121.3 75c8.9 5.5 20.2 5.1 28.7-1l62.5-45c9.2-6.6 13.7-18 11.2-29.1L498.1 5.6zM448 384l-112-69.2c-6.8-4.2-15.2-4.9-22.6-1.8L139 399.7l28.6-60.3c3.5-7.4 2.5-16.1-2.6-22.5l-78.5-81.8 72.8-19.8c8.3-2.3 15.3-8 19.1-15.7l168.3-133.7 33.3 331.1z"/>
+            </svg>
+        </div>
+
+        <!-- Drifting Clouds Foreground Layer -->
+        <div class="absolute bottom-[-50px] left-0 w-[140%] h-80 bg-repeat-x opacity-35 animate-cloud-fast" 
+             style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1000 300\'><path fill=\'%23ffffff\' d=\'M 0,300 Q 80,180 180,210 Q 260,110 380,140 Q 480,80 600,120 Q 720,160 820,130 Q 920,80 1000,200 L 1000,300 Z\'/></svg>'); background-size: 1000px 300px;">
+        </div>
+
+        <div class="absolute top-1/3 right-0 w-[120%] h-72 bg-repeat-x opacity-15 animate-cloud-reverse" 
+             style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1000 300\'><path fill=\'%23ffffff\' d=\'M 50,280 Q 120,190 200,220 Q 300,130 420,160 Q 520,90 640,140 Q 750,190 850,150 Q 930,120 1000,240 L 1000,300 Z\'/></svg>'); background-size: 900px 250px;">
+        </div>
+    </div>
+
+    <!-- Glass Header Navigation -->
+    <header class="glass-header z-40 px-4 md:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4 shrink-0 relative">
+        <div class="flex items-center space-x-3 space-x-reverse">
+            <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-sky-500/30 border border-white/30">
                 <i class="fa-solid fa-plane-departure"></i>
             </div>
             <div>
-                <h1 class="text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-300 to-white">
+                <h1 class="text-lg md:text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-white via-sky-100 to-blue-200">
                     شركة دمشق للسفر والسياحة
                 </h1>
-                <p class="text-[11px] text-blue-400 font-semibold tracking-wide">
+                <p class="text-[11px] text-sky-300 font-semibold tracking-wide flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                     الوكيل العام للخطوط الجوية العراقية #GSA_IRAQ_AIRWAYS
                 </p>
             </div>
         </div>
 
-        <!-- Service Tabs -->
-        <nav class="flex items-center gap-1.5 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800">
-            <button onclick="switchTab('groups')" id="tab-groups" class="active-tab px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+        <!-- Glass Tabs Bar -->
+        <nav class="flex items-center gap-1.5 bg-slate-900/40 p-1.5 rounded-2xl border border-white/10 backdrop-blur-md overflow-x-auto max-w-full">
+            <button onclick="switchTab('groups')" id="tab-groups" class="active-tab px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 whitespace-nowrap">
                 <i class="fa-solid fa-people-group"></i> الكروبات
             </button>
-            <button onclick="switchTab('visa')" id="tab-visa" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
-                <i class="fa-solid fa-passport"></i> الفيزا
+            <button onclick="switchTab('visa')" id="tab-visa" class="glass-btn px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-passport"></i> الفيزا والتأشيرات
             </button>
-            <button onclick="switchTab('land')" id="tab-land" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
-                <i class="fa-solid fa-car-side"></i> الرحلات البرية (GMC)
+            <button onclick="switchTab('land')" id="tab-land" class="glass-btn px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-car-side"></i> رحلات GMC الأردن
             </button>
-            <button onclick="switchTab('flights')" id="tab-flights" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+            <button onclick="switchTab('flights')" id="tab-flights" class="glass-btn px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2 whitespace-nowrap">
                 <i class="fa-solid fa-plane"></i> الطيران
             </button>
-            <button onclick="switchTab('esim')" id="tab-esim" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+            <button onclick="switchTab('esim')" id="tab-esim" class="glass-btn px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2 whitespace-nowrap">
                 <i class="fa-solid fa-sim-card"></i> شرائح eSIM
             </button>
-            <button onclick="switchTab('contact')" id="tab-contact" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
-                <i class="fa-solid fa-location-dot"></i> الفروع والتواصل
+            <button onclick="switchTab('contact')" id="tab-contact" class="glass-btn px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-map-location-dot"></i> الفروع والخرائط
             </button>
         </nav>
 
-        <!-- Direct WhatsApp Button -->
-        <div class="flex items-center gap-3">
-            <a href="https://wa.me/9647701716661" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-emerald-600/20">
+        <!-- Direct WhatsApp Quick Action -->
+        <div class="hidden sm:flex items-center gap-3">
+            <a href="https://wa.me/9647701716661" target="_blank" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/25 border border-white/20">
                 <i class="fa-brands fa-whatsapp text-sm"></i> حجز سريع واتساب
             </a>
         </div>
     </header>
 
-    <!-- Main Content Panel (Floating Panel over Globe Background) -->
-    <main class="flex-1 flex justify-center items-center p-4 z-10 overflow-hidden relative">
+    <!-- Main Content Panel (Floating Glass Panel) -->
+    <main class="flex-1 flex justify-center items-center p-3 md:p-6 z-10 overflow-hidden relative">
 
-        <section class="w-full max-w-3xl h-full flex flex-col z-20 rounded-2xl glass-panel border border-slate-800 shadow-2xl overflow-hidden relative">
+        <section class="w-full max-w-3xl h-full flex flex-col z-20 rounded-3xl glass-main-container overflow-hidden relative">
             
-            <!-- Service 1: الكروبات -->
-            <div id="panel-groups" class="p-6 h-full flex flex-col overflow-y-auto space-y-4">
-                <div>
-                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-globe text-blue-500"></i> الكروبات والعروض السياحية
-                    </h2>
-                    <p class="text-xs text-slate-400">تصفح أفضل الرحلات الجماعية بأسعار شاملة الطيران والفنادق</p>
+            <!-- SECTION 1: الكروبات السياحية -->
+            <div id="panel-groups" class="p-5 md:p-6 h-full flex flex-col overflow-y-auto space-y-4">
+                <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                    <div>
+                        <h2 class="text-lg md:text-xl font-extrabold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-globe text-sky-400"></i> الكروبات والعروض السياحية
+                        </h2>
+                        <p class="text-xs text-sky-200/80">أفضل الرحلات الجماعية الشاملة للطيران والفنادق الفاخرة</p>
+                    </div>
+                    <span class="text-xs bg-sky-500/20 text-sky-300 border border-sky-400/30 px-3 py-1 rounded-full font-bold">عروض موسمية</span>
                 </div>
 
-                <div id="groups-list" class="grid grid-cols-1 gap-3"></div>
+                <div id="groups-list" class="grid grid-cols-1 gap-3.5"></div>
             </div>
 
-            <!-- Service 2: الفيزا -->
-            <div id="panel-visa" class="p-6 h-full flex flex-col overflow-y-auto space-y-4 hidden">
-                <div>
-                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-passport text-blue-500"></i> خدمات تأشيرات السفر (الفيزا)
+            <!-- SECTION 2: التأشيرات والفيزا -->
+            <div id="panel-visa" class="p-5 md:p-6 h-full flex flex-col overflow-y-auto space-y-4 hidden">
+                <div class="border-b border-white/10 pb-3">
+                    <h2 class="text-lg md:text-xl font-extrabold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-passport text-sky-400"></i> خدمات تأشيرات السفر (الفيزا)
                     </h2>
-                    <p class="text-xs text-slate-400">نضمن لك التقديم الآمن والموثق لجميع الوجهات العالمية</p>
+                    <p class="text-xs text-sky-200/80">تقديم رسمي موثوق وسريع لكافة الدول مع ضمان إجراءات المعاملات</p>
                 </div>
 
-                <div class="grid grid-cols-1 gap-3" id="visa-list"></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="visa-list"></div>
             </div>
 
-            <!-- Service 3: الرحلات البرية (GMC) -->
-            <div id="panel-land" class="p-6 h-full flex flex-col overflow-y-auto space-y-4 hidden">
-                <div>
-                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-car-side text-blue-500"></i> الرحلات البرية اليومية (GMC)
+            <!-- SECTION 3: الرحلات البرية GMC -->
+            <div id="panel-land" class="p-5 md:p-6 h-full flex flex-col overflow-y-auto space-y-4 hidden">
+                <div class="border-b border-white/10 pb-3">
+                    <h2 class="text-lg md:text-xl font-extrabold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-car-side text-sky-400"></i> الرحلات البرية اليومية (GMC)
                     </h2>
-                    <p class="text-xs text-slate-400">رحلات يومية بسيارات VIP حديثة ومكيفة نحو الأردن</p>
+                    <p class="text-xs text-sky-200/80">رحلات برية يومية بسيارات صالون VIP مكيفة نحو المملكة الأردنية</p>
                 </div>
 
-                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-emerald-500 space-y-3">
+                <div class="glass-card p-5 md:p-6 rounded-2xl border-r-4 border-r-emerald-400 space-y-4">
                     <div class="flex justify-between items-start">
                         <div>
-                            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-md font-bold">رحلات يومية منتظمة</span>
-                            <h3 class="text-lg font-bold text-white mt-2">🇯🇴 من العراق (أربيل / تكريت) ➔ عمان (الأردن)</h3>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-3 py-1 rounded-full font-bold">انطلاق يومي منتظم</span>
+                            <h3 class="text-base md:text-lg font-bold text-white mt-2.5">🇯🇴 من (تكريت / أربيل) ➔ عمان (الأردن)</h3>
                         </div>
-                        <span class="text-2xl">🚘</span>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-emerald-300 text-2xl border border-emerald-400/30">
+                            <i class="fa-solid fa-car"></i>
+                        </div>
                     </div>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        تسيير رحلات برية يومية بنظام الصالون المريح (GMC) من فروعنا في تكريت وأربيل مباشرة إلى العاصمة الأردنية عمان، مع تقديم كافة التسهيلات الحدودية وخيارات النقل الآمن.
+                    <p class="text-xs text-slate-200 leading-relaxed">
+                        تسيير رحلات برية يومية بسيارات حديثة (GMC) من فروعنا في **تكريت** و **أربيل** مباشرة إلى العاصمة الأردنية عمان، مع توفير أقصى درجات الراحة والتسهيلات الحدودية الكاملة.
                     </p>
-                    <div class="pt-2 flex justify-end">
-                        <a href="https://wa.me/9647701716661?text=استفسار%20عن%20حجز%20رحلة%20GMC%20إلى%20الأردن" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2">
-                            <i class="fa-brands fa-whatsapp"></i> احجز مقعدك عبر واتساب
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-white/10">
+                        <span class="text-xs text-sky-200"><i class="fa-solid fa-shield-halved text-emerald-400 ml-1"></i> سيارات مكيفة وراحة عالية</span>
+                        <a href="https://wa.me/9647701716661?text=استفسار%20عن%20حجز%20رحلة%20GMC%20إلى%20الأردن" target="_blank" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/30">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> احجز مقعدك عبر واتساب
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Service 4: الطيران -->
-            <div id="panel-flights" class="p-6 h-full flex flex-col space-y-4 overflow-y-auto hidden">
-                <div>
-                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-plane text-blue-500"></i> حجز تذاكر الطيران
+            <!-- SECTION 4: الطيران -->
+            <div id="panel-flights" class="p-5 md:p-6 h-full flex flex-col space-y-4 overflow-y-auto hidden">
+                <div class="border-b border-white/10 pb-3">
+                    <h2 class="text-lg md:text-xl font-extrabold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-plane text-sky-400"></i> حجز تذاكر الطيران
                     </h2>
-                    <p class="text-xs text-slate-400">الوكيل العام للخطوط الجوية العراقية وحجوزات الملكية الأردنية وكافة الخطوط العالمية</p>
+                    <p class="text-xs text-sky-200/80">الوكيل العام للخطوط الجوية العراقية وحجوزات الملكية الأردنية والخطوط العالمية</p>
                 </div>
 
-                <div class="glass-panel p-5 rounded-2xl space-y-4 border border-slate-700/50">
+                <div class="glass-card p-5 rounded-2xl space-y-4 border border-white/15">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1.5">مطار الانطلاق</label>
-                        <select id="flight-from" class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-blue-500">
+                        <label class="block text-xs font-semibold text-slate-200 mb-1.5">مطار الانطلاق</label>
+                        <select id="flight-from" class="w-full bg-slate-900/80 border border-white/20 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-sky-400 backdrop-blur-md">
                             <option value="EBL">🇮🇶 أربيل - مطار أربيل الدولي (EBL)</option>
                             <option value="BGW">🇮🇶 بغداد - مطار بغداد الدولي (BGW)</option>
                             <option value="BSR">🇮🇶 البصرة - مطار البصرة الدولي (BSR)</option>
@@ -203,14 +289,14 @@
                     </div>
 
                     <div class="flex justify-center my-1">
-                        <div class="w-8 h-8 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center border border-blue-500/30">
-                            <i class="fa-solid fa-arrow-down-up-lock text-xs"></i>
+                        <div class="w-8 h-8 rounded-full bg-sky-500/20 text-sky-300 flex items-center justify-center border border-sky-400/30 shadow-md">
+                            <i class="fa-solid fa-plane-departure text-xs"></i>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1.5">مطار الوصول</label>
-                        <select id="flight-to" class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-blue-500">
+                        <label class="block text-xs font-semibold text-slate-200 mb-1.5">مطار الوصول</label>
+                        <select id="flight-to" class="w-full bg-slate-900/80 border border-white/20 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-sky-400 backdrop-blur-md">
                             <option value="AMM">🇯🇴 عمان - مطار الملكة علياء (AMM)</option>
                             <option value="IST">🇹🇷 إسطنبول - مطار إسطنبول الدولي (IST)</option>
                             <option value="DXB">🇦🇪 دبي - مطار دبي الدولي (DXB)</option>
@@ -219,99 +305,121 @@
                         </select>
                     </div>
 
-                    <button onclick="requestFlightWhatsApp()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 text-xs">
-                        <i class="fa-brands fa-whatsapp text-sm"></i> الاستفسار والحجز المباشر عبر واتساب
+                    <button onclick="requestFlightWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-500/25 transition-all flex items-center justify-center gap-2 text-xs border border-white/20">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> طلب استفسار وحجز عبر واتساب
                     </button>
                 </div>
             </div>
 
-            <!-- Service 5: eSIM -->
-            <div id="panel-esim" class="p-6 h-full flex flex-col space-y-4 overflow-y-auto hidden">
-                <div>
-                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-sim-card text-blue-500"></i> خدمات الإنترنت الدولي (eSIM)
+            <!-- SECTION 5: eSIM -->
+            <div id="panel-esim" class="p-5 md:p-6 h-full flex flex-col space-y-4 overflow-y-auto hidden">
+                <div class="border-b border-white/10 pb-3">
+                    <h2 class="text-lg md:text-xl font-extrabold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-sim-card text-sky-400"></i> خدمات إنترنت eSIM الدولي
                     </h2>
-                    <p class="text-xs text-slate-400">باقات إنترنت دولية للشريحة الإلكترونية لضمان الاتصال فور وصولك</p>
+                    <p class="text-xs text-sky-200/80">باقات إنترنت للشريحة الإلكترونية لضمان بقائك متصلاً في كل دول العالم</p>
                 </div>
 
                 <div class="glass-card p-5 rounded-2xl space-y-3">
                     <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-white text-sm">🌐 باقات الشريحة الإلكترونية (eSIM)</h3>
-                        <span class="text-xs bg-blue-500/20 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded-md font-semibold">تفعيل فوري</span>
+                        <h3 class="font-bold text-white text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-wifi text-sky-400"></i> باقات الشريحة الإلكترونية (eSIM)
+                        </h3>
+                        <span class="text-xs bg-sky-500/20 text-sky-300 border border-sky-400/30 px-2.5 py-0.5 rounded-full font-semibold">تفعيل فوري</span>
                     </div>
-                    <p class="text-xs text-slate-300">نوفر باقات إنترنت تغطي أكثر من 150 دولة بأسعار تنافسية دون الحاجة لتغيير شريحتك المحلية.</p>
+                    <p class="text-xs text-slate-200 leading-relaxed">
+                        نوفر باقات إنترنت فائقة السرعة تغطي أكثر من 150 دولة بأسعار منافسة دون الحاجة لاستبدال شريحتك المحلية.
+                    </p>
                     <div class="pt-2 flex justify-end">
-                        <a href="https://wa.me/9647701716661?text=طلب%20شراء%20باقة%20إنترنت%20eSIM" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2">
-                            <i class="fa-brands fa-whatsapp"></i> طلب باقة عبر واتساب
+                        <a href="https://wa.me/9647701716661?text=طلب%20شراء%20باقة%20إنترنت%20eSIM" target="_blank" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2 border border-white/10">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> طلب باقة عبر واتساب
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Service 6: الفروع والعناوين والتواصل -->
-            <div id="panel-contact" class="p-6 h-full flex flex-col space-y-4 overflow-y-auto hidden">
-                <div>
-                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-location-dot text-blue-500"></i> الفروع وأرقام واتساب
+            <!-- SECTION 6: الفروع ومواقع الخرائط والتواصل -->
+            <div id="panel-contact" class="p-5 md:p-6 h-full flex flex-col space-y-4 overflow-y-auto hidden">
+                <div class="border-b border-white/10 pb-3">
+                    <h2 class="text-lg md:text-xl font-extrabold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot text-sky-400"></i> موقع الشركة وفروعنا على الخريطة
                     </h2>
-                    <p class="text-xs text-slate-400">زورونا في فروعنا أو تواصلوا معنا مباشرة عبر واتساب</p>
+                    <p class="text-xs text-sky-200/80">انقر على أي فرع للانتقال المباشر إلى موقعه في خرائط جوجل (Google Maps)</p>
                 </div>
 
-                <!-- الفروع -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div class="glass-card p-4 rounded-xl border-r-4 border-r-blue-500">
-                        <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
-                            <i class="fa-solid fa-building text-blue-400"></i> فرع تكريت
-                        </h3>
-                        <p class="text-xs text-slate-300 mt-1">شارع الأربعين - مقابل عمارة الترنبول</p>
-                    </div>
+                <!-- الفروع مع أزرار خرائط جوجل المباشرة -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <!-- فرع تكريت -->
+                    <a href="https://maps.google.com/?q=34.6063,43.6789" target="_blank" class="glass-card p-4 rounded-2xl border-r-4 border-r-blue-400 flex flex-col justify-between gap-3 group">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-sky-400"></i> فرع تكريت
+                                </h3>
+                                <span class="text-[10px] bg-sky-500/20 text-sky-300 border border-sky-400/30 px-2 py-0.5 rounded-md group-hover:bg-sky-500 group-hover:text-white transition-all">فتح الخريطة 🗺️</span>
+                            </div>
+                            <p class="text-xs text-slate-200 mt-2 font-medium">شارع الأربعين - مقابل عمارة الترنبول</p>
+                        </div>
+                        <div class="text-[11px] text-sky-300 font-bold flex items-center gap-1.5 pt-1 border-t border-white/10">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> الانتقال إلى Google Maps
+                        </div>
+                    </a>
 
-                    <div class="glass-card p-4 rounded-xl border-r-4 border-r-indigo-500">
-                        <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
-                            <i class="fa-solid fa-building text-indigo-400"></i> فرع أربيل
-                        </h3>
-                        <p class="text-xs text-slate-300 mt-1">شارع 100 متري - مجاور بانزيخانة أكار</p>
-                    </div>
+                    <!-- فرع أربيل -->
+                    <a href="https://maps.google.com/?q=36.1901,44.0091" target="_blank" class="glass-card p-4 rounded-2xl border-r-4 border-r-indigo-400 flex flex-col justify-between gap-3 group">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+                                    <i class="fa-solid fa-location-dot text-indigo-400"></i> فرع أربيل
+                                </h3>
+                                <span class="text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 px-2 py-0.5 rounded-md group-hover:bg-indigo-500 group-hover:text-white transition-all">فتح الخريطة 🗺️</span>
+                            </div>
+                            <p class="text-xs text-slate-200 mt-2 font-medium">شارع 100 متري - مجاور بانزيخانة أكار</p>
+                        </div>
+                        <div class="text-[11px] text-indigo-300 font-bold flex items-center gap-1.5 pt-1 border-t border-white/10">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> الانتقال إلى Google Maps
+                        </div>
+                    </a>
                 </div>
 
                 <!-- أرقام الواتساب -->
-                <div class="glass-card p-4 rounded-xl space-y-3">
-                    <h3 class="text-xs font-bold text-slate-200 flex items-center gap-2">
-                        <i class="fa-brands fa-whatsapp text-emerald-400 text-sm"></i> أرقام التواصل المباشر (واتساب):
+                <div class="glass-card p-4 rounded-2xl space-y-3 border border-white/15">
+                    <h3 class="text-xs font-bold text-slate-100 flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> أرقام التواصل المباشر عبر واتساب:
                     </h3>
 
-                    <div class="grid grid-cols-2 gap-2 text-xs">
-                        <a href="https://wa.me/9647701716661" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
-                            <span>07701716661</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                        <a href="https://wa.me/9647701716661" target="_blank" class="glass-btn p-2.5 rounded-xl text-emerald-300 hover:text-emerald-200 flex items-center justify-between font-mono font-bold">
+                            <span>07701716661</span> <i class="fa-brands fa-whatsapp text-emerald-400"></i>
                         </a>
-                        <a href="https://wa.me/9647701716662" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
-                            <span>07701716662</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                        <a href="https://wa.me/9647701716662" target="_blank" class="glass-btn p-2.5 rounded-xl text-emerald-300 hover:text-emerald-200 flex items-center justify-between font-mono font-bold">
+                            <span>07701716662</span> <i class="fa-brands fa-whatsapp text-emerald-400"></i>
                         </a>
-                        <a href="https://wa.me/9647701716663" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
-                            <span>07701716663</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                        <a href="https://wa.me/9647701716663" target="_blank" class="glass-btn p-2.5 rounded-xl text-emerald-300 hover:text-emerald-200 flex items-center justify-between font-mono font-bold">
+                            <span>07701716663</span> <i class="fa-brands fa-whatsapp text-emerald-400"></i>
                         </a>
-                        <a href="https://wa.me/9647701716664" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
-                            <span>07701716664</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                        <a href="https://wa.me/9647701716664" target="_blank" class="glass-btn p-2.5 rounded-xl text-emerald-300 hover:text-emerald-200 flex items-center justify-between font-mono font-bold">
+                            <span>07701716664</span> <i class="fa-brands fa-whatsapp text-emerald-400"></i>
                         </a>
-                        <a href="https://wa.me/9647701716665" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
-                            <span>07701716665</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                        <a href="https://wa.me/9647701716665" target="_blank" class="glass-btn p-2.5 rounded-xl text-emerald-300 hover:text-emerald-200 flex items-center justify-between font-mono font-bold">
+                            <span>07701716665</span> <i class="fa-brands fa-whatsapp text-emerald-400"></i>
                         </a>
-                        <a href="https://wa.me/9647701716666" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
-                            <span>07701716666</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                        <a href="https://wa.me/9647701716666" target="_blank" class="glass-btn p-2.5 rounded-xl text-emerald-300 hover:text-emerald-200 flex items-center justify-between font-mono font-bold">
+                            <span>07701716666</span> <i class="fa-brands fa-whatsapp text-emerald-400"></i>
                         </a>
                     </div>
 
                     <div class="pt-1">
-                        <a href="https://wa.me/9647722166669" target="_blank" class="w-full bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between text-xs font-mono">
-                            <span>خط إضافي: 07722166669</span> <i class="fa-brands fa-whatsapp"></i>
+                        <a href="https://wa.me/9647722166669" target="_blank" class="w-full glass-btn p-2.5 rounded-xl text-emerald-300 hover:text-emerald-200 flex items-center justify-between text-xs font-mono font-bold">
+                            <span>خط الإدارة الإضافي: 07722166669</span> <i class="fa-brands fa-whatsapp text-base"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- البريد الإلكتروني وسوشيال ميديا -->
-                <div class="flex items-center justify-between text-xs text-slate-400 pt-1 px-1">
-                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-envelope text-blue-400"></i> demshq.co@gmail.com</span>
-                    <span class="flex items-center gap-1.5"><i class="fa-brands fa-instagram text-pink-400"></i> @demshq.travel</span>
+                <!-- التواصل الاجتماعي -->
+                <div class="flex flex-wrap items-center justify-between text-xs text-sky-200/80 pt-1 px-1 gap-2">
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-envelope text-sky-400"></i> demshq.co@gmail.com</span>
+                    <a href="https://instagram.com/demshq.travel" target="_blank" class="flex items-center gap-1.5 hover:text-pink-300 transition-all"><i class="fa-brands fa-instagram text-pink-400"></i> @demshq.travel (20k+ متابع)</a>
                 </div>
             </div>
 
@@ -319,9 +427,9 @@
 
     </main>
 
-    <!-- Application Script -->
+    <!-- Application Logic Script -->
     <script>
-        // Real Data Sets with Flags Included
+        // Data Sets with Flags Included
         const groupsData = [
             { id: 1, title: 'رحلة دبي الذهبية', price: 650, duration: '6 أيام / 5 ليالي', hotel: 'فندق ماريوت دبي 5 نجوم', flag: '🇦🇪', country: 'الإمارات' },
             { id: 2, title: 'سحر إسطنبول والشمال التركي', price: 480, duration: '8 أيام / 7 ليالي', hotel: 'فندق جواهربيرت إسطنبول 4 نجوم', flag: '🇹🇷', country: 'تركيا' },
@@ -344,161 +452,63 @@
             { country: 'مملكة البحرين / تنزانيا', flag: '🇧🇭', desc: 'تأشيرة زيارة وسياحة' }
         ];
 
-        // Non-Interactive Decorative 3D Digital Globe Scene
-        let scene, camera, renderer, digitalGlobeGroup;
-
-        function initDigitalGlobe() {
-            const container = document.getElementById('globe-container');
-
-            scene = new THREE.Scene();
-
-            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 190;
-
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            container.appendChild(renderer.domElement);
-
-            digitalGlobeGroup = new THREE.Group();
-
-            // 1. Digital Wireframe Grid Sphere
-            const sphereGeometry = new THREE.SphereGeometry(60, 48, 48);
-            const wireframeMaterial = new THREE.MeshBasicMaterial({
-                color: 0x2563eb,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.22
-            });
-            const wireframeMesh = new THREE.Mesh(sphereGeometry, wireframeMaterial);
-            digitalGlobeGroup.add(wireframeMesh);
-
-            // 2. Inner Core Sphere
-            const coreGeometry = new THREE.SphereGeometry(58.5, 32, 32);
-            const coreMaterial = new THREE.MeshBasicMaterial({
-                color: 0x030712,
-                transparent: true,
-                opacity: 0.95
-            });
-            const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
-            digitalGlobeGroup.add(coreMesh);
-
-            // 3. Digital Particles Grid
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 2800;
-            const positions = new Float32Array(particlesCount * 3);
-
-            for (let i = 0; i < particlesCount; i++) {
-                const u = Math.random();
-                const v = Math.random();
-                const theta = u * 2.0 * Math.PI;
-                const phi = Math.acos(2.0 * v - 1.0);
-                const r = 60.5;
-
-                positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-                positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-                positions[i * 3 + 2] = r * Math.cos(phi);
-            }
-
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-            const particlesMaterial = new THREE.PointsMaterial({
-                color: 0x38bdf8,
-                size: 1.2,
-                transparent: true,
-                opacity: 0.8
-            });
-
-            const pointCloud = new THREE.Points(particlesGeometry, particlesMaterial);
-            digitalGlobeGroup.add(pointCloud);
-
-            // 4. Tech Outer Ring
-            const ringGeometry = new THREE.RingGeometry(72, 73, 64);
-            const ringMaterial = new THREE.MeshBasicMaterial({
-                color: 0x3b82f6,
-                side: THREE.DoubleSide,
-                transparent: true,
-                opacity: 0.25
-            });
-            const ringMesh = new THREE.Mesh(ringGeometry, ringMaterial);
-            ringMesh.rotation.x = Math.PI / 2.5;
-            digitalGlobeGroup.add(ringMesh);
-
-            scene.add(digitalGlobeGroup);
-
-            animate();
-            window.addEventListener('resize', onWindowResize);
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            if (digitalGlobeGroup) {
-                digitalGlobeGroup.rotation.y += 0.002;
-                digitalGlobeGroup.rotation.x += 0.0004;
-            }
-            renderer.render(scene, camera);
-        }
-
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-
-        // Tab Switcher Logic
+        // Tab Switcher Function
         window.switchTab = function(tabName) {
             ['groups', 'visa', 'land', 'flights', 'esim', 'contact'].forEach(t => {
                 const tabBtn = document.getElementById(`tab-${t}`);
                 const panel = document.getElementById(`panel-${t}`);
                 if (tabBtn && panel) {
                     tabBtn.className = t === tabName 
-                        ? 'active-tab px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2'
-                        : 'px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2';
+                        ? 'active-tab px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 whitespace-nowrap'
+                        : 'glass-btn px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2 whitespace-nowrap';
                     panel.classList.toggle('hidden', t !== tabName);
                 }
             });
         };
 
+        // Render Groups List
         function renderGroups() {
             const container = document.getElementById('groups-list');
             container.innerHTML = groupsData.map(g => `
-                <div class="glass-card p-3.5 rounded-xl flex items-center justify-between border border-slate-800">
-                    <div class="flex items-center gap-3">
-                        <span class="text-3xl">${g.flag}</span>
+                <div class="glass-card p-4 rounded-2xl flex items-center justify-between gap-3 border border-white/10">
+                    <div class="flex items-center gap-3.5">
+                        <span class="text-3xl md:text-4xl drop-shadow-md">${g.flag}</span>
                         <div>
-                            <h4 class="font-bold text-white text-xs">${g.title} (${g.country})</h4>
-                            <p class="text-[11px] text-slate-400 mt-0.5"><i class="fa-solid fa-hotel text-blue-400 ml-1"></i> ${g.hotel}</p>
-                            <span class="inline-block mt-1 text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">${g.duration}</span>
+                            <h4 class="font-bold text-white text-xs md:text-sm">${g.title} (${g.country})</h4>
+                            <p class="text-[11px] text-sky-200/80 mt-0.5"><i class="fa-solid fa-hotel text-sky-400 ml-1"></i> ${g.hotel}</p>
+                            <span class="inline-block mt-1 text-[10px] bg-sky-500/20 text-sky-300 border border-sky-400/30 px-2.5 py-0.5 rounded-full font-semibold">${g.duration}</span>
                         </div>
                     </div>
-                    <div class="text-left flex flex-col items-end gap-1">
-                        <span class="text-base font-black text-blue-400">$${g.price}</span>
-                        <a href="https://wa.me/9647701716661?text=استفسار%20عن%20كروب%20${encodeURIComponent(g.title)}" target="_blank" class="bg-emerald-600/80 hover:bg-emerald-600 text-white text-[10px] px-2.5 py-1 rounded-lg font-bold flex items-center gap-1 transition-all">
-                            <i class="fa-brands fa-whatsapp"></i> حجز
+                    <div class="text-left flex flex-col items-end gap-1.5">
+                        <span class="text-base md:text-lg font-black text-sky-300">$${g.price}</span>
+                        <a href="https://wa.me/9647701716661?text=استفسار%20عن%20كروب%20${encodeURIComponent(g.title)}" target="_blank" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white text-[11px] px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition-all shadow-md">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> حجز
                         </a>
                     </div>
                 </div>
             `).join('');
         }
 
+        // Render Visa List
         function renderVisas() {
             const container = document.getElementById('visa-list');
             container.innerHTML = visaData.map(v => `
-                <div class="glass-card p-3.5 rounded-xl flex items-center justify-between">
+                <div class="glass-card p-3.5 rounded-2xl flex items-center justify-between gap-2 border border-white/10">
                     <div class="flex items-center gap-3">
-                        <span class="text-2xl">${v.flag}</span>
+                        <span class="text-2xl md:text-3xl drop-shadow-md">${v.flag}</span>
                         <div>
                             <h4 class="font-bold text-white text-xs">${v.country}</h4>
-                            <p class="text-[11px] text-slate-400">${v.desc}</p>
+                            <p class="text-[10px] text-sky-200/80">${v.desc}</p>
                         </div>
                     </div>
-                    <a href="https://wa.me/9647701716661?text=طلب%20فيزا%20${encodeURIComponent(v.country)}" target="_blank" class="bg-emerald-600/80 hover:bg-emerald-600 text-white text-[10px] px-3 py-1.5 rounded-lg font-bold flex items-center gap-1 transition-all">
-                        <i class="fa-brands fa-whatsapp"></i> تقديم
+                    <a href="https://wa.me/9647701716661?text=طلب%20فيزا%20${encodeURIComponent(v.country)}" target="_blank" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white text-[10px] px-3 py-1.5 rounded-xl font-bold flex items-center gap-1 transition-all shrink-0">
+                        <i class="fa-brands fa-whatsapp text-xs"></i> تقديم
                     </a>
                 </div>
             `).join('');
         }
 
+        // Request Flight via WhatsApp
         window.requestFlightWhatsApp = function() {
             const fromSelect = document.getElementById('flight-from');
             const toSelect = document.getElementById('flight-to');
@@ -509,8 +519,8 @@
             window.open(`https://wa.me/9647701716661?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
+        // Initialize App on DOM Load
         window.addEventListener('DOMContentLoaded', () => {
-            initDigitalGlobe();
             renderGroups();
             renderVisas();
         });
