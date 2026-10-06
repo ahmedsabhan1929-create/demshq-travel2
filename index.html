@@ -48,7 +48,7 @@
                         radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0,0,0,0));
             background-repeat: repeat;
             background-size: 200px 200px;
-            opacity: 0.6;
+            opacity: 0.7;
         }
 
         /* 3D Rotating Earth Sphere */
@@ -57,16 +57,16 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 320px;
-            height: 320px;
+            width: 360px;
+            height: 360px;
             border-radius: 50%;
             box-shadow: inset 16px 0 40px 6px rgba(0, 0, 0, 0.9),
                         inset -3px 0 12px 2px rgba(255, 255, 255, 0.3),
-                        0 0 50px 10px rgba(14, 165, 233, 0.3);
+                        0 0 60px 15px rgba(14, 165, 233, 0.4);
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Earth_Cloud_Map.jpg/1024px-Earth_Cloud_Map.jpg');
             background-size: cover;
             animation: rotateEarth 35s linear infinite;
-            opacity: 0.85;
+            opacity: 0.9;
         }
 
         @keyframes rotateEarth {
@@ -74,41 +74,59 @@
             100% { background-position: 1024px 0; }
         }
 
-        /* Glassmorphism Styling */
+        /* Pure Crystal Glassmorphism Styling */
         .glass-header {
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         .glass-panel {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.05);
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card:hover {
-            background: rgba(255, 255, 255, 0.14);
-            border-color: rgba(56, 189, 248, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(56, 189, 248, 0.6);
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.3);
+            box-shadow: 0 12px 35px -5px rgba(14, 165, 233, 0.4);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.07) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+        }
+
+        .glass-input option {
+            background-color: #0f172a;
+            color: #ffffff;
         }
 
         .active-tab {
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            background: rgba(2, 132, 199, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.5);
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+            box-shadow: 0 4px 20px rgba(2, 132, 199, 0.5);
         }
 
         /* Custom Scrollbar */
@@ -116,10 +134,10 @@
             width: 5px;
         }
         ::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(255, 255, 255, 0.03);
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
@@ -135,14 +153,14 @@
         <div class="earth-container"></div>
     </div>
 
-    <!-- Header Navigation -->
-    <header class="glass-header z-40 px-6 py-3 flex flex-wrap items-center justify-between border-b border-white/10 shrink-0 relative gap-3">
+    <!-- Transparent Glass Header Navigation -->
+    <header class="glass-header z-40 px-6 py-3 flex flex-wrap items-center justify-between border-b border-white/15 shrink-0 relative gap-3">
         <div class="flex items-center space-x-4 space-x-reverse">
-            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-500 to-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-sky-500/30">
+            <div class="w-11 h-11 rounded-2xl bg-sky-500/30 backdrop-blur-md flex items-center justify-center text-sky-300 text-xl font-bold border border-sky-400/40 shadow-lg shadow-sky-500/20">
                 <i class="fa-solid fa-earth-americas"></i>
             </div>
             <div>
-                <h1 class="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-white via-sky-200 to-sky-400">
+                <h1 class="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-white via-sky-100 to-sky-300">
                     شركة دمشق للسفر والسياحة
                 </h1>
                 <p class="text-[11px] text-sky-300 font-bold tracking-wide">
@@ -152,29 +170,29 @@
         </div>
 
         <!-- Service Tabs -->
-        <nav class="flex items-center gap-1.5 bg-slate-900/60 p-1.5 rounded-2xl border border-white/10 backdrop-blur-md">
+        <nav class="flex items-center gap-1.5 bg-white/5 p-1.5 rounded-2xl border border-white/15 backdrop-blur-xl">
             <button onclick="switchTab('groups')" id="tab-groups" class="active-tab px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
                 <i class="fa-solid fa-people-group"></i> الكروبات
             </button>
-            <button onclick="switchTab('visa')" id="tab-visa" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2">
+            <button onclick="switchTab('visa')" id="tab-visa" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
                 <i class="fa-solid fa-passport"></i> الفيزا
             </button>
-            <button onclick="switchTab('land')" id="tab-land" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2">
+            <button onclick="switchTab('land')" id="tab-land" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
                 <i class="fa-solid fa-car-side"></i> رحلات GMC
             </button>
-            <button onclick="switchTab('flights')" id="tab-flights" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2">
+            <button onclick="switchTab('flights')" id="tab-flights" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
                 <i class="fa-solid fa-plane-up"></i> الطيران
             </button>
-            <button onclick="switchTab('esim')" id="tab-esim" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2">
+            <button onclick="switchTab('esim')" id="tab-esim" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
                 <i class="fa-solid fa-sim-card"></i> eSIM
             </button>
-            <button onclick="switchTab('contact')" id="tab-contact" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2">
+            <button onclick="switchTab('contact')" id="tab-contact" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
                 <i class="fa-solid fa-map-location-dot"></i> الفروع والخارطة
             </button>
         </nav>
 
         <!-- Direct WhatsApp CTA -->
-        <a href="https://wa.me/9647701716661" target="_blank" rel="noopener noreferrer" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/25 border border-emerald-400/30">
+        <a href="https://wa.me/9647701716661" target="_blank" rel="noopener noreferrer" class="bg-emerald-500/30 hover:bg-emerald-500/50 backdrop-blur-md text-emerald-200 hover:text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/20 border border-emerald-400/40">
             <i class="fa-brands fa-whatsapp text-sm"></i> حجز سريع واتساب
         </a>
     </header>
@@ -217,10 +235,10 @@
                     <p class="text-xs text-slate-300">سفريات برية يومية بسيارات VIP حديثة ومكيفة</p>
                 </div>
 
-                <div class="glass-card p-5 rounded-2xl border-r-4 border-r-emerald-500 space-y-3">
+                <div class="glass-card p-5 rounded-2xl border-r-4 border-r-emerald-400 space-y-3">
                     <div class="flex justify-between items-start">
                         <div>
-                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2.5 py-1 rounded-md font-bold">رحلات يومية VIP</span>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2.5 py-1 rounded-md font-bold backdrop-blur-md">رحلات يومية VIP</span>
                             <h3 class="text-lg font-bold text-white mt-2">🇯🇴 العراق (أربيل / تكريت) ➔ عمان (الأردن)</h3>
                         </div>
                         <span class="text-3xl">🚘</span>
@@ -229,7 +247,7 @@
                         نقدم رحلات برية يومية عبر سيارات جمس (GMC) حديثة ومريحة تنطلق من فروعنا في تكريت وأربيل مباشرة إلى الأردن، مع تسهيل كافة إجراءات العبور الحدودية.
                     </p>
                     <div class="pt-2 flex justify-end">
-                        <a href="https://wa.me/9647701716661?text=استفسار%20عن%20حجز%20رحلة%20GMC%20إلى%20الأردن" target="_blank" rel="noopener noreferrer" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/20">
+                        <a href="https://wa.me/9647701716661?text=استفسار%20عن%20حجز%20رحلة%20GMC%20إلى%20الأردن" target="_blank" rel="noopener noreferrer" class="bg-emerald-500/30 hover:bg-emerald-500/50 backdrop-blur-md text-emerald-200 hover:text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2 border border-emerald-400/40 shadow-lg shadow-emerald-500/20">
                             <i class="fa-brands fa-whatsapp"></i> احجز مقعدك الآن عبر واتساب
                         </a>
                     </div>
@@ -248,7 +266,7 @@
                 <div class="glass-card p-5 rounded-2xl space-y-4">
                     <div>
                         <label class="block text-xs font-semibold text-sky-200 mb-1.5">مطار الانطلاق</label>
-                        <select id="flight-from" class="w-full bg-slate-900/80 border border-white/20 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-sky-400">
+                        <select id="flight-from" class="glass-input w-full text-xs rounded-xl p-3 focus:outline-none focus:border-sky-400">
                             <option value="EBL">🇮🇶 أربيل - مطار أربيل الدولي (EBL)</option>
                             <option value="BGW">🇮🇶 بغداد - مطار بغداد الدولي (BGW)</option>
                             <option value="BSR">🇮🇶 البصرة - مطار البصرة الدولي (BSR)</option>
@@ -257,14 +275,14 @@
                     </div>
 
                     <div class="flex justify-center my-1">
-                        <div class="w-8 h-8 rounded-full bg-sky-500/20 text-sky-300 flex items-center justify-center border border-sky-400/30">
+                        <div class="w-8 h-8 rounded-full bg-sky-500/20 text-sky-300 flex items-center justify-center border border-sky-400/30 backdrop-blur-md">
                             <i class="fa-solid fa-arrow-down-up-lock text-xs"></i>
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-semibold text-sky-200 mb-1.5">مطار الوصول</label>
-                        <select id="flight-to" class="w-full bg-slate-900/80 border border-white/20 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-sky-400">
+                        <select id="flight-to" class="glass-input w-full text-xs rounded-xl p-3 focus:outline-none focus:border-sky-400">
                             <option value="AMM">🇯🇴 عمان - مطار الملكة علياء (AMM)</option>
                             <option value="IST">🇹🇷 إسطنبول - مطار إسطنبول الدولي (IST)</option>
                             <option value="DXB">🇦🇪 دبي - مطار دبي الدولي (DXB)</option>
@@ -273,7 +291,7 @@
                         </select>
                     </div>
 
-                    <button onclick="requestFlightWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-2 text-xs border border-emerald-400/30">
+                    <button onclick="requestFlightWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500/40 to-teal-600/40 hover:from-emerald-500/60 hover:to-teal-600/60 backdrop-blur-md text-emerald-200 hover:text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-2 text-xs border border-emerald-400/40">
                         <i class="fa-brands fa-whatsapp text-sm"></i> الاستفسار والحجز المباشر عبر واتساب
                     </button>
                 </div>
@@ -291,13 +309,13 @@
                 <div class="glass-card p-5 rounded-2xl space-y-3">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-white text-sm">🌐 باقات الشريحة الإلكترونية (eSIM)</h3>
-                        <span class="text-xs bg-sky-500/20 text-sky-300 border border-sky-400/30 px-2.5 py-0.5 rounded-md font-semibold">تفعيل فوري</span>
+                        <span class="text-xs bg-sky-500/20 text-sky-300 border border-sky-400/40 px-2.5 py-0.5 rounded-md font-semibold backdrop-blur-md">تفعيل فوري</span>
                     </div>
                     <p class="text-xs text-slate-200 leading-relaxed">
                         نوفر باقات إنترنت دولية تعمل في أكثر من 150 دولة حول العالم بأسعار تنافسية ودون الحاجة لتبديل شريحتك المحلية.
                     </p>
                     <div class="pt-2 flex justify-end">
-                        <a href="https://wa.me/9647701716661?text=طلب%20شراء%20باقة%20إنترنت%20eSIM" target="_blank" rel="noopener noreferrer" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/20">
+                        <a href="https://wa.me/9647701716661?text=طلب%20شراء%20باقة%20إنترنت%20eSIM" target="_blank" rel="noopener noreferrer" class="bg-emerald-500/30 hover:bg-emerald-500/50 backdrop-blur-md text-emerald-200 hover:text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2 border border-emerald-400/40 shadow-lg shadow-emerald-500/20">
                             <i class="fa-brands fa-whatsapp"></i> طلب باقة عبر واتساب
                         </a>
                     </div>
@@ -323,7 +341,7 @@
                             </h3>
                             <p class="text-xs text-slate-300 mt-1">شارع الأربعين - مقابل عمارة الترنبول</p>
                         </div>
-                        <div class="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-300 flex items-center justify-center border border-sky-400/30 group-hover:scale-110 transition-transform">
+                        <div class="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-300 flex items-center justify-center border border-sky-400/30 group-hover:scale-110 transition-transform backdrop-blur-md">
                             <i class="fa-solid fa-map-pin text-sm"></i>
                         </div>
                     </a>
@@ -336,7 +354,7 @@
                             </h3>
                             <p class="text-xs text-slate-300 mt-1">شارع 100 متري - مجاور بانزيخانة أكار</p>
                         </div>
-                        <div class="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center border border-indigo-400/30 group-hover:scale-110 transition-transform">
+                        <div class="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center border border-indigo-400/30 group-hover:scale-110 transition-transform backdrop-blur-md">
                             <i class="fa-solid fa-map-pin text-sm"></i>
                         </div>
                     </a>
@@ -349,28 +367,28 @@
                     </h3>
 
                     <div class="grid grid-cols-2 gap-2 text-xs">
-                        <a href="https://wa.me/9647701716661" target="_blank" rel="noopener noreferrer" class="bg-slate-900/60 hover:bg-emerald-950/40 border border-white/10 hover:border-emerald-500/50 p-2.5 rounded-xl text-emerald-400 flex items-center justify-between font-mono transition-all">
-                            <span>07701716661</span> <i class="fa-brands fa-whatsapp text-slate-400"></i>
+                        <a href="https://wa.me/9647701716661" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-400/40 backdrop-blur-md p-2.5 rounded-xl text-emerald-300 flex items-center justify-between font-mono transition-all">
+                            <span>07701716661</span> <i class="fa-brands fa-whatsapp text-slate-300"></i>
                         </a>
-                        <a href="https://wa.me/9647701716662" target="_blank" rel="noopener noreferrer" class="bg-slate-900/60 hover:bg-emerald-950/40 border border-white/10 hover:border-emerald-500/50 p-2.5 rounded-xl text-emerald-400 flex items-center justify-between font-mono transition-all">
-                            <span>07701716662</span> <i class="fa-brands fa-whatsapp text-slate-400"></i>
+                        <a href="https://wa.me/9647701716662" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-400/40 backdrop-blur-md p-2.5 rounded-xl text-emerald-300 flex items-center justify-between font-mono transition-all">
+                            <span>07701716662</span> <i class="fa-brands fa-whatsapp text-slate-300"></i>
                         </a>
-                        <a href="https://wa.me/9647701716663" target="_blank" rel="noopener noreferrer" class="bg-slate-900/60 hover:bg-emerald-950/40 border border-white/10 hover:border-emerald-500/50 p-2.5 rounded-xl text-emerald-400 flex items-center justify-between font-mono transition-all">
-                            <span>07701716663</span> <i class="fa-brands fa-whatsapp text-slate-400"></i>
+                        <a href="https://wa.me/9647701716663" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-400/40 backdrop-blur-md p-2.5 rounded-xl text-emerald-300 flex items-center justify-between font-mono transition-all">
+                            <span>07701716663</span> <i class="fa-brands fa-whatsapp text-slate-300"></i>
                         </a>
-                        <a href="https://wa.me/9647701716664" target="_blank" rel="noopener noreferrer" class="bg-slate-900/60 hover:bg-emerald-950/40 border border-white/10 hover:border-emerald-500/50 p-2.5 rounded-xl text-emerald-400 flex items-center justify-between font-mono transition-all">
-                            <span>07701716664</span> <i class="fa-brands fa-whatsapp text-slate-400"></i>
+                        <a href="https://wa.me/9647701716664" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-400/40 backdrop-blur-md p-2.5 rounded-xl text-emerald-300 flex items-center justify-between font-mono transition-all">
+                            <span>07701716664</span> <i class="fa-brands fa-whatsapp text-slate-300"></i>
                         </a>
-                        <a href="https://wa.me/9647701716665" target="_blank" rel="noopener noreferrer" class="bg-slate-900/60 hover:bg-emerald-950/40 border border-white/10 hover:border-emerald-500/50 p-2.5 rounded-xl text-emerald-400 flex items-center justify-between font-mono transition-all">
-                            <span>07701716665</span> <i class="fa-brands fa-whatsapp text-slate-400"></i>
+                        <a href="https://wa.me/9647701716665" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-400/40 backdrop-blur-md p-2.5 rounded-xl text-emerald-300 flex items-center justify-between font-mono transition-all">
+                            <span>07701716665</span> <i class="fa-brands fa-whatsapp text-slate-300"></i>
                         </a>
-                        <a href="https://wa.me/9647701716666" target="_blank" rel="noopener noreferrer" class="bg-slate-900/60 hover:bg-emerald-950/40 border border-white/10 hover:border-emerald-500/50 p-2.5 rounded-xl text-emerald-400 flex items-center justify-between font-mono transition-all">
-                            <span>07701716666</span> <i class="fa-brands fa-whatsapp text-slate-400"></i>
+                        <a href="https://wa.me/9647701716666" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-400/40 backdrop-blur-md p-2.5 rounded-xl text-emerald-300 flex items-center justify-between font-mono transition-all">
+                            <span>07701716666</span> <i class="fa-brands fa-whatsapp text-slate-300"></i>
                         </a>
                     </div>
 
                     <div class="pt-1">
-                        <a href="https://wa.me/9647722166669" target="_blank" rel="noopener noreferrer" class="w-full bg-slate-900/60 hover:bg-emerald-950/40 border border-white/10 hover:border-emerald-500/50 p-2.5 rounded-xl text-emerald-400 flex items-center justify-between text-xs font-mono transition-all">
+                        <a href="https://wa.me/9647722166669" target="_blank" rel="noopener noreferrer" class="w-full bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-400/40 backdrop-blur-md p-2.5 rounded-xl text-emerald-300 flex items-center justify-between text-xs font-mono transition-all">
                             <span>خط إضافي: 07722166669</span> <i class="fa-brands fa-whatsapp"></i>
                         </a>
                     </div>
@@ -425,7 +443,7 @@
                         tabBtn.className = 'active-tab px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2';
                         panel.classList.remove('hidden');
                     } else {
-                        tabBtn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2';
+                        tabBtn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold text-slate-200 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2';
                         panel.classList.add('hidden');
                     }
                 }
@@ -443,12 +461,12 @@
                         <div>
                             <h4 class="font-bold text-white text-xs">${g.title} (${g.country})</h4>
                             <p class="text-[11px] text-slate-300 mt-0.5"><i class="fa-solid fa-hotel text-sky-400 ml-1"></i> ${g.hotel}</p>
-                            <span class="inline-block mt-1 text-[10px] bg-sky-500/20 text-sky-200 border border-sky-400/30 px-2 py-0.5 rounded-md">${g.duration}</span>
+                            <span class="inline-block mt-1 text-[10px] bg-sky-500/20 text-sky-200 border border-sky-400/30 px-2 py-0.5 rounded-md backdrop-blur-md">${g.duration}</span>
                         </div>
                     </div>
                     <div class="text-left flex flex-col items-end gap-1">
                         <span class="text-base font-black text-sky-300">$${g.price}</span>
-                        <a href="https://wa.me/9647701716661?text=استفسار%20عن%20كروب%20${encodeURIComponent(g.title)}" target="_blank" rel="noopener noreferrer" class="bg-emerald-500 hover:bg-emerald-600 text-white text-[10px] px-2.5 py-1 rounded-lg font-bold flex items-center gap-1 transition-all shadow-md">
+                        <a href="https://wa.me/9647701716661?text=استفسار%20عن%20كروب%20${encodeURIComponent(g.title)}" target="_blank" rel="noopener noreferrer" class="bg-emerald-500/30 hover:bg-emerald-500/50 backdrop-blur-md text-emerald-200 hover:text-white text-[10px] px-2.5 py-1 rounded-lg font-bold flex items-center gap-1 border border-emerald-400/40 transition-all shadow-md">
                             <i class="fa-brands fa-whatsapp"></i> حجز
                         </a>
                     </div>
@@ -469,7 +487,7 @@
                             <p class="text-[11px] text-slate-300">${v.desc}</p>
                         </div>
                     </div>
-                    <a href="https://wa.me/9647701716661?text=طلب%20فيزا%20${encodeURIComponent(v.country)}" target="_blank" rel="noopener noreferrer" class="bg-emerald-500 hover:bg-emerald-600 text-white text-[10px] px-3 py-1.5 rounded-lg font-bold flex items-center gap-1 transition-all shadow-md">
+                    <a href="https://wa.me/9647701716661?text=طلب%20فيزا%20${encodeURIComponent(v.country)}" target="_blank" rel="noopener noreferrer" class="bg-emerald-500/30 hover:bg-emerald-500/50 backdrop-blur-md text-emerald-200 hover:text-white text-[10px] px-3 py-1.5 rounded-lg font-bold flex items-center gap-1 border border-emerald-400/40 transition-all shadow-md">
                         <i class="fa-brands fa-whatsapp"></i> تقديم
                     </a>
                 </div>
