@@ -37,7 +37,7 @@
         }
 
         .glass-panel {
-            background: rgba(15, 23, 42, 0.85);
+            background: rgba(15, 23, 42, 0.88);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -69,100 +69,136 @@
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* إيقاف التفاعل نهائياً ليصبح زينة فقط */
+            pointer-events: none;
             z-index: 0;
         }
     </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden relative">
 
-    <!-- background Decorative Globe Canvas (In Center) -->
+    <!-- Background Decorative Globe Canvas (In Center) -->
     <div id="globe-container"></div>
 
     <!-- Header Navigation -->
-    <header class="glass-panel z-40 px-6 py-4 flex items-center justify-between border-b border-slate-800 shrink-0 relative">
+    <header class="glass-panel z-40 px-6 py-3 flex items-center justify-between border-b border-slate-800 shrink-0 relative">
         <div class="flex items-center space-x-4 space-x-reverse">
-            <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-500/30">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-500/30">
                 <i class="fa-solid fa-plane-departure"></i>
             </div>
             <div>
-                <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300">
+                <h1 class="text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-300 to-white">
                     شركة دمشق للسفر والسياحة
                 </h1>
-                <p class="text-xs text-slate-400">Damascus Travel & Tourism Agency</p>
+                <p class="text-[11px] text-blue-400 font-semibold tracking-wide">
+                    الوكيل العام للخطوط الجوية العراقية #GSA_IRAQ_AIRWAYS
+                </p>
             </div>
         </div>
 
         <!-- Service Tabs -->
-        <nav class="flex items-center gap-2 bg-slate-900/80 p-1.5 rounded-2xl border border-slate-800">
-            <button onclick="switchTab('groups')" id="tab-groups" class="active-tab px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2">
-                <i class="fa-solid fa-people-group"></i> الكروبات السياحية
+        <nav class="flex items-center gap-1.5 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800">
+            <button onclick="switchTab('groups')" id="tab-groups" class="active-tab px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                <i class="fa-solid fa-people-group"></i> الكروبات
             </button>
-            <button onclick="switchTab('visa')" id="tab-visa" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center gap-2">
-                <i class="fa-solid fa-passport"></i> خدمات الفيزا
+            <button onclick="switchTab('visa')" id="tab-visa" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-passport"></i> الفيزا
             </button>
-            <button onclick="switchTab('flights')" id="tab-flights" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center gap-2">
-                <i class="fa-solid fa-plane"></i> تذاكر الطيران
+            <button onclick="switchTab('land')" id="tab-land" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-car-side"></i> الرحلات البرية (GMC)
             </button>
-            <button onclick="switchTab('hotels')" id="tab-hotels" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center gap-2">
-                <i class="fa-solid fa-hotel"></i> حجز الفنادق
+            <button onclick="switchTab('flights')" id="tab-flights" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-plane"></i> الطيران
+            </button>
+            <button onclick="switchTab('esim')" id="tab-esim" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-sim-card"></i> شرائح eSIM
+            </button>
+            <button onclick="switchTab('contact')" id="tab-contact" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-location-dot"></i> الفروع والتواصل
             </button>
         </nav>
 
+        <!-- Direct WhatsApp Button -->
         <div class="flex items-center gap-3">
-            <span class="text-xs text-slate-400 border border-slate-700 px-3 py-1.5 rounded-full bg-slate-800/50">
-                <i class="fa-solid fa-phone text-blue-400 ml-1"></i> خدمة العملاء 24/7
-            </span>
+            <a href="https://wa.me/9647701716661" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-emerald-600/20">
+                <i class="fa-brands fa-whatsapp text-sm"></i> حجز سريع واتساب
+            </a>
         </div>
     </header>
 
     <!-- Main Content Panel (Floating Panel over Globe Background) -->
-    <main class="flex-1 flex justify-center items-center p-6 z-10 overflow-hidden relative">
+    <main class="flex-1 flex justify-center items-center p-4 z-10 overflow-hidden relative">
 
-        <section class="w-full max-w-3xl h-full flex flex-col z-20 rounded-2xl glass-panel border border-slate-800 shadow-2xl overflow-hidden">
+        <section class="w-full max-w-3xl h-full flex flex-col z-20 rounded-2xl glass-panel border border-slate-800 shadow-2xl overflow-hidden relative">
             
             <!-- Service 1: الكروبات -->
             <div id="panel-groups" class="p-6 h-full flex flex-col overflow-y-auto space-y-4">
-                <div class="flex justify-between items-center mb-2">
-                    <div>
-                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-globe text-blue-500"></i> الكروبات السياحية المتاحة
-                        </h2>
-                        <p class="text-xs text-slate-400">تصفح أقوى العروض والرحلات الجماعية</p>
-                    </div>
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-globe text-blue-500"></i> الكروبات والعروض السياحية
+                    </h2>
+                    <p class="text-xs text-slate-400">تصفح أفضل الرحلات الجماعية بأسعار شاملة الطيران والفنادق</p>
                 </div>
 
-                <div id="groups-list" class="grid grid-cols-1 gap-4"></div>
+                <div id="groups-list" class="grid grid-cols-1 gap-3"></div>
             </div>
 
             <!-- Service 2: الفيزا -->
             <div id="panel-visa" class="p-6 h-full flex flex-col overflow-y-auto space-y-4 hidden">
                 <div>
                     <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-passport text-blue-500"></i> خدمات الفيزا والتأشيرات
+                        <i class="fa-solid fa-passport text-blue-500"></i> خدمات تأشيرات السفر (الفيزا)
                     </h2>
-                    <p class="text-xs text-slate-400">معلومات التأشيرة والأسعار ومتطلبات التقديم حسب الدولة</p>
+                    <p class="text-xs text-slate-400">نضمن لك التقديم الآمن والموثق لجميع الوجهات العالمية</p>
                 </div>
 
                 <div class="grid grid-cols-1 gap-3" id="visa-list"></div>
             </div>
 
-            <!-- Service 3: الطيران -->
-            <div id="panel-flights" class="p-6 h-full flex flex-col space-y-5 overflow-y-auto hidden">
+            <!-- Service 3: الرحلات البرية (GMC) -->
+            <div id="panel-land" class="p-6 h-full flex flex-col overflow-y-auto space-y-4 hidden">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-car-side text-blue-500"></i> الرحلات البرية اليومية (GMC)
+                    </h2>
+                    <p class="text-xs text-slate-400">رحلات يومية بسيارات VIP حديثة ومكيفة نحو الأردن</p>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-emerald-500 space-y-3">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-md font-bold">رحلات يومية منتظمة</span>
+                            <h3 class="text-lg font-bold text-white mt-2">🇯🇴 من العراق (أربيل / تكريت) ➔ عمان (الأردن)</h3>
+                        </div>
+                        <span class="text-2xl">🚘</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        تسيير رحلات برية يومية بنظام الصالون المريح (GMC) من فروعنا في تكريت وأربيل مباشرة إلى العاصمة الأردنية عمان، مع تقديم كافة التسهيلات الحدودية وخيارات النقل الآمن.
+                    </p>
+                    <div class="pt-2 flex justify-end">
+                        <a href="https://wa.me/9647701716661?text=استفسار%20عن%20حجز%20رحلة%20GMC%20إلى%20الأردن" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> احجز مقعدك عبر واتساب
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 4: الطيران -->
+            <div id="panel-flights" class="p-6 h-full flex flex-col space-y-4 overflow-y-auto hidden">
                 <div>
                     <h2 class="text-xl font-bold text-white flex items-center gap-2">
                         <i class="fa-solid fa-plane text-blue-500"></i> حجز تذاكر الطيران
                     </h2>
-                    <p class="text-xs text-slate-400">حدد مطار الانطلاق والوصول لحساب التكلفة التقديرية</p>
+                    <p class="text-xs text-slate-400">الوكيل العام للخطوط الجوية العراقية وحجوزات الملكية الأردنية وكافة الخطوط العالمية</p>
                 </div>
 
                 <div class="glass-panel p-5 rounded-2xl space-y-4 border border-slate-700/50">
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 mb-1.5">مطار الانطلاق</label>
-                        <select id="flight-from" class="w-full bg-slate-900 border border-slate-700 text-white text-sm rounded-xl p-3 focus:outline-none focus:border-blue-500">
-                            <option value="BGW">🇮🇶 العراق - مطار بغداد الدولي (BGW)</option>
-                            <option value="EBL">🇮🇶 العراق - مطار أربيل الدولي (EBL)</option>
-                            <option value="BSR">🇮🇶 العراق - مطار البصرة الدولي (BSR)</option>
+                        <select id="flight-from" class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-blue-500">
+                            <option value="EBL">🇮🇶 أربيل - مطار أربيل الدولي (EBL)</option>
+                            <option value="BGW">🇮🇶 بغداد - مطار بغداد الدولي (BGW)</option>
+                            <option value="BSR">🇮🇶 البصرة - مطار البصرة الدولي (BSR)</option>
+                            <option value="NJF">🇮🇶 النجف - مطار النجف الدولي (NJF)</option>
                         </select>
                     </div>
 
@@ -174,67 +210,109 @@
 
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 mb-1.5">مطار الوصول</label>
-                        <select id="flight-to" class="w-full bg-slate-900 border border-slate-700 text-white text-sm rounded-xl p-3 focus:outline-none focus:border-blue-500">
-                            <option value="IST">🇹🇷 تركيا - مطار إسطنبول الدولي (IST)</option>
-                            <option value="DXB">🇦🇪 الإمارات - مطار دبي الدولي (DXB)</option>
-                            <option value="GYD">🇦🇿 أذربيجان - مطار باكو حيدر علييف (GYD)</option>
-                            <option value="CAI">🇪🇬 مصر - مطار القاهرة الدولي (CAI)</option>
-                            <option value="MYP">🇲🇾 ماليزيا - مطار كوالالمبور الدولي (KUL)</option>
+                        <select id="flight-to" class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-3 focus:outline-none focus:border-blue-500">
+                            <option value="AMM">🇯🇴 عمان - مطار الملكة علياء (AMM)</option>
+                            <option value="IST">🇹🇷 إسطنبول - مطار إسطنبول الدولي (IST)</option>
+                            <option value="DXB">🇦🇪 دبي - مطار دبي الدولي (DXB)</option>
+                            <option value="CAI">🇪🇬 القاهرة - مطار القاهرة الدولي (CAI)</option>
+                            <option value="MCT">🇴🇲 مسقط - مطار مسقط الدولي (MCT)</option>
                         </select>
                     </div>
 
-                    <button onclick="searchFlights()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-magnifying-glass"></i> بحث عن رحلة الطيران
+                    <button onclick="requestFlightWhatsApp()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 text-xs">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> الاستفسار والحجز المباشر عبر واتساب
                     </button>
                 </div>
+            </div>
 
-                <div id="flight-result" class="hidden glass-card p-5 rounded-2xl border-l-4 border-l-blue-500">
+            <!-- Service 5: eSIM -->
+            <div id="panel-esim" class="p-6 h-full flex flex-col space-y-4 overflow-y-auto hidden">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-sim-card text-blue-500"></i> خدمات الإنترنت الدولي (eSIM)
+                    </h2>
+                    <p class="text-xs text-slate-400">باقات إنترنت دولية للشريحة الإلكترونية لضمان الاتصال فور وصولك</p>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl space-y-3">
                     <div class="flex justify-between items-center">
-                        <div>
-                            <span class="text-xs text-blue-400 font-bold tracking-widest uppercase">النتيجة التقديرية</span>
-                            <h3 class="text-lg font-bold text-white mt-0.5" id="flight-route-title">🇮🇶 بغداد ➔ 🇹🇷 إسطنبول</h3>
-                            <p class="text-xs text-slate-400" id="flight-duration">مدة الرحلة التقديرية: ~ 2 ساعة و 30 دقيقة</p>
-                        </div>
-                        <div class="text-left">
-                            <span class="text-2xl font-black text-green-400" id="flight-price">$320</span>
-                            <span class="block text-xs text-slate-400">لشخص واحد</span>
-                        </div>
+                        <h3 class="font-bold text-white text-sm">🌐 باقات الشريحة الإلكترونية (eSIM)</h3>
+                        <span class="text-xs bg-blue-500/20 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded-md font-semibold">تفعيل فوري</span>
+                    </div>
+                    <p class="text-xs text-slate-300">نوفر باقات إنترنت تغطي أكثر من 150 دولة بأسعار تنافسية دون الحاجة لتغيير شريحتك المحلية.</p>
+                    <div class="pt-2 flex justify-end">
+                        <a href="https://wa.me/9647701716661?text=طلب%20شراء%20باقة%20إنترنت%20eSIM" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> طلب باقة عبر واتساب
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Service 4: الفنادق -->
-            <div id="panel-hotels" class="p-6 h-full flex flex-col space-y-5 hidden">
+            <!-- Service 6: الفروع والعناوين والتواصل -->
+            <div id="panel-contact" class="p-6 h-full flex flex-col space-y-4 overflow-y-auto hidden">
                 <div>
                     <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-hotel text-blue-500"></i> استكشاف وحجز الفنادق
+                        <i class="fa-solid fa-location-dot text-blue-500"></i> الفروع وأرقام واتساب
                     </h2>
-                    <p class="text-xs text-slate-400">اختر الدولة والمنطقة لتصفح خيارات الإقامة</p>
+                    <p class="text-xs text-slate-400">زورونا في فروعنا أو تواصلوا معنا مباشرة عبر واتساب</p>
                 </div>
 
-                <div class="glass-panel p-4 rounded-2xl grid grid-cols-2 gap-3 border border-slate-700/50">
-                    <div>
-                        <label class="block text-xs text-slate-300 mb-1">اسم الدولة</label>
-                        <select id="hotel-country" onchange="updateHotelDistricts()" class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-2.5">
-                            <option value="UAE">🇦🇪 الإمارات العربية المتحدة</option>
-                            <option value="TUR">🇹🇷 تركيا</option>
-                            <option value="AZE">🇦🇿 أذربيجان</option>
-                            <option value="EGY">🇪🇬 مصر</option>
-                            <option value="MYS">🇲🇾 ماليزيا</option>
-                        </select>
+                <!-- الفروع -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="glass-card p-4 rounded-xl border-r-4 border-r-blue-500">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+                            <i class="fa-solid fa-building text-blue-400"></i> فرع تكريت
+                        </h3>
+                        <p class="text-xs text-slate-300 mt-1">شارع الأربعين - مقابل عمارة الترنبول</p>
                     </div>
 
-                    <div>
-                        <label class="block text-xs text-slate-300 mb-1">المنطقة / المدينة</label>
-                        <select id="hotel-district" class="w-full bg-slate-900 border border-slate-700 text-white text-xs rounded-xl p-2.5"></select>
+                    <div class="glass-card p-4 rounded-xl border-r-4 border-r-indigo-500">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+                            <i class="fa-solid fa-building text-indigo-400"></i> فرع أربيل
+                        </h3>
+                        <p class="text-xs text-slate-300 mt-1">شارع 100 متري - مجاور بانزيخانة أكار</p>
                     </div>
-
-                    <button onclick="searchHotels()" class="col-span-2 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-xs transition-all mt-1">
-                        <i class="fa-solid fa-magnifying-glass"></i> عرض الفنادق المتاحة
-                    </button>
                 </div>
 
-                <div id="hotels-list" class="space-y-3 overflow-y-auto flex-1"></div>
+                <!-- أرقام الواتساب -->
+                <div class="glass-card p-4 rounded-xl space-y-3">
+                    <h3 class="text-xs font-bold text-slate-200 flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-emerald-400 text-sm"></i> أرقام التواصل المباشر (واتساب):
+                    </h3>
+
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <a href="https://wa.me/9647701716661" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
+                            <span>07701716661</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                        </a>
+                        <a href="https://wa.me/9647701716662" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
+                            <span>07701716662</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                        </a>
+                        <a href="https://wa.me/9647701716663" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
+                            <span>07701716663</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                        </a>
+                        <a href="https://wa.me/9647701716664" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
+                            <span>07701716664</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                        </a>
+                        <a href="https://wa.me/9647701716665" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
+                            <span>07701716665</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                        </a>
+                        <a href="https://wa.me/9647701716666" target="_blank" class="bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between font-mono">
+                            <span>07701716666</span> <i class="fa-brands fa-whatsapp text-slate-500"></i>
+                        </a>
+                    </div>
+
+                    <div class="pt-1">
+                        <a href="https://wa.me/9647722166669" target="_blank" class="w-full bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-700/60 hover:border-emerald-500/50 p-2.5 rounded-lg text-emerald-400 flex items-center justify-between text-xs font-mono">
+                            <span>خط إضافي: 07722166669</span> <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- البريد الإلكتروني وسوشيال ميديا -->
+                <div class="flex items-center justify-between text-xs text-slate-400 pt-1 px-1">
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-envelope text-blue-400"></i> demshq.co@gmail.com</span>
+                    <span class="flex items-center gap-1.5"><i class="fa-brands fa-instagram text-pink-400"></i> @demshq.travel</span>
+                </div>
             </div>
 
         </section>
@@ -243,42 +321,28 @@
 
     <!-- Application Script -->
     <script>
-        // Data Sets with Flags Included
-        let groupsData = [
+        // Real Data Sets with Flags Included
+        const groupsData = [
             { id: 1, title: 'رحلة دبي الذهبية', price: 650, duration: '6 أيام / 5 ليالي', hotel: 'فندق ماريوت دبي 5 نجوم', flag: '🇦🇪', country: 'الإمارات' },
             { id: 2, title: 'سحر إسطنبول والشمال التركي', price: 480, duration: '8 أيام / 7 ليالي', hotel: 'فندق جواهربيرت إسطنبول 4 نجوم', flag: '🇹🇷', country: 'تركيا' },
             { id: 3, title: 'رحلة باكو الاستثنائية', price: 520, duration: '5 أيام / 4 ليالي', hotel: 'فندق هايات ريجنسي باكو', flag: '🇦🇿', country: 'أذربيجان' },
             { id: 4, title: 'رحلة شرم الشيخ و القاهرة', price: 430, duration: '7 أيام / 6 ليالي', hotel: 'منتجع ريكسوس شرم الشيخ', flag: '🇪🇬', country: 'مصر' },
-            { id: 5, title: 'جولة كوالالمبور ولنكاوي', price: 890, duration: '10 أيام / 9 ليالي', hotel: 'فندق جراندا ميلينيوم كوالالمبور', flag: '🇲🇾', country: 'ماليزيا' }
+            { id: 5, title: 'جولة عمان والعقبة', price: 390, duration: '6 أيام / 5 ليالي', hotel: 'فندق عمان روتانا', flag: '🇯🇴', country: 'الأردن' }
         ];
 
         const visaData = [
-            { id: 'UAE', country: 'الإمارات العربية المتحدة', price: '$120', time: '24 - 48 ساعة', docs: 'صورة الجواز + صورة شخصية', flag: '🇦🇪' },
-            { id: 'TUR', country: 'تركيا (فيزا إلكترونية/ملصق)', price: '$130', time: '3 - 5 أيام عمل', docs: 'جواز نافذ + كشف حساب', flag: '🇹🇷' },
-            { id: 'AZE', country: 'أذربيجان', price: '$45', time: '3 أيام', docs: 'صورة الجواز فقط', flag: '🇦🇿' },
-            { id: 'EGY', country: 'مصر (الموافقات الأمنية)', price: '$150', time: '7 - 10 أيام', docs: 'صورة الجواز والهوية', flag: '🇪🇬' },
-            { id: 'MYS', country: 'ماليزيا', price: '$35', time: '48 ساعة', docs: 'جواز السفر وتأكيد الحجز', flag: '🇲🇾' }
+            { country: 'جمهورية مصر العربية', flag: '🇪🇬', desc: 'فيزا سياحية وموافقات أمنية' },
+            { country: 'المملكة الأردنية الهاشمية', flag: '🇯🇴', desc: 'تأشيرات ودخول براً وجواً' },
+            { country: 'سلطنة عمان', flag: '🇴🇲', desc: 'فيزا سياحية إلكترونية' },
+            { country: 'دولة قطر', flag: '🇶🇦', desc: 'تأشيرة هيا والسياحة' },
+            { country: 'مملكة تايلاند', flag: '🇹🇭', desc: 'تأشيرة سياحة علاجية واستجمام' },
+            { country: 'إندونيسيا', flag: '🇮🇩', desc: 'فيزا بالي والسياحة' },
+            { country: 'جمهورية الصين الشعبية', flag: '🇨🇳', desc: 'تأشيرات تجارية وسياحية' },
+            { country: 'جورجيا', flag: '🇬🇪', desc: 'تأشيرة سياحية موثقة' },
+            { country: 'المملكة المغربية', flag: '🇲🇦', desc: 'تأشيرة دخول رسمية' },
+            { country: 'سريلانكا / كمبوديا / سنغافورة', flag: '🌏', desc: 'تأشيرات إلكترونية سريعة' },
+            { country: 'مملكة البحرين / تنزانيا', flag: '🇧🇭', desc: 'تأشيرة زيارة وسياحة' }
         ];
-
-        const hotelsData = {
-            'UAE': [
-                { name: 'فندق برج العرب دبي', rating: '5 نجوم فاخر', price: '$850/ليلة', area: 'جميرا', flag: '🇦🇪' },
-                { name: 'فندق أتلانتس النخلة', rating: '5 نجوم', price: '$520/ليلة', area: 'نخلة جميرا', flag: '🇦🇪' }
-            ],
-            'TUR': [
-                { name: 'فندق سواندور توبكابي إسطنبول', rating: '5 نجوم', price: '$210/ليلة', area: 'تقسيم', flag: '🇹🇷' },
-                { name: 'فندق راديسون بلو إسطنبول', rating: '4 نجوم', price: '$140/ليلة', area: 'شيشلي', flag: '🇹🇷' }
-            ],
-            'AZE': [
-                { name: 'فندق فيرمونت باكو (أبراج اللهب)', rating: '5 نجوم', price: '$190/ليلة', area: 'وسط المدينة', flag: '🇦🇿' }
-            ],
-            'EGY': [
-                { name: 'فندق ماريوت مينا هاوس القاهرة', rating: '5 نجوم', price: '$180/ليلة', area: 'الجيزة', flag: '🇪🇬' }
-            ],
-            'MYS': [
-                { name: 'فندق تريدرز كوالالمبور', rating: '5 نجوم', price: '$130/ليلة', area: 'وسط المدينة البرجين', flag: '🇲🇾' }
-            ]
-        };
 
         // Non-Interactive Decorative 3D Digital Globe Scene
         let scene, camera, renderer, digitalGlobeGroup;
@@ -362,9 +426,7 @@
 
             scene.add(digitalGlobeGroup);
 
-            // Smooth Auto-Rotation Animation
             animate();
-
             window.addEventListener('resize', onWindowResize);
         }
 
@@ -385,31 +447,35 @@
 
         // Tab Switcher Logic
         window.switchTab = function(tabName) {
-            ['groups', 'visa', 'flights', 'hotels'].forEach(t => {
-                document.getElementById(`tab-${t}`).className = t === tabName 
-                    ? 'active-tab px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2'
-                    : 'px-4 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all flex items-center gap-2';
-                document.getElementById(`panel-${t}`).classList.toggle('hidden', t !== tabName);
+            ['groups', 'visa', 'land', 'flights', 'esim', 'contact'].forEach(t => {
+                const tabBtn = document.getElementById(`tab-${t}`);
+                const panel = document.getElementById(`panel-${t}`);
+                if (tabBtn && panel) {
+                    tabBtn.className = t === tabName 
+                        ? 'active-tab px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2'
+                        : 'px-3.5 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-2';
+                    panel.classList.toggle('hidden', t !== tabName);
+                }
             });
         };
 
         function renderGroups() {
             const container = document.getElementById('groups-list');
             container.innerHTML = groupsData.map(g => `
-                <div class="glass-card p-4 rounded-2xl flex items-center justify-between border border-slate-800">
+                <div class="glass-card p-3.5 rounded-xl flex items-center justify-between border border-slate-800">
                     <div class="flex items-center gap-3">
                         <span class="text-3xl">${g.flag}</span>
                         <div>
-                            <div class="flex items-center gap-2">
-                                <h4 class="font-bold text-white text-sm">${g.title}</h4>
-                                <span class="text-xs text-slate-400">(${g.country})</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mt-0.5"><i class="fa-solid fa-hotel text-blue-400 ml-1"></i> ${g.hotel}</p>
+                            <h4 class="font-bold text-white text-xs">${g.title} (${g.country})</h4>
+                            <p class="text-[11px] text-slate-400 mt-0.5"><i class="fa-solid fa-hotel text-blue-400 ml-1"></i> ${g.hotel}</p>
                             <span class="inline-block mt-1 text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-md">${g.duration}</span>
                         </div>
                     </div>
-                    <div class="text-left">
-                        <span class="text-lg font-black text-blue-400">$${g.price}</span>
+                    <div class="text-left flex flex-col items-end gap-1">
+                        <span class="text-base font-black text-blue-400">$${g.price}</span>
+                        <a href="https://wa.me/9647701716661?text=استفسار%20عن%20كروب%20${encodeURIComponent(g.title)}" target="_blank" class="bg-emerald-600/80 hover:bg-emerald-600 text-white text-[10px] px-2.5 py-1 rounded-lg font-bold flex items-center gap-1 transition-all">
+                            <i class="fa-brands fa-whatsapp"></i> حجز
+                        </a>
                     </div>
                 </div>
             `).join('');
@@ -418,78 +484,35 @@
         function renderVisas() {
             const container = document.getElementById('visa-list');
             container.innerHTML = visaData.map(v => `
-                <div class="glass-card p-4 rounded-2xl flex items-center justify-between">
+                <div class="glass-card p-3.5 rounded-xl flex items-center justify-between">
                     <div class="flex items-center gap-3">
-                        <span class="text-3xl">${v.flag}</span>
+                        <span class="text-2xl">${v.flag}</span>
                         <div>
-                            <h4 class="font-bold text-white text-sm">${v.country}</h4>
-                            <p class="text-xs text-slate-400"><i class="fa-solid fa-clock text-blue-400 ml-1"></i> المدة: ${v.time}</p>
-                            <p class="text-[11px] text-slate-400"><i class="fa-solid fa-file-lines text-blue-400 ml-1"></i> ${v.docs}</p>
+                            <h4 class="font-bold text-white text-xs">${v.country}</h4>
+                            <p class="text-[11px] text-slate-400">${v.desc}</p>
                         </div>
                     </div>
-                    <span class="text-lg font-bold text-green-400">${v.price}</span>
+                    <a href="https://wa.me/9647701716661?text=طلب%20فيزا%20${encodeURIComponent(v.country)}" target="_blank" class="bg-emerald-600/80 hover:bg-emerald-600 text-white text-[10px] px-3 py-1.5 rounded-lg font-bold flex items-center gap-1 transition-all">
+                        <i class="fa-brands fa-whatsapp"></i> تقديم
+                    </a>
                 </div>
             `).join('');
         }
 
-        window.searchFlights = function() {
+        window.requestFlightWhatsApp = function() {
             const fromSelect = document.getElementById('flight-from');
             const toSelect = document.getElementById('flight-to');
-            
-            const fromText = fromSelect.options[fromSelect.selectedIndex].text.split('-')[1] || '';
-            const toText = toSelect.options[toSelect.selectedIndex].text.split('-')[1] || '';
-            
-            const fromFlag = fromSelect.options[fromSelect.selectedIndex].text.split(' ')[0];
-            const toFlag = toSelect.options[toSelect.selectedIndex].text.split(' ')[0];
+            const fromText = fromSelect.options[fromSelect.selectedIndex].text;
+            const toText = toSelect.options[toSelect.selectedIndex].text;
 
-            document.getElementById('flight-route-title').innerHTML = `${fromFlag} ${fromText} ➔ ${toFlag} ${toText}`;
-            document.getElementById('flight-result').classList.remove('hidden');
-        };
-
-        window.updateHotelDistricts = function() {
-            const country = document.getElementById('hotel-country').value;
-            const select = document.getElementById('hotel-district');
-            
-            let options = [];
-            if (country === 'UAE') options = ['جميرا', 'نخلة جميرا', 'وسط دبي'];
-            else if (country === 'TUR') options = ['تقسيم', 'شيشلي', 'الفاتح'];
-            else if (country === 'AZE') options = ['وسط المدينة', 'البلدة القديمة'];
-            else if (country === 'EGY') options = ['الجيزة', 'وسط البلد', 'شرم الشيخ'];
-            else if (country === 'MYS') options = ['كوالالمبور البرجين', 'جزيرة لنكاوي'];
-
-            select.innerHTML = options.map(o => `<option value="${o}">${o}</option>`).join('');
-        };
-
-        window.searchHotels = function() {
-            const country = document.getElementById('hotel-country').value;
-            const list = hotelsData[country] || [];
-            const container = document.getElementById('hotels-list');
-            
-            if(list.length === 0) {
-                container.innerHTML = `<div class="text-center text-slate-400 py-4 text-xs">لا توجد فنادق متاحة حالياً لهذا الخيار</div>`;
-                return;
-            }
-
-            container.innerHTML = list.map(h => `
-                <div class="glass-card p-3 rounded-xl flex justify-between items-center">
-                    <div class="flex items-center gap-2.5">
-                        <span class="text-2xl">${h.flag}</span>
-                        <div>
-                            <h4 class="text-xs font-bold text-white">${h.name}</h4>
-                            <span class="text-[10px] text-blue-400">${h.rating} - ${h.area}</span>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold text-green-400">${h.price}</span>
-                </div>
-            `).join('');
+            const msg = `السلام عليكم، استفسار عن تذكرة طيران من (${fromText}) إلى (${toText})`;
+            window.open(`https://wa.me/9647701716661?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
         window.addEventListener('DOMContentLoaded', () => {
             initDigitalGlobe();
             renderGroups();
             renderVisas();
-            updateHotelDistricts();
-            searchHotels();
         });
     </script>
 </body>
