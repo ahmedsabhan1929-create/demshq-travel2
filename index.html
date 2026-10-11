@@ -256,6 +256,444 @@ const blog=[
 const tms=[['تعامل راقي جداً من كادر فرع تكريت. تم تنظيم رحلتنا إلى تركيا بدون أي مشاكل والفنادق كانت ممتازة.','أسامة الدوري'],['أسرع إصدار فيزة وحجز طيران تعاملت معاه. التواصل عبر الواتساب كان سريع وجاوبوا على كل الاستفسارات.','مصطفى الناصري'],['برنامج ماليزيا كان فوق المتوقع. تنظيم دقيق واستقبال مباشر في المطار. شكراً لشركة دمشق!','م. أحمد العبيدي']];
 
 
+  
+<!-- DEMSHQ TRAVEL | VISA SECTION -->
+<section id="visa-section" dir="rtl">
+  <style>
+    #visa-section {
+      --visa-bg: #07111f;
+      --visa-card: rgba(16, 33, 54, .82);
+      --visa-line: rgba(104, 205, 255, .19);
+      --visa-cyan: #52d5ff;
+      background:
+        radial-gradient(ellipse at 85% 0%, rgba(0, 151, 219, .15), transparent 42%),
+        radial-gradient(ellipse at 0% 80%, rgba(53, 97, 218, .12), transparent 40%),
+        var(--visa-bg);
+      color: #f4f8ff;
+      padding: 90px 22px;
+      font-family: inherit;
+      overflow: hidden;
+    }
+
+    #visa-section * { box-sizing: border-box; }
+
+    #visa-section .visa-container {
+      max-width: 1240px;
+      margin: auto;
+    }
+
+    #visa-section .visa-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    #visa-section .visa-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid var(--visa-line);
+      background: rgba(49, 169, 235, .07);
+      padding: 9px 15px;
+      border-radius: 30px;
+      color: var(--visa-cyan);
+      font-size: 12px;
+      letter-spacing: .7px;
+    }
+
+    #visa-section .visa-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--visa-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--visa-cyan);
+    }
+
+    #visa-section .visa-heading h2 {
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.35;
+      margin: 22px 0 12px;
+      font-weight: 800;
+    }
+
+    #visa-section .visa-heading h2 span {
+      color: var(--visa-cyan);
+    }
+
+    #visa-section .visa-heading p {
+      color: #a8b9cd;
+      line-height: 2;
+      max-width: 650px;
+      margin: auto;
+      font-size: 15px;
+    }
+
+    #visa-section .visa-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      margin: 35px 0 24px;
+    }
+
+    #visa-section .visa-search {
+      flex: 1 1 240px;
+      position: relative;
+    }
+
+    #visa-section .visa-search input {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--visa-line);
+      border-radius: 12px;
+      background: rgba(255,255,255,.035);
+      color: white;
+      padding: 12px 43px 12px 14px;
+      outline: none;
+      font: inherit;
+    }
+
+    #visa-section .visa-search input:focus {
+      border-color: var(--visa-cyan);
+    }
+
+    #visa-section .visa-search input::placeholder {
+      color: #8297ad;
+    }
+
+    #visa-section .visa-search-icon {
+      position: absolute;
+      right: 15px;
+      top: 12px;
+      color: var(--visa-cyan);
+      pointer-events: none;
+    }
+
+    #visa-section .visa-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #visa-section .visa-filter {
+      border: 1px solid var(--visa-line);
+      background: rgba(255,255,255,.035);
+      color: #b9c9da;
+      border-radius: 10px;
+      padding: 10px 15px;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    #visa-section .visa-filter:hover,
+    #visa-section .visa-filter.active {
+      background: rgba(67, 199, 255, .13);
+      border-color: var(--visa-cyan);
+      color: white;
+    }
+
+    #visa-section .visa-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    #visa-section .visa-card {
+      position: relative;
+      min-width: 0;
+      padding: 21px 18px;
+      border-radius: 17px;
+      border: 1px solid var(--visa-line);
+      background: linear-gradient(145deg, rgba(21, 43, 68, .94), var(--visa-card));
+      overflow: hidden;
+      transition: transform .25s ease, border-color .25s ease,
+                  box-shadow .25s ease;
+    }
+
+    #visa-section .visa-card::before {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      left: -55px;
+      top: -55px;
+      border-radius: 50%;
+      background: rgba(59, 195, 255, .08);
+      pointer-events: none;
+    }
+
+    #visa-section .visa-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(82, 213, 255, .65);
+      box-shadow: 0 15px 35px rgba(0,0,0,.2);
+    }
+
+    #visa-section .visa-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 19px;
+    }
+
+    #visa-section .visa-flag {
+      font-size: 35px;
+      line-height: 1;
+      filter: saturate(.9);
+    }
+
+    #visa-section .visa-card h3 {
+      font-size: 17px;
+      margin: 0 0 5px;
+      color: #f4f8ff;
+    }
+
+    #visa-section .visa-region {
+      color: #8da5bd;
+      font-size: 12px;
+    }
+
+    #visa-section .visa-label {
+      display: inline-block;
+      font-size: 11px;
+      color: var(--visa-cyan);
+      background: rgba(82,213,255,.09);
+      border: 1px solid rgba(82,213,255,.17);
+      border-radius: 6px;
+      padding: 5px 8px;
+      margin-bottom: 13px;
+    }
+
+    #visa-section .visa-description {
+      font-size: 13px;
+      line-height: 1.9;
+      color: #b4c3d3;
+      min-height: 48px;
+      margin: 0 0 17px;
+    }
+
+    #visa-section .visa-inquire {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 42px;
+      border-radius: 10px;
+      border: 1px solid rgba(82,213,255,.35);
+      background: rgba(82,213,255,.08);
+      color: #e9f9ff;
+      font: inherit;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    #visa-section .visa-inquire:hover {
+      background: var(--visa-cyan);
+      color: #061321;
+    }
+
+    #visa-section .visa-note {
+      margin-top: 24px;
+      border: 1px solid var(--visa-line);
+      background: rgba(255,255,255,.025);
+      padding: 15px 18px;
+      border-radius: 12px;
+      color: #9eb2c8;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    #visa-section .visa-note strong {
+      color: #dcefff;
+    }
+
+    #visa-section .visa-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: #b4c3d3;
+      padding: 35px 10px;
+    }
+
+    @media (max-width: 1000px) {
+      #visa-section .visa-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      #visa-section { padding: 65px 15px; }
+      #visa-section .visa-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      #visa-section .visa-card { padding: 15px 12px; }
+      #visa-section .visa-card-top {
+        align-items: flex-start;
+        gap: 9px;
+      }
+      #visa-section .visa-flag { font-size: 29px; }
+      #visa-section .visa-card h3 { font-size: 15px; }
+      #visa-section .visa-description { font-size: 12px; }
+      #visa-section .visa-tools { gap: 12px; }
+    }
+
+    @media (max-width: 360px) {
+      #visa-section .visa-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #visa-section *, #visa-section *::before {
+        transition: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+
+  <div class="visa-container">
+    <header class="visa-heading">
+      <div class="visa-eyebrow">
+        <span class="visa-dot"></span>
+        DEMSHQ TRAVEL · VISA SERVICES
+      </div>
+
+      <h2>وجهتك تبدأ من <span>التأشيرة</span></h2>
+
+      <p>
+        اكتشف وجهتك القادمة، وتواصل مع فريقنا للاستفسار عن
+        متطلبات التأشيرة والوثائق اللازمة حسب جنسيتك ووجهة سفرك.
+      </p>
+    </header>
+
+    <div class="visa-tools">
+      <label class="visa-search">
+        <span class="visa-search-icon" aria-hidden="true">⌕</span>
+        <input id="visaSearch" type="search"
+          placeholder="ابحث عن دولة..." aria-label="ابحث عن دولة">
+      </label>
+
+      <div class="visa-filters" aria-label="تصفية الدول">
+        <button class="visa-filter active" data-region="all">كل الدول</button>
+        <button class="visa-filter" data-region="asia">آسيا</button>
+        <button class="visa-filter" data-region="europe">أوروبا</button>
+        <button class="visa-filter" data-region="arab">الدول العربية</button>
+        <button class="visa-filter" data-region="other">أخرى</button>
+      </div>
+    </div>
+
+    <div class="visa-grid" id="visaGrid" aria-live="polite"></div>
+
+    <div class="visa-note">
+      <strong>ملاحظة مهمة:</strong>
+      إجراءات التأشيرات ومتطلباتها ومدد المعالجة تختلف حسب الجنسية
+      ونوع التأشيرة والظروف الحالية. المعلومات هنا للتعريف بالدول فقط،
+      ولا تمثل تأكيدًا لإمكانية الحصول على التأشيرة أو شروطها.
+      يرجى التواصل معنا للتحقق من المتطلبات الرسمية قبل الحجز.
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById("visa-section");
+      if (!root || root.dataset.initialized) return;
+      root.dataset.initialized = "true";
+
+      // استبدل رقم الواتساب أدناه برقم الشركة بصيغة دولية دون +
+      const WHATSAPP_NUMBER = "9647701716661";
+
+      const countries = [
+        { name: "تركيا", flag: "🇹🇷", region: "asia", area: "آسيا", desc: "استفسر عن تأشيرة السفر إلى تركيا." },
+        { name: "الإمارات", flag: "🇦🇪", region: "arab", area: "الخليج العربي", desc: "استفسر عن متطلبات زيارة الإمارات." },
+        { name: "السعودية", flag: "🇸🇦", region: "arab", area: "الخليج العربي", desc: "استفسر عن نوع التأشيرة المناسبة." },
+        { name: "قطر", flag: "🇶🇦", region: "arab", area: "الخليج العربي", desc: "تحقق من متطلبات الدخول إلى قطر." },
+        { name: "عُمان", flag: "🇴🇲", region: "arab", area: "الخليج العربي", desc: "استفسر عن خيارات التأشيرة." },
+        { name: "الكويت", flag: "🇰🇼", region: "arab", area: "الخليج العربي", desc: "تحقق من شروط الزيارة." },
+        { name: "البحرين", flag: "🇧🇭", region: "arab", area: "الخليج العربي", desc: "استفسر عن إجراءات التأشيرة." },
+        { name: "الأردن", flag: "🇯🇴", region: "arab", area: "الشرق الأوسط", desc: "تحقق من شروط الدخول حسب الجنسية." },
+        { name: "مصر", flag: "🇪🇬", region: "arab", area: "شمال أفريقيا", desc: "استفسر عن تأشيرة زيارة مصر." },
+        { name: "لبنان", flag: "🇱🇧", region: "arab", area: "الشرق الأوسط", desc: "تحقق من متطلبات السفر." },
+        { name: "أذربيجان", flag: "🇦🇿", region: "asia", area: "القوقاز", desc: "استفسر عن خيارات التأشيرة." },
+        { name: "جورجيا", flag: "🇬🇪", region: "asia", area: "القوقاز", desc: "تحقق من الشروط الرسمية." },
+        { name: "تايلاند", flag: "🇹🇭", region: "asia", area: "جنوب شرق آسيا", desc: "استفسر عن متطلبات الزيارة." },
+        { name: "ماليزيا", flag: "🇲🇾", region: "asia", area: "جنوب شرق آسيا", desc: "تحقق من شروط الدخول." },
+        { name: "إندونيسيا", flag: "🇮🇩", region: "asia", area: "جنوب شرق آسيا", desc: "استفسر عن خيارات التأشيرة." },
+        { name: "فرنسا", flag: "🇫🇷", region: "europe", area: "أوروبا", desc: "استفسر عن تأشيرة شنغن." },
+        { name: "ألمانيا", flag: "🇩🇪", region: "europe", area: "أوروبا", desc: "تحقق من متطلبات شنغن." },
+        { name: "إيطاليا", flag: "🇮🇹", region: "europe", area: "أوروبا", desc: "استفسر عن إجراءات شنغن." },
+        { name: "إسبانيا", flag: "🇪🇸", region: "europe", area: "أوروبا", desc: "تحقق من نوع التأشيرة المطلوبة." },
+        { name: "المملكة المتحدة", flag: "🇬🇧", region: "other", area: "بريطانيا", desc: "استفسر عن متطلبات التأشيرة البريطانية." }
+      ];
+
+      const grid = root.querySelector("#visaGrid");
+      const search = root.querySelector("#visaSearch");
+      const filters = [...root.querySelectorAll(".visa-filter")];
+      let activeRegion = "all";
+
+      function render() {
+        const term = search.value.trim().toLocaleLowerCase("ar");
+        const filtered = countries.filter(country => {
+          const matchesTerm =
+            country.name.toLocaleLowerCase("ar").includes(term) ||
+            country.area.toLocaleLowerCase("ar").includes(term);
+          const matchesRegion =
+            activeRegion === "all" ||
+            country.region === activeRegion;
+          return matchesTerm && matchesRegion;
+        });
+
+        if (!filtered.length) {
+          grid.innerHTML = '<div class="visa-empty">لم نعثر على دولة بهذا الاسم.</div>';
+          return;
+        }
+
+        grid.innerHTML = filtered.map(country => {
+          const message = `السلام عليكم، أريد الاستفسار عن تأشيرة ${country.name}، أنا أحمل جواز سفر عراقي. يرجى توضيح المتطلبات والتكاليف والخطوات.`;
+          const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+          return `
+            <article class="visa-card">
+              <div class="visa-card-top">
+                <span class="visa-flag" aria-hidden="true">${country.flag}</span>
+                <div>
+                  <h3>${country.name}</h3>
+                  <span class="visa-region">${country.area}</span>
+                </div>
+              </div>
+              <span class="visa-label">استفسار عن التأشيرة</span>
+              <p class="visa-description">${country.desc}</p>
+              <a class="visa-inquire"
+                 href="${url}"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="استفسر عن فيزا ${country.name} عبر واتساب">
+                استفسر الآن <span aria-hidden="true">←</span>
+              </a>
+            </article>`;
+        }).join("");
+      }
+
+      filters.forEach(button => {
+        button.addEventListener("click", () => {
+          activeRegion = button.dataset.region;
+          filters.forEach(item => {
+            const active = item === button;
+            item.classList.toggle("active", active);
+            item.setAttribute("aria-pressed", String(active));
+          });
+          render();
+        });
+      });
+
+      search.addEventListener("input", render);
+      render();
+    })();
+  </script>
+</section>
+
+
 // globe geo: hub + the three real programmes
 const HUB={n:'تكريت',lat:34.6,lon:43.7},GEO={istanbul:{lat:41.01,lon:28.98},dubai:{lat:25.2,lon:55.27},malaysia:{lat:3.14,lon:101.69}};
 let cur='IQD';
